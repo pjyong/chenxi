@@ -1,0 +1,4 @@
+content_articles:
+    type:     rest
+    resource: ChenXi\ContentBundle\Controller\ArticlesController
+    prefix: /api/content

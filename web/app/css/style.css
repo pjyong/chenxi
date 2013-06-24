@@ -1,0 +1,18 @@
+.btn-div{
+    width:100%;
+}
+.input_w_90{
+    width: 90%;
+}
+
+div.tagsinput span.tag{
+    font-size:11px;
+    padding:2px;
+}
+.float_l{
+    float:left;
+}
+
+/*******************content options************/
+.content_options .btn-link:hover{text-decoration: none;}
+.content_options .btn-link{padding:3px 0px;}

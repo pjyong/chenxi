@@ -1,0 +1,18 @@
+ChenXi\ContentBundle\Entity\Article:
+    type: entity
+    table: article
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+       title:
+           type: string
+           length: 255
+       body:
+           type: text
+       start_date: 
+           type: datetime
+       end_date:
+           type: datetime
