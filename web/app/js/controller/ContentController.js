@@ -5,7 +5,6 @@ define([
     'view/content/ArticleEditView',
     'view/content/ArticleIndexView',
     'repository/content/ArticleRepository',
-
     'ckeditor',
     'bootstrap.daterangepicker',
     'jquery.tagsinput',
@@ -17,53 +16,47 @@ define([
     ArticleIndexView,
     ArticleRepository
 ){
-    // require(['']);
     return AppController.extend({
 
 
-        initialize: function(){
-            _.bindAll(this, 'submitArticle');
-            vent.on('contentModule:submitArticle', this.submitArticle);
-        },
-
-        getArticles: function(){
-            var articleIndexView = new ArticleIndexView();
-            this.contentRegion.show(articleIndexView);
-        },
-
-        // createArticle: function(){
-        //     var articleCreateView = new ArticleCreateView();
-        //     this.contentRegion.show(articleCreateView);
-        //     var ckeditor = CKEDITOR.replace('content_body');
-        //     articleCreateView.$('#content-date').daterangepicker();
-        //     articleCreateView.$('.ace-popover').popover();
-        //     articleCreateView.$('.tags').tagsInput();
+        // initialize: function(){
+        //     _.bindAll(this, 'submitArticle');
+        //     vent.on('contentModule:submitArticle', this.submitArticle);
         // },
 
-        editArticle: function(id){
-            var that = this;
-            // create repository
-            var articleRepository = new ArticleRepository();
-            var callback = function(article){
-                var editArticleView = new ArticleCreateView({model: article});
-                that.contentRegion.show(editArticleView);
-                var ckeditor = CKEDITOR.replace('content_body');
-                editArticleView.$('#content_date').daterangepicker();
-                editArticleView.$('.ace-popover').popover();
-                editArticleView.$('.tags').tagsInput();
-            };
-            $.when(articleRepository.getArticle(id)).then(callback);
-        },
+        // getArticles: function(){
+        //     var that = this;
+        //     var articleRepository = new ArticleRepository();
+        //     var callback = function(articles){
+        //         var articleIndexView = new ArticleIndexView({collection: articles});
+        //         that.contentRegion.show(articleIndexView);
+        //     };
+        //     $.when(articleRepository.getArticles()).then(callback);   
+        // },
 
-        submitArticle: function(options){
-            var articleRepository = new ArticleRepository();
-            // console.log('start');
-            var callback = function(article){
-                console.log(article);
-            };
-            $.when(articleRepository.createArticle(options.model)).then(callback);
-            // console.log(options.model);
-        },
+        // editArticle: function(id){
+        //     var that = this;
+        //     // create repository
+        //     var articleRepository = new ArticleRepository();
+        //     var callback = function(article){
+        //         var editArticleView = new ArticleCreateView({model: article});
+        //         that.contentRegion.show(editArticleView);
+        //         var ckeditor = CKEDITOR.replace('content_body');
+        //         editArticleView.$('#content_date').daterangepicker();
+        //         editArticleView.$('.ace-popover').popover();
+        //         editArticleView.$('.tags').tagsInput();
+        //     };
+        //     $.when(articleRepository.getArticle(id)).then(callback);
+        // },
+
+        // submitArticle: function(options){
+        //     var articleRepository = new ArticleRepository();
+        //     // console.log('start');
+        //     var callback = function(article){
+        //         console.log(article);
+        //     };
+        //     $.when(articleRepository.createArticle(options.model)).then(callback);
+        // },
 
         // loadPages: function(){
         //     var contentIndexView = new ContentIndexView();
@@ -85,14 +78,6 @@ define([
         //     $('#content_date').datetimepicker();
         //     $('.tags').tagsInput();
         // },
-
-        
-
-
-
-
-
-
     });
     
 });

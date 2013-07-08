@@ -27,12 +27,15 @@ define([
 
         getArticles: function(){
             app.module('sidebar').controller.activeNav({nav: '#/content/article'});
-            app.module('m.content').controller.getArticles();
+            // app.module('m.content').controller.getArticles();
+            app.module('m.content').loadController('article').getArticles();
+            // console.log(app.module('m.content').controller.test());
         },
 
         editArticle: function(id){
             app.module('sidebar').controller.activeNav({nav: '#/content/article'});
-            app.module('m.content').controller.editArticle(id);  
+            app.module('m.content').loadController('article').editArticle(id);
+            // app.module('m.content').controller.editArticle(id);  
         },
 
         loadPages: function(){

@@ -142,50 +142,64 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/api/content/articles')) {
-            // get_articles
-            if (preg_match('#^/api/content/articles/(?P<id>[^/\\.]++)(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
+        if (0 === strpos($pathinfo, '/api/content')) {
+            if (0 === strpos($pathinfo, '/api/content/articles')) {
+                // get_articles
+                if (preg_match('#^/api/content/articles(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_get_articles;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'get_articles')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::getArticlesAction',  '_format' => 'json',));
+                }
+                not_get_articles:
+
+                // post_articles
+                if (preg_match('#^/api/content/articles(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_post_articles;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'post_articles')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::postArticlesAction',  '_format' => 'json',));
+                }
+                not_post_articles:
+
+                // put_article
+                if (preg_match('#^/api/content/articles/(?P<id>[^/\\.]++)(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'PUT') {
+                        $allow[] = 'PUT';
+                        goto not_put_article;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'put_article')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::putArticleAction',  '_format' => 'json',));
+                }
+                not_put_article:
+
+                // get_article
+                if (preg_match('#^/api/content/articles/(?P<id>[^/\\.]++)(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_get_article;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'get_article')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::getArticleAction',  '_format' => 'json',));
+                }
+                not_get_article:
+
+            }
+
+            // get_tags
+            if (0 === strpos($pathinfo, '/api/content/tags') && preg_match('#^/api/content/tags(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
                 if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                     $allow = array_merge($allow, array('GET', 'HEAD'));
-                    goto not_get_articles;
+                    goto not_get_tags;
                 }
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'get_articles')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::getAction',  '_format' => 'json',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'get_tags')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\TagsController::cgetAction',  '_format' => 'json',));
             }
-            not_get_articles:
-
-            // put_articles
-            if (preg_match('#^/api/content/articles(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
-                if ($this->context->getMethod() != 'PUT') {
-                    $allow[] = 'PUT';
-                    goto not_put_articles;
-                }
-
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'put_articles')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::putAction',  '_format' => 'json',));
-            }
-            not_put_articles:
-
-            // post_articles
-            if (preg_match('#^/api/content/articles(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_post_articles;
-                }
-
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'post_articles')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::postAction',  '_format' => 'json',));
-            }
-            not_post_articles:
-
-            // delete_articles
-            if (preg_match('#^/api/content/articles(?:\\.(?P<_format>json|xml|html))?$#s', $pathinfo, $matches)) {
-                if ($this->context->getMethod() != 'DELETE') {
-                    $allow[] = 'DELETE';
-                    goto not_delete_articles;
-                }
-
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'delete_articles')), array (  '_controller' => 'ChenXi\\ContentBundle\\Controller\\ArticlesController::deleteAction',  '_format' => 'json',));
-            }
-            not_delete_articles:
+            not_get_tags:
 
         }
 

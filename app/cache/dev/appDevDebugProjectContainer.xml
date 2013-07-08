@@ -558,6 +558,7 @@
     <parameter key="fos_rest.prefer_extension">true</parameter>
     <parameter key="fos_rest.fallback_format">html</parameter>
     <parameter key="fos_rest.mime_types" type="collection"/>
+    <parameter key="fos_rest.converter.request_body.validation_errors_argument">validationErrors</parameter>
     <parameter key="fos_user.backend_type_orm">true</parameter>
     <parameter key="fos_user.validator.password.class">FOS\UserBundle\Validator\PasswordValidator</parameter>
     <parameter key="fos_user.validator.unique.class">FOS\UserBundle\Validator\UniqueValidator</parameter>
@@ -1721,7 +1722,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>51c6a8e79a85c</argument>
+            <argument>51d261a375384</argument>
           </service>
         </argument>
       </argument>
@@ -1987,7 +1988,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>51c6a8e79a85c</argument>
+            <argument>51d261a375384</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>

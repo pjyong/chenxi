@@ -53,4 +53,9 @@ class ArticleManager
     {
     	return $this->repository->findOneBy($criteria);
     }
+
+    public function findS()
+    {
+    	return $this->repository->findAll();
+    }
 }

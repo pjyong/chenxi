@@ -1,14 +1,16 @@
 define([
     'marionette', 
     'vent',
+    'view/content/ArticleItemView',
     'text!template/content/article/ArticleIndex.html',
 ], function(
     Marionette,
     vent, 
+    ArticleItemView,
     ArticleIndex
 ){
 
-    return Marionette.Layout.extend({
+    return Marionette.CompositeView.extend({
 
         className: 'row-fluid',
 
@@ -25,11 +27,14 @@ define([
             'click #creat_content': 'createContent'
         },        
 
-        regions: {
-            
+        itemView: ArticleItemView,
+
+        appendHtml: function(collectionView, itemView, index){
+            collectionView.$("tbody").append(itemView.el);
         },
 
         initialize: function(){
+
             // this.contentType = this.options.type;
 
             // // get information about contentType
@@ -40,6 +45,10 @@ define([
             // }
             // _.bindAll(this, 'createContent');
             // alert(options.type);
+
+            // save article collection
+            // this.collection = this.options.collection;
+            
         },
 
         createContent: function(){

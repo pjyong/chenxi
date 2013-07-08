@@ -1,20 +1,32 @@
 define([
     'marionette',
     'model/content/ArticleModel',
+    'collection/content/ArticleCollection'
 ], function(
     Marionette,
-    ArticleModel
+    ArticleModel,
+    ArticleCollection
 ){
     var articleRepository = Marionette.Controller.extend({
+
+        getArticles: function(){
+            var deferred = $.Deferred();
+            var articles = new ArticleCollection();
+            articles.on('sync', function(){
+                deferred.resolve(articles);
+            });
+            articles.fetch();
+            return deferred.promise();
+        },
 
         createArticle: function(article){
             var deferred = $.Deferred();
             article.on('sync', function(article, response){
-                alert(response);
                 deferred.resolve(response);
             });
 
             article.save();
+            return deferred.promise();
         },
 
         getArticle: function(id){
@@ -37,6 +49,8 @@ define([
             article.on('sync', callback);
             article.fetch();
         },
+
+
 
     });  
 
