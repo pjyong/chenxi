@@ -54,6 +54,9 @@ define([
             this.model.set('start_date', '2012-06-20');
             this.model.set('end_date', '2012-09-10');
             this.model.set('body', CKEDITOR.instances.content_body.getData());
+
+            // bind tags data
+            this.model.set('tags', this.$('.tags').val());
             
             // verify
 

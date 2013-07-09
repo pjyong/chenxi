@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new ChenXi\UserBundle\ChenXiUserBundle(),
             new ChenXi\MainBundle\ChenXiMainBundle(),
             new ChenXi\ContentBundle\ChenXiContentBundle(),
+            new FPN\TagBundle\FPNTagBundle(),
+            new ChenXi\TagBundle\ChenXiTagBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

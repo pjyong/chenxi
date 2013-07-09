@@ -2,12 +2,14 @@
 
 namespace ChenXi\ContentBundle\Entity;
 
+use DoctrineExtensions\Taggable\Taggable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Article
  */
-class Article
+class Article implements Taggable
 {
     /**
      * @var integer
@@ -34,7 +36,7 @@ class Article
      */
     private $end_date;
 
-
+    private $tags;
     /**
      * Get id
      *
@@ -135,5 +137,26 @@ class Article
     public function getEndDate()
     {
         return $this->end_date;
+    }
+
+    /**
+     * Make this entity taggable
+     *
+     */
+    public function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+
+        return $this->tags;
+    }
+
+    public function getTaggableType()
+    {
+        return 'article';
+    }
+
+    public function getTaggableId()
+    {
+        return $this->getId();
     }
 }

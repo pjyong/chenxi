@@ -38,6 +38,10 @@ class ArticlesController extends FOSRestController
 	{
 		$article = $this->container->get('chenxi_article_manager')->find($id);
 
+		// load tags
+		$tagManager = $this->container->get('fpn_tag.tag_manager');
+		$tagManager->loadTagging($article);
+
 		if(!$article)
 		{
 			$article = array('error' => 1);
@@ -65,6 +69,14 @@ class ArticlesController extends FOSRestController
 			// print_r($article);
 			// return;
 			$this->container->get('chenxi_article_manager')->update($article);
+
+			// save tags
+			$tagManager = $this->container->get('fpn_tag.tag_manager');
+			$tagNames = $tagManager->splitTagNames($this->getRequest()->request->get('tags'));
+			$tags = $tagManager->loadOrCreateTags($tagNames);
+			$tagManager->addTags($tags, $article);
+			$tagManager->saveTagging($article);
+
 
 			return $this->handleView($this->view($article));
 		}

@@ -16,6 +16,16 @@ define([
     ArticleIndexView,
     ArticleRepository
 ){
+    // helper function 
+    function convertTagsToString(tagCollection){
+        var str = '';
+        tagCollection.each(function(model){
+            str += ',' + model.get('name');
+        });
+        return str.substring(1);
+    }
+
+
     return AppController.extend({
 
 
@@ -31,7 +41,8 @@ define([
                 var articleIndexView = new ArticleIndexView({collection: articles});
                 that.contentRegion.show(articleIndexView);
             };
-            $.when(articleRepository.getArticles()).then(callback);   
+            $.when(articleRepository.getArticles()).then(callback); 
+
         },
 
         editArticle: function(id){
@@ -44,6 +55,11 @@ define([
                 var ckeditor = CKEDITOR.replace('content_body');
                 editArticleView.$('#content_date').daterangepicker();
                 editArticleView.$('.ace-popover').popover();
+                // convert the tags of article into string
+                $tags = article.get('tags');
+                if(_.isObject($tags) && !_.isEmpty($tags)){
+                    editArticleView.$('.tags').val(convertTagsToString($tags));
+                }
                 editArticleView.$('.tags').tagsInput();
             };
             $.when(articleRepository.getArticle(id)).then(callback);
