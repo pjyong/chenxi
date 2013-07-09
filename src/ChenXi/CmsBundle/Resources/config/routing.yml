@@ -1,3 +1,0 @@
-chen_xi_cms_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ChenXiCmsBundle:Default:index }

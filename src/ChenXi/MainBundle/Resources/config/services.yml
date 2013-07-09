@@ -1,7 +1,0 @@
-parameters:
-#    chen_xi_main.example.class: ChenXi\MainBundle\Example
-
-services:
-#    chen_xi_main.example:
-#        class: %chen_xi_main.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,9 +1,0 @@
-content_articles:
-    type:     rest
-    resource: ChenXi\ContentBundle\Controller\ArticlesController
-    prefix: /api/content
-
-content_tags:
-    type: rest
-    resource: ChenXi\ContentBundle\Controller\TagsController
-    prefix: /api/content
