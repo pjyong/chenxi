@@ -25,6 +25,22 @@ class ArticlesController extends FOSRestController
 		return $this->process(new Article());
 	}
 
+	// delete
+	public function deleteArticleAction($id)
+	{
+		$articleManager = $this->container->get('chenxi_article_manager');
+		$article = $articleManager->find($id);
+
+		// remove tags relate article
+		$tagManager = $this->container->get('fpn_tag.tag_manager');
+		$tagManager->deleteTagging($article);
+
+		// remove article
+		$articleManager->delete($article);
+
+		return $this->handleView($this->view(null, 204));
+	}
+
 	// update
 	public function putArticleAction($id)
 	{

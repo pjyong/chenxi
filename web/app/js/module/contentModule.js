@@ -18,14 +18,19 @@ define([
 
     content.addInitializer(function(){
         // content.controller = new ContentController();
+        this.controllerType = '';
     });
 
 
     content.loadController = function(name){
-        if(name === 'article'){
+
+        if(name === 'article' && this.controllerType != 'article'){
+            if(!_.isUndefined(this.controller)){
+                this.controller.close();
+            }
             this.controller = new ArticleController();
         }
-
+        this.controllerType = name;
         return this.controller;
     };
 

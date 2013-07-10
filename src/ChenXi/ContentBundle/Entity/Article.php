@@ -7,36 +7,47 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Article
+ * ChenXi\ContentBundle\Entity\Article
+ *
+ * @ORM\Table(name="article")
+ * @ORM\Entity
  */
 class Article implements Taggable
 {
     /**
-     * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string
+     * @ORM\Column(type="text")
      */
     private $body;
 
     /**
-     * @var \DateTime
+     * @ORM\Column(type="datetime")
      */
     private $start_date;
 
     /**
-     * @var \DateTime
+     * @ORM\Column(type="datetime")
      */
     private $end_date;
 
+    /**
+     * @ORM\Column(type="integer", options={"default" = 1})
+     */
+    private $status = 1;
+
     private $tags;
+
     /**
      * Get id
      *
@@ -141,7 +152,6 @@ class Article implements Taggable
 
     /**
      * Make this entity taggable
-     *
      */
     public function getTags()
     {

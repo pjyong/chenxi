@@ -62,7 +62,7 @@ define([
 
 
             // trigger submit action
-            vent.trigger('contentModule:submitArticle', {model: this.model});
+            vent.trigger('articleController:submitArticle', {model: this.model});
         },
 
     });

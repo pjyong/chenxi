@@ -1,8 +1,11 @@
 define([
     'marionette',
-    'view/BreadcrumbView'  
+    'vent',
+    'view/BreadcrumbView'
+    
 ], function(
     Marionette,
+    vent,
     BreadcrumbView
 ){
 

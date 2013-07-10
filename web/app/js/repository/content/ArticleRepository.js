@@ -24,8 +24,16 @@ define([
             article.on('sync', function(article, response){
                 deferred.resolve(response);
             });
-
             article.save();
+            return deferred.promise();
+        },
+
+        deleteArticle: function(article){
+            var deferred = $.Deferred();
+            article.on('sync', function(article, response, options){
+                deferred.resolve(options);
+            });
+            article.destroy();
             return deferred.promise();
         },
 

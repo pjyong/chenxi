@@ -8,6 +8,7 @@ require.config({
         localStorage: 'lib/backbone.localStorage',
         ckeditor: 'lib/ckeditor/ckeditor',
         'jquery.tagsinput': 'lib/jquery.tagsinput.min',
+        'jquery.gritter': 'lib/jquery.gritter.min',
         'backbone.routerilter': 'lib/backbone.routefilter',
         'backbone.wreqr': 'lib/backbone.wreqr',
         'backbone.babysitter': 'lib/backbone.babysitter',
@@ -32,8 +33,11 @@ require.config({
         'jquery.tagsinput': {
             deps: ['jquery']
         },
+        'jquery.gritter': {
+            deps: ['jquery']
+        },
         backbone : {
-            deps : ['jquery','underscore', 'bootstrap'],
+            deps : ['jquery','underscore', 'bootstrap', 'jquery.gritter'],
             exports : 'Backbone'
         },
         'backbone.routerilter': {

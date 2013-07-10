@@ -1,9 +1,11 @@
 define([
     'marionette',
     'app',  
+    'view/common/LoadingView'
 ], function(
     Marionette,
-    app
+    app,
+    LoadingView
 ){
     return Marionette.Controller.extend({
         
@@ -17,6 +19,17 @@ define([
 
             Marionette.Controller.prototype.constructor.call(this, options);
         },
+
+        startLoading: function(){
+            if(_.isUndefined(app.loadingView)){
+                app.loadingView = new LoadingView();
+            }
+            app.loadingView.show();
+        },
+
+        endLoading: function(){
+            app.loadingView.hide();
+        }
 
     });
 });

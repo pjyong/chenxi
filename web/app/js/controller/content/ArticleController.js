@@ -30,8 +30,10 @@ define([
 
 
         initialize: function(){
-            _.bindAll(this, 'submitArticle');
-            vent.on('contentModule:submitArticle', this.submitArticle);
+            _.bindAll(this, 'submitArticle', 'deleteArticle');
+            vent.on('articleController:submitArticle', this.submitArticle);
+            vent.on('articleController:deleteArticle', this.deleteArticle);
+
         },
 
         getArticles: function(){
@@ -40,9 +42,31 @@ define([
             var callback = function(articles){
                 var articleIndexView = new ArticleIndexView({collection: articles});
                 that.contentRegion.show(articleIndexView);
+                that.endLoading();
             };
+            that.startLoading();
             $.when(articleRepository.getArticles()).then(callback); 
 
+        },
+
+        deleteArticle: function(options){
+            var that = this;
+            var articleRepository = new ArticleRepository();
+            var callback = function(options){
+                if(204 === options.xhr.status){
+                    // delete successfully
+                    $.gritter.add({
+                        // (string | mandatory) the heading of the notification
+                        title: '删除文章成功!',
+                        // (string | mandatory) the text inside the notification
+                        text: '',
+                        class_name: 'gritter-success'
+                    });
+                    that.endLoading();
+                }
+            };
+            that.startLoading();
+            $.when(articleRepository.deleteArticle(options.model)).then(callback);
         },
 
         editArticle: function(id){
@@ -60,19 +84,32 @@ define([
                 if(_.isObject($tags) && !_.isEmpty($tags)){
                     editArticleView.$('.tags').val(convertTagsToString($tags));
                 }
-                editArticleView.$('.tags').tagsInput();
+                editArticleView.$('.tags').tagsInput({defaultText: '添加标签'});
+                that.endLoading();
             };
+            that.startLoading();
             $.when(articleRepository.getArticle(id)).then(callback);
         },
 
         submitArticle: function(options){
+            var that = this;
             var articleRepository = new ArticleRepository();
             // console.log('start');
             var callback = function(article){
-                console.log(article);
+                that.endLoading();
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: '发布文章成功!',
+                    // (string | mandatory) the text inside the notification
+                    text: '',
+                    class_name: 'gritter-success'
+                });
             };
+            that.startLoading();
+
             $.when(articleRepository.createArticle(options.model)).then(callback);
         },
+
 
         test: function(){alert('successful');}
     });
