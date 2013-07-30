@@ -1,11 +1,9 @@
 define([
     'marionette',
     'app',
-    'controller/ContentController'
 ], function(
     Marionette,
-    app,
-    ContentController
+    app
 ){
     var contentRouter = Backbone.Router.extend({
 
@@ -13,8 +11,10 @@ define([
             'content/article': 'getArticles',
             'content/article/edit/:id': 'editArticle',
             'content/article/add': 'editArticle',
-            'content/page': 'loadPages',
-            'content/page/add': 'createPage',
+            'content/page': 'getPages',
+            'content/page/add': 'editPage',
+            'content/gallery': 'getGalleries',
+            'content/gallery/add': 'editGallery'
         },
 
         before: function(){
@@ -38,13 +38,26 @@ define([
             // app.module('m.content').controller.editArticle(id);  
         },
 
-        loadPages: function(){
-            app.module('m.content').controller.loadPages();
+        getPages: function(){
+            app.module('sidebar').controller.activeNav({nav: '#/content/article'});
+            app.module('m.content').loadController('page').getPages();
         },
 
-        createPage: function(){
-            app.module('m.content').controller.createContent({type: 'page'});
+        editPage: function(){
+            app.module('sidebar').controller.activeNav({nav: '#/content/article'});
+            app.module('m.content').loadController('page').editPage(id);
         },
+
+        getGalleries: function(){
+            app.module('sidebar').controller.activeNav({nav: '#/content/gallery'});
+            app.module('m.content').loadController('gallery').getGalleries();
+        },
+
+        editGallery: function(){
+            app.module('sidebar').controller.activeNav({nav: '#/content/gallery'});
+            app.module('m.content').loadController('gallery').editGallery();
+
+        }
 
     });  
 

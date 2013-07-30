@@ -1,1 +1,11 @@
+websites:
+    type:     rest
+    resource: ChenXi\MainBundle\Controller\WebsitesController
+    prefix: /api
 
+#
+
+
+get_website:
+    path: /api/outter/website
+    defaults: { _controller: ChenXiMainBundle:Websites:getWebsiteFromSession }

@@ -186,7 +186,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="assets/avatars/avatar.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                        <img src="app/assets/avatars/avatar.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Alex:</span>
@@ -203,7 +203,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="assets/avatars/avatar3.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                        <img src="app/assets/avatars/avatar3.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Susan:</span>
@@ -220,7 +220,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="assets/avatars/avatar4.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                        <img src="app/assets/avatars/avatar4.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Bob:</span>
@@ -246,7 +246,7 @@
 
                         <li class="light-blue user-profile">
                             <a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
-                                <img class="nav-user-photo" src="assets/avatars/user.jpg" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/user.jpg" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="app/assets/avatars/user.jpg" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/user.jpg" alt="Jason's Photo" />
                                 <span id="user_info">
                                     <small>Welcome,</small>
                                     Jason
@@ -360,7 +360,7 @@
                             </li>
 
                             <li>
-                                <a href="#">
+                                <a href="#/content/gallery">
                                     <i class="icon-double-angle-right"></i>
                                     相册
                                 </a>
@@ -437,15 +437,7 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-edit"></i>
-                            <span>网站管理</span>
-
-                        </a>
-
-                        
-                    </li>
+                    
 
                     <li>
                         <a href="#">
@@ -476,12 +468,21 @@
                     </li>
 
                     <li>
-                        <a href="#">
-                            <i class="icon-file"></i>
-                            <span>设置</span>
+                        <a href="#" class="dropdown-toggle">
+                            <i class="icon-edit"></i>
+                            <span>网站管理</span>
 
+                            <b class="arrow icon-angle-down"></b>
                         </a>
 
+                        <ul class="submenu">
+                            <li>
+                                <a href="#/config/website">
+                                    <i class="icon-double-angle-right"></i>
+                                    站点配置
+                                </a>
+                            </li>
+                        </ul>
                         
                     </li>
                 </ul><!--/.nav-list-->
@@ -506,19 +507,9 @@
             <i class="icon-double-angle-up icon-only bigger-110"></i>
         </a>
         <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">头部</h3>
-  </div>
-  <div class="modal-body">
-    <p>身体</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-    <button class="btn btn-primary">保存</button>
-  </div>
+  
 </div>
 
 
-<div id="loading_div"></div>
+<div id="loading_div">正在加载...</div>
 {% endblock %}

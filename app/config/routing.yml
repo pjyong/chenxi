@@ -1,3 +1,7 @@
+chen_xi_gallery:
+    resource: "@ChenXiGalleryBundle/Resources/config/routing.yml"
+    prefix:   /
+
 chen_xi_tag:
     resource: "@ChenXiTagBundle/Resources/config/routing.yml"
     prefix:   /
@@ -13,4 +17,6 @@ chen_xi_main:
 chen_xi_user:
     resource: "@ChenXiUserBundle/Resources/config/routing.yml"
     prefix:   /
+
+
 

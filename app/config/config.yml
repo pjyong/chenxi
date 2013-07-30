@@ -24,6 +24,7 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
 # Assetic Configuration
 assetic:
@@ -80,3 +81,4 @@ fpn_tag:
     model:
         tag_class:     ChenXi\TagBundle\Entity\Tag
         tagging_class: ChenXi\TagBundle\Entity\Tagging
+

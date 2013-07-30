@@ -1,18 +1,21 @@
 define([
     'marionette',
     'vent',
-    'view/BreadcrumbView'
+    'view/BreadcrumbView',
+    'region/ModalRegion'
     
 ], function(
     Marionette,
     vent,
-    BreadcrumbView
+    BreadcrumbView,
+    ModalRegion
 ){
 
     var app = new Marionette.Application();
 
     app.addRegions({
-        contentRegion: '#page-content'
+        contentRegion: '#page-content',
+        modalRegion: ModalRegion
     });
 
     // show breadcrumb view
@@ -22,6 +25,8 @@ define([
         if(Backbone.history){
             Backbone.history.start();
         }
+        // 加载
+        
     });
 
     app.startSubApp = function(appName, args){

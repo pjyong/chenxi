@@ -16,6 +16,7 @@ define([
             // this.headerRegion = app.headerRegion;
             // this.navRegion = app.navRegion;
             this.contentRegion = app.contentRegion;
+            this.modalRegion = app.modalRegion;
 
             Marionette.Controller.prototype.constructor.call(this, options);
         },
@@ -29,6 +30,10 @@ define([
 
         endLoading: function(){
             app.loadingView.hide();
+        },
+
+        loadModal: function(view){
+            this.modalRegion.show(view);
         }
 
     });

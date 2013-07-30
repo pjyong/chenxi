@@ -29,10 +29,6 @@ class ArticleManager
 		$this->class = $metadata->getName();
 	}
 
-	public function find($id)
-	{
-		return $this->repository->find($id);
-	}
 
 	public function delete(Article $article)
 	{
@@ -49,13 +45,25 @@ class ArticleManager
 		}
 	}
 
+	public function find($id)
+	{
+		return $this->repository->find($id);
+	}
+
 	public function findOneBy(array $criteria)
     {
     	return $this->repository->findOneBy($criteria);
     }
 
-    public function findS()
+    public function findAll()
     {
     	return $this->repository->findAll();
+    }
+
+    public function findBy(array $criteria)
+    {
+    	$query = $this->em->createQuery('SELECT a FROM ChenXi\ContentBundle\Entity\Article a JOIN a.website w WHERE w.id = :wid');
+    	$query->setParameter(':wid', $criteria['websiteId']);
+    	return $query->getResult();
     }
 }

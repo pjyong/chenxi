@@ -36,7 +36,11 @@ define([
 
         destroyView: function(){
             this.close();
-        }
+        },
+
+        // onClose: function(){
+        //     alert('close item');
+        // }
 
     });
 });

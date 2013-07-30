@@ -9,12 +9,16 @@ use ChenXi\ContentBundle\Entity\Article;
 use ChenXi\ContentBundle\Form\Type\ArticleType;
 
 
+
+
 class ArticlesController extends FOSRestController
 {
 	// get the collection
 	public function getArticlesAction()
 	{
-		$articles = $this->container->get('chenxi_article_manager')->findS();
+		$criteria = array('websiteId' => $this->getWebsiteId());
+
+		$articles = $this->container->get('chenxi_article_manager')->findBy($criteria);
 
 		return $this->handleView($this->view($articles));
 	}
@@ -22,7 +26,12 @@ class ArticlesController extends FOSRestController
 	// create
 	public function postArticlesAction()
 	{
-		return $this->process(new Article());
+		$article = new Article();
+		// 指定website
+		$website = $this->container->get('chenxi_website_manager')->find($this->getWebsiteId());
+		$article->setWebsite($website);
+
+		return $this->process($article, true);
 	}
 
 	// delete
@@ -68,8 +77,9 @@ class ArticlesController extends FOSRestController
 
 
 
-	public function process(Article $article)
+	public function process(Article $article, $new = false)
 	{
+		$statusCode = $new ? 201 : 204;
 		$form = $this->createForm(new ArticleType(), $article);
 		$data = $this->getRequest()->request->all();
 		$children = $form->all();
@@ -87,15 +97,18 @@ class ArticlesController extends FOSRestController
 			$this->container->get('chenxi_article_manager')->update($article);
 
 			// save tags
-			$tagManager = $this->container->get('fpn_tag.tag_manager');
-			$tagNames = $tagManager->splitTagNames($this->getRequest()->request->get('tags'));
-			$tags = $tagManager->loadOrCreateTags($tagNames);
-			$tagManager->addTags($tags, $article);
-			$tagManager->saveTagging($article);
+			// $tagManager = $this->container->get('fpn_tag.tag_manager');
+			// $tagNames = $tagManager->splitTagNames($this->getRequest()->request->get('tags'));
+			// $tags = $tagManager->loadOrCreateTags($tagNames);
+			// $tagManager->addTags($tags, $article);
+			// $tagManager->saveTagging($article);
 
 
-			return $this->handleView($this->view($article));
+			return $this->handleView($this->view($new ? $article : null, $statusCode));
 		}
+		return $this->handleView($this->view($form, 400));
+
+
 		// $isValid = true;
 		// $title = $this->getRequest()->request->get('title');
 		// $start_date = $this->getRequest()->request->get('start_date');
@@ -114,5 +127,10 @@ class ArticlesController extends FOSRestController
 		// 	return $this->handleView($this->view($article));
 		// }
 		
+	}
+
+	function getWebsiteId()
+	{
+		return $this->getRequest()->getSession()->get('websiteId');
 	}
 }

@@ -6,6 +6,9 @@ use DoctrineExtensions\Taggable\Taggable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+
+// use Symfony\Component\HttpFoundation\Session\Session;
+
 /**
  * ChenXi\ContentBundle\Entity\Article
  *
@@ -47,6 +50,17 @@ class Article implements Taggable
     private $status = 1;
 
     private $tags;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ChenXi\MainBundle\Entity\Website")
+     * @ORM\JoinColumn(name="website_id", referencedColumnName="id")
+     **/
+    private $website;
+
+    public function __construct()
+    {
+
+    }
 
     /**
      * Get id
@@ -150,6 +164,17 @@ class Article implements Taggable
         return $this->end_date;
     }
 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        
+        return $this;
+    }
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
     /**
      * Make this entity taggable
      */
@@ -168,5 +193,28 @@ class Article implements Taggable
     public function getTaggableId()
     {
         return $this->getId();
+    }
+
+    /**
+     * Set website
+     *
+     * @param \ChenXi\MainBundle\Entity\Website $website
+     * @return Article
+     */
+    public function setWebsite(\ChenXi\MainBundle\Entity\Website $website = null)
+    {
+        $this->website = $website;
+    
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return \ChenXi\MainBundle\Entity\Website 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
     }
 }

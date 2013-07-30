@@ -13,12 +13,6 @@ $loader = new ApcClassLoader('sf2', $loader);
 $loader->register(true);
 */
 
-
-
-
-// fdsfdafafafa
-//wfowofowofowofdsfdsfdsfs
-// wowowoowowowowowoowowow
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
@@ -30,12 +24,3 @@ $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
-
-
-// this is my test , dont' wororororoo
-
-
-// fdsfsfsfsfsfs, fds f s fs
-
-
-

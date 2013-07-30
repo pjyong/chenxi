@@ -21,6 +21,8 @@ define([
 
         events: {
             'click .publish': 'publishArticle',
+            'change .tags': 'modCheckboxTag',
+            'click .media_library': 'showMediaLibrary'
         },        
 
         regions: {
@@ -28,7 +30,7 @@ define([
         },
 
         initialize: function(){
-            _.bindAll(this, 'publishArticle');
+            _.bindAll(this, 'publishArticle', 'modCheckboxTag', 'showMediaLibrary');
             // this.contentType = this.options.type;
 
             // get information about contentType
@@ -38,6 +40,10 @@ define([
             //     this.contentTypeName = '页面';
             // }
             // alert(options.type);
+
+
+
+
         },
 
         render: function(){
@@ -60,10 +66,34 @@ define([
             
             // verify
 
-
             // trigger submit action
             vent.trigger('articleController:submitArticle', {model: this.model});
         },
+
+        showMediaLibrary: function(){
+            vent.trigger('articleController:loadMediaLibrary');
+        },
+
+        modCheckboxTag: function(e){
+            var currentObj = $(e.currentTarget);
+            console.log(currentObj.val());
+            if(currentObj.val() == ''){
+                // uncheck
+                this.checkOption(this.$('.tag_label'));
+            }else{
+                // check
+                this.uncheckOption(this.$('.tag_label'));
+            }
+        },
+
+        checkOption: function(el){
+            el.find('i').replaceWith('<i class="icon-check"></i>');
+        },
+
+        uncheckOption: function(el){
+            el.find('i').replaceWith('<i class="icon-edit"></i>');
+
+        }
 
     });
 });

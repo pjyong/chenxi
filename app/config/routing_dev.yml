@@ -2,6 +2,9 @@ chenxi_homepage:
     pattern:  /
     defaults: { _controller: ChenXiMainBundle:Default:index }
 
+chenxi_test:
+    pattern:  /chenxi_test
+    defaults: { _controller: ChenXiMainBundle:Default:test }
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

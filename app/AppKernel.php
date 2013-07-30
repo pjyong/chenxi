@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new ChenXi\ContentBundle\ChenXiContentBundle(),
             new FPN\TagBundle\FPNTagBundle(),
             new ChenXi\TagBundle\ChenXiTagBundle(),
+            new ChenXi\GalleryBundle\ChenXiGalleryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -31,6 +32,7 @@ class AppKernel extends Kernel
             $bundles[] = new JMS\SerializerBundle\JMSSerializerBundle();
             $bundles[] = new FOS\RestBundle\FOSRestBundle();
             $bundles[] = new FOS\UserBundle\FOSUserBundle();
+            // $bundles[] = new FOS\OAuthServerBundle\FOSOAuthServerBundle();
         }
 
         return $bundles;

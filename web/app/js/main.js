@@ -69,6 +69,7 @@ require([
     'app',
     'module/sidebarModule',
     'module/contentModule',
+    'module/configModule',
     'vent',
 ], function(
     app

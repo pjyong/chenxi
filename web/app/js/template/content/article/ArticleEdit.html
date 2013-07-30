@@ -50,14 +50,16 @@
         <div class="widget-body">
             <div class="widget-body-inner">
                 <div class="widget-main padding-6">
-                    <div>
-                        <button data-toggle="collapse" data-target="#tagsdiv" class="btn btn-link"><i class="icon-check"></i>标签</button>    
+                    <div class="tag_label">
+                        <button data-toggle="collapse" data-target="#tagsdiv" class="btn btn-link">
+                            <i class="<%=_.isUndefined(args.tags) ? 'icon-edit' : 'icon-check' %>"></i>标签
+                        </button>    
                     </div>
-                    <div id="tagsdiv" class="collapse in">
+                    <div id="tagsdiv" class="collapse">
                         <input class="tags" value=""/>
                     </div>
                     <div>
-                        <button type="button" data-target="#myModal" data-toggle="modal" class="btn btn-link"><i class="icon-check"></i>多媒体</button>
+                        <button type="button" class="btn btn-link media_library"><i class="icon-check"></i>多媒体</button>
                     </div>
                 </div>
             </div>

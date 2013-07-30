@@ -16,8 +16,19 @@ div.tagsinput span.tag{
 #loading_div{
 	position:fixed;
 	top:5px;
-	width:100px;
+
 	left:46%;
+	border-radius: 5px;
+font-size: 12px;
+font-weight: bold;
+padding: 4px 4px;
+background: #FF8000;
+color: #FFF;
+min-width: 60px;
+text-align: center;
+line-height: normal;
+text-decoration: none;
+z-index: 10000;
 }
 
 /*******************content options************/

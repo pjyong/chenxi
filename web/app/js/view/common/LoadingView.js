@@ -1,9 +1,7 @@
 define([
     'marionette', 
-    'text!template/common/LoadingTemplate.html',
 ], function(
     Marionette,
-    LoadingTemplate
 ){
 
     return Marionette.ItemView.extend({
@@ -15,13 +13,14 @@ define([
             this.render();
         },
 
+        
+
         template: function(){
             return _.template(LoadingTemplate);
         },
 
         render: function(){
             this.$el.html(this.template());
-            this.$el.hide();
         },
 
         show: function(){

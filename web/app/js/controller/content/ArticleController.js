@@ -5,6 +5,7 @@ define([
     'view/content/ArticleEditView',
     'view/content/ArticleIndexView',
     'repository/content/ArticleRepository',
+    'view/modal/MediaLibraryView',
     'ckeditor',
     'bootstrap.daterangepicker',
     'jquery.tagsinput',
@@ -14,7 +15,8 @@ define([
     AppController,
     ArticleCreateView,
     ArticleIndexView,
-    ArticleRepository
+    ArticleRepository,
+    MediaLibraryView
 ){
     // helper function 
     function convertTagsToString(tagCollection){
@@ -30,9 +32,10 @@ define([
 
 
         initialize: function(){
-            _.bindAll(this, 'submitArticle', 'deleteArticle');
+            _.bindAll(this, 'submitArticle', 'deleteArticle', 'loadMediaLibrary');
             vent.on('articleController:submitArticle', this.submitArticle);
             vent.on('articleController:deleteArticle', this.deleteArticle);
+            vent.on('articleController:loadMediaLibrary', this.loadMediaLibrary);
 
         },
 
@@ -43,6 +46,7 @@ define([
                 var articleIndexView = new ArticleIndexView({collection: articles});
                 that.contentRegion.show(articleIndexView);
                 that.endLoading();
+                $('[data-toggle="tooltip"]').tooltip();
             };
             that.startLoading();
             $.when(articleRepository.getArticles()).then(callback); 
@@ -69,6 +73,7 @@ define([
             $.when(articleRepository.deleteArticle(options.model)).then(callback);
         },
 
+        // add or edit article
         editArticle: function(id){
             var that = this;
             // create repository
@@ -110,6 +115,15 @@ define([
             $.when(articleRepository.createArticle(options.model)).then(callback);
         },
 
+        loadMediaLibrary: function(){
+            this.loadModal(new MediaLibraryView());
+        },
+
+        onClose: function(){
+            vent.off('articleController:submitArticle');
+            vent.off('articleController:deleteArticle');
+            vent.off('articleController:loadMediaLibrary');
+        },
 
         test: function(){alert('successful');}
     });
