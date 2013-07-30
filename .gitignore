@@ -1,0 +1,5 @@
+composer.lock
+composer.phar
+/web/bundles/
+/app/cache/
+/vendor/
