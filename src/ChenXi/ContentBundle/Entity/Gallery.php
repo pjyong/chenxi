@@ -39,8 +39,8 @@ class Gallery
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="ChenXi\ContentBundle\Entity\Image", mappedBy="Gallery")
-     * @ORM\JoinTable(name="gallery_image_x_ref", 
+     * @ORM\ManyToMany(targetEntity="ChenXi\ContentBundle\Entity\Image")
+     * @ORM\JoinTable(name="gallery_image_xref", 
      * joinColumns={@ORM\JoinColumn(name="gallery_id", referencedColumnName="id")}, 
      * inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true)}
      * )
