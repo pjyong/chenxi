@@ -8,6 +8,13 @@ content_tags:
     resource: ChenXi\ContentBundle\Controller\TagsController
     prefix: /api/content
 
+content_galleries:
+    type:     rest
+    resource: ChenXi\ContentBundle\Controller\GalleriesController
+    prefix: /api/content
+
+
+
 
 test_page:
     path: /test

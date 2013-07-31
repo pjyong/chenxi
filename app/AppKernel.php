@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new ChenXi\ContentBundle\ChenXiContentBundle(),
             new FPN\TagBundle\FPNTagBundle(),
             new ChenXi\TagBundle\ChenXiTagBundle(),
-            new ChenXi\GalleryBundle\ChenXiGalleryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
