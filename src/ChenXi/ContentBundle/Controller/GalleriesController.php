@@ -18,34 +18,34 @@ class GalleriesController extends FOSRestController
 	{
 		$criteria = array('websiteId' => $this->getWebsiteId());
 
-		$articles = $this->container->get('chenxi_article_manager')->findBy($criteria);
+		$galleries = $this->container->get('chenxi_gallery_manager')->findBy($criteria);
 
-		return $this->handleView($this->view($articles));
+		return $this->handleView($this->view($galleries));
 	}
 
 	// create
 	public function postGalleriesAction()
 	{
-		$article = new Gallery();
+		$gallery = new Gallery();
 		// 指定website
 		$website = $this->container->get('chenxi_website_manager')->find($this->getWebsiteId());
-		$article->setWebsite($website);
+		$gallery->setWebsite($website);
 
-		return $this->process($article, true);
+		return $this->process($gallery, true);
 	}
 
 	// delete
 	public function deleteGalleryAction($id)
 	{
-		$articleManager = $this->container->get('chenxi_article_manager');
-		$article = $articleManager->find($id);
+		$galleryManager = $this->container->get('chenxi_gallery_manager');
+		$gallery = $galleryManager->find($id);
 
-		// remove tags relate article
+		// remove tags relate gallery
 		$tagManager = $this->container->get('fpn_tag.tag_manager');
-		$tagManager->deleteTagging($article);
+		$tagManager->deleteTagging($gallery);
 
-		// remove article
-		$articleManager->delete($article);
+		// remove gallery
+		$galleryManager->delete($gallery);
 
 		return $this->handleView($this->view(null, 204));
 	}
@@ -53,34 +53,34 @@ class GalleriesController extends FOSRestController
 	// update
 	public function putGalleryAction($id)
 	{
-		$article = $this->container->get('chenxi_article_manager')->find($id);
+		$gallery = $this->container->get('chenxi_gallery_manager')->find($id);
 
-		return $this->process($article);
+		return $this->process($gallery);
 	}
 
 	// read
 	public function getGalleryAction($id)
 	{
-		$article = $this->container->get('chenxi_article_manager')->find($id);
-
+		$gallery = $this->container->get('chenxi_gallery_manager')->find($id);
 		// load tags
-		$tagManager = $this->container->get('fpn_tag.tag_manager');
-		$tagManager->loadTagging($article);
+		// $tagManager = $this->container->get('fpn_tag.tag_manager');
+		// $tagManager->loadTagging($gallery);
 
-		if(!$article)
+		if(!$gallery)
 		{
-			$article = array('error' => 1);
+			$gallery = array('error' => 1);
 		}
+		
 
-		return $this->handleView($this->view($article));
+		return $this->handleView($this->view($gallery));
 	}
 
 
 
-	public function process(Gallery $article, $new = false)
+	public function process(Gallery $gallery, $new = false)
 	{
 		$statusCode = $new ? 201 : 204;
-		$form = $this->createForm(new GalleryType(), $article);
+		$form = $this->createForm(new GalleryType(), $gallery);
 		$data = $this->getRequest()->request->all();
 		$children = $form->all();
 		$toBind = array_intersect_key($data, $children);
@@ -92,19 +92,19 @@ class GalleriesController extends FOSRestController
 		$form->bind($toBind);
 
 		if($form->isValid()){
-			// print_r($article);
+			// print_r($gallery);
 			// return;
-			$this->container->get('chenxi_article_manager')->update($article);
+			$this->container->get('chenxi_gallery_manager')->update($gallery);
 
 			// save tags
 			// $tagManager = $this->container->get('fpn_tag.tag_manager');
 			// $tagNames = $tagManager->splitTagNames($this->getRequest()->request->get('tags'));
 			// $tags = $tagManager->loadOrCreateTags($tagNames);
-			// $tagManager->addTags($tags, $article);
-			// $tagManager->saveTagging($article);
+			// $tagManager->addTags($tags, $gallery);
+			// $tagManager->saveTagging($gallery);
 
 
-			return $this->handleView($this->view($new ? $article : null, $statusCode));
+			return $this->handleView($this->view($new ? $gallery : null, $statusCode));
 		}
 		return $this->handleView($this->view($form, 400));
 
@@ -117,14 +117,14 @@ class GalleriesController extends FOSRestController
 
 
 		// if($isValid){
-		// 	$article->setTitle($title);
-		// 	$article->setBody($body);
-		// 	$article->setStartDate(new \DateTime($start_date));
-		// 	$article->setEndDate(new \DateTime($end_date));
+		// 	$gallery->setTitle($title);
+		// 	$gallery->setBody($body);
+		// 	$gallery->setStartDate(new \DateTime($start_date));
+		// 	$gallery->setEndDate(new \DateTime($end_date));
 
-		// 	$this->container->get('chenxi_article_manager')->update($article);
+		// 	$this->container->get('chenxi_gallery_manager')->update($gallery);
 
-		// 	return $this->handleView($this->view($article));
+		// 	return $this->handleView($this->view($gallery));
 		// }
 		
 	}

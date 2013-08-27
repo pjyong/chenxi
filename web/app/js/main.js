@@ -9,6 +9,7 @@ require.config({
         ckeditor: 'lib/ckeditor/ckeditor',
         'jquery.tagsinput': 'lib/jquery.tagsinput.min',
         'jquery.gritter': 'lib/jquery.gritter.min',
+        'jquery.chosen': 'lib/chosen.jquery.min',
         'backbone.routerilter': 'lib/backbone.routefilter',
         'backbone.wreqr': 'lib/backbone.wreqr',
         'backbone.babysitter': 'lib/backbone.babysitter',

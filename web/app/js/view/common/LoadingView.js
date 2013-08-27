@@ -1,7 +1,7 @@
 define([
     'marionette', 
 ], function(
-    Marionette,
+    Marionette
 ){
 
     return Marionette.ItemView.extend({
@@ -10,18 +10,18 @@ define([
         el: '#loading_div',
 
         initialize: function(){
-            this.render();
+            // this.render();
         },
 
         
 
-        template: function(){
-            return _.template(LoadingTemplate);
-        },
+        // template: function(){
+        //     return _.template(LoadingTemplate);
+        // },
 
-        render: function(){
-            this.$el.html(this.template());
-        },
+        // render: function(){
+        //     this.$el.html(this.template());
+        // },
 
         show: function(){
             this.$el.show();

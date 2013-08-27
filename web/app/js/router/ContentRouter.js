@@ -14,6 +14,7 @@ define([
             'content/page': 'getPages',
             'content/page/add': 'editPage',
             'content/gallery': 'getGalleries',
+            'content/gallery/edit/:id': 'editGallery',
             'content/gallery/add': 'editGallery'
         },
 
@@ -43,7 +44,7 @@ define([
             app.module('m.content').loadController('page').getPages();
         },
 
-        editPage: function(){
+        editPage: function(id){
             app.module('sidebar').controller.activeNav({nav: '#/content/article'});
             app.module('m.content').loadController('page').editPage(id);
         },
@@ -53,9 +54,9 @@ define([
             app.module('m.content').loadController('gallery').getGalleries();
         },
 
-        editGallery: function(){
+        editGallery: function(id){
             app.module('sidebar').controller.activeNav({nav: '#/content/gallery'});
-            app.module('m.content').loadController('gallery').editGallery();
+            app.module('m.content').loadController('gallery').editGallery(id);
 
         }
 

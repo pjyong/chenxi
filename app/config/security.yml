@@ -54,7 +54,7 @@ security:
     firewalls:
         # 所有的页面都必须要经过验证 
         main:
-            pattern: ^/login$
+            pattern: ^/login$|^/register|^/resetting
             anonymous:    ~   
         secured_area:
             pattern: ^/

@@ -34,3 +34,11 @@ z-index: 10000;
 /*******************content options************/
 .content_options .btn-link:hover{text-decoration: none;}
 .content_options .btn-link{padding:3px 0px;}
+
+
+#template_options_view{
+	color: #393939;
+}
+#template_options_view label{
+	text-align:right;
+}

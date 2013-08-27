@@ -32,6 +32,16 @@ class Gallery
     private $title;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_date;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_date;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
@@ -56,6 +66,7 @@ class Gallery
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->updated_date = new \DateTime();
     }
 
     /**
@@ -181,5 +192,49 @@ class Gallery
     public function removeImage(\ChenXi\ContentBundle\Entity\Image $images)
     {
         $this->images->removeElement($images);
+    }
+
+    /**
+     *
+     * @ORM\PreUpdate
+     *
+     */
+    public function setUpdatedDate()
+    {
+        $this->updated_date = new \DateTime();
+    }    
+
+
+    /**
+     * Set created_date
+     *
+     * @param \DateTime $createdDate
+     * @return Gallery
+     */
+    public function setCreatedDate($createdDate)
+    {
+        $this->created_date = $createdDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get created_date
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedDate()
+    {
+        return $this->created_date;
+    }
+
+    /**
+     * Get updated_date
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedDate()
+    {
+        return $this->updated_date;
     }
 }

@@ -32,6 +32,16 @@ class Gallery
     private $title;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_date;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_date;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
@@ -39,8 +49,8 @@ class Gallery
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="ChenXi\ContentBundle\Entity\Image", mappedBy="Gallery")
-     * @ORM\JoinTable(name="gallery_image_x_ref", 
+     * @ORM\ManyToMany(targetEntity="ChenXi\ContentBundle\Entity\Image")
+     * @ORM\JoinTable(name="gallery_image_xref", 
      * joinColumns={@ORM\JoinColumn(name="gallery_id", referencedColumnName="id")}, 
      * inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true)}
      * )
@@ -182,4 +192,15 @@ class Gallery
     {
         $this->images->removeElement($images);
     }
+
+    /**
+     *
+     * @ORM\PreUpdate
+     *
+     */
+    public function setUpdatedDate()
+    {
+        $this->updated_date = new \DateTime();
+    }
+
 }

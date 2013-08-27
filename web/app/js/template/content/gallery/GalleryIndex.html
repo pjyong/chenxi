@@ -1,0 +1,68 @@
+<h3 class="header smaller lighter blue">
+    相册列表
+    <a href="#/content/gallery/add" class="btn btn-mini btn-primary">
+            <i class="icon-pencil bigger-120"></i>
+            创建相册
+    </a>
+</h3>
+
+<div id="table_report_wrapper" class="dataTables_wrapper" role="grid">
+    <div class="row-fluid">
+        <div class="span6">
+            <div id="table_report_length" class="dataTables_length">
+                <label>Display 
+                    <select size="1" name="table_report_length" aria-controls="table_report">
+                        <option value="10" selected="selected">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select> records
+                </label>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="dataTables_filter" id="table_report_filter">
+                <label>Search: <input type="text" aria-controls="table_report"></label>
+            </div>
+        </div>
+    </div>
+    <table id="table_report" class="table table-striped table-bordered table-hover dataTable" aria-describedby="table_report_info">
+        <thead>
+            <tr role="row">
+                <th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 64px;">
+                    <label>
+                        <input type="checkbox">
+                        <span class="lbl"></span>
+                    </label>
+                </th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="table_report" rowspan="1" colspan="1" aria-label="标题排序" style="width: 190px;">标题</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="table_report" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 143px;">作者</th>
+                <th class="hidden-phone sorting" role="columnheader" tabindex="0" aria-controls="table_report" rowspan="1" colspan="1" aria-label="Update: activate to sort column ascending" style="width: 223px;">
+                    <i class="icon-time hidden-phone"></i>
+                    创建日期
+                </th>
+                <th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="table_report" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 183px;">状态</th>
+                <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 274px;">操作选项</th>
+            </tr>
+        </thead>
+        <tbody role="alert" aria-live="polite" aria-relevant="all">
+            
+        </tbody>
+    </table>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="dataTables_info" id="table_report_info">Showing 1 to 10 of 23 entries</div>
+        </div>
+        <div class="span6">
+            <div class="dataTables_paginate paging_bootstrap pagination">
+                <ul>
+                    <li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li><li><a href="#">3</a></li>
+                    <li class="next"><a href="#"><i class="icon-double-angle-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+                        

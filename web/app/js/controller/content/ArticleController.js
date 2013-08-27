@@ -6,9 +6,11 @@ define([
     'view/content/ArticleIndexView',
     'repository/content/ArticleRepository',
     'view/modal/MediaLibraryView',
+    'view/common/TemplateOptionsView',
     'ckeditor',
     'bootstrap.daterangepicker',
     'jquery.tagsinput',
+    'jquery.chosen'
 ], function(
     Marionette,
     vent,
@@ -16,7 +18,8 @@ define([
     ArticleCreateView,
     ArticleIndexView,
     ArticleRepository,
-    MediaLibraryView
+    MediaLibraryView,
+    TemplateOptionsView
 ){
     // helper function 
     function convertTagsToString(tagCollection){
@@ -91,6 +94,10 @@ define([
                 }
                 editArticleView.$('.tags').tagsInput({defaultText: '添加标签'});
                 that.endLoading();
+
+                // load template options view
+                var templateOptions = new TemplateOptionsView();
+                templateOptions.$el.find('.templates-select').chosen();
             };
             that.startLoading();
             $.when(articleRepository.getArticle(id)).then(callback);

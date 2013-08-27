@@ -45,6 +45,11 @@ class Article implements Taggable
     private $end_date;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_date;
+
+    /**
      * @ORM\Column(type="integer", options={"default" = 1})
      */
     private $status = 1;
@@ -216,5 +221,25 @@ class Article implements Taggable
     public function getWebsite()
     {
         return $this->website;
+    }
+
+    /**
+     *
+     * @ORM\PreUpdate
+     *
+     */
+    public function setUpdatedDate()
+    {
+        $this->updated_date = new \DateTime();
+    }
+
+    /**
+     * Get updated_date
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedDate()
+    {
+        return $this->updated_date;
     }
 }
