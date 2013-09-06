@@ -18,11 +18,13 @@ define([
         },
 
         events: {
-            // 'click .delete': 'deleteGallery'
+            'click .tools': 'eidtImage'
         },
 
         initialize: function(){
-            // _.bindAll(this, 'deleteGallery');
+            _.bindAll(this, 'eidtImage');
+            // _.bind(this.editImage, this);
+            console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
         },
 
@@ -34,6 +36,13 @@ define([
         //     // trigger
         //     vent.trigger('galleryController:deleteGallery', {model: this.model});
         // },
+
+        editImage: function(e){
+            e.preventDefault();
+            alert('test');
+            return false;
+            // console.log(this.model);
+        },
 
         destroyView: function(){
             this.close();

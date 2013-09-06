@@ -1,6 +1,7 @@
 composer.lock
 composer.phar
 /web/bundles/
+/web/uploads/
 /app/cache/
 /app/logs/
 /vendor/

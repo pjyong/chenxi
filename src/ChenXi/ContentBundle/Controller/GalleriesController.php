@@ -55,7 +55,10 @@ class GalleriesController extends FOSRestController
 		// 指定website
 		$website = $this->container->get('chenxi_website_manager')->find($this->getWebsiteId());
 		$image->setWebsite($website);
-		$image->setName('teststs');
+
+		// 过滤掉文件后缀
+		$filename = substr($file->getClientOriginalName(), 0, strrpos($file->getClientOriginalName(), '.'));
+		$image->setName($filename);
 		$image->setFile($file);
 
 		// $form = $this->createForm(new ImageType(), $image);
