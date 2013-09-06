@@ -1,11 +1,11 @@
 define([
     'marionette', 
     'vent',
-    'text!template/content/gallery/GalleryItem.html',
+    'text!template/content/gallery/GalleryImageItem.html',
 ], function(
     Marionette,
     vent, 
-    GalleryItem
+    GalleryImageItem
 ){
 
     return Marionette.ItemView.extend({
@@ -14,26 +14,26 @@ define([
         
 
         template: function(data){
-            return _.template(GalleryItem, data, {variable: 'args'});
+            return _.template(GalleryImageItem, data, {variable: 'args'});
         },
 
         events: {
-            'click .delete': 'deleteGallery'
+            // 'click .delete': 'deleteGallery'
         },
 
         initialize: function(){
-            _.bindAll(this, 'deleteGallery');
-            this.listenTo(this.options.model, 'destroy', this.destroyView);
+            // _.bindAll(this, 'deleteGallery');
+            // this.listenTo(this.options.model, 'destroy', this.destroyView);
         },
 
         render: function(){
             this.$el.html(this.template(this.model.toJSON()));
         },
 
-        deleteGallery: function(){
-            // trigger
-            vent.trigger('galleryController:deleteGallery', {model: this.model});
-        },
+        // deleteGallery: function(){
+        //     // trigger
+        //     vent.trigger('galleryController:deleteGallery', {model: this.model});
+        // },
 
         destroyView: function(){
             this.close();

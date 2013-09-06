@@ -4,19 +4,24 @@ define([
     'controller/AppController',
     'view/content/GalleryEditView',
     'view/content/GalleryIndexView',
+    'view/content/GalleryImageIndexView',
+    'view/content/GalleryImageAddView',
     'repository/content/GalleryRepository',
     'view/modal/MediaLibraryView',
     'view/common/TemplateOptionsView',
     'ckeditor',
     'bootstrap.datetimepicker',
     'jquery.tagsinput',
-    'jquery.chosen'
+    'jquery.chosen',
+    'dropzone'
 ], function(
     Marionette,
     vent,
     AppController,
     GalleryCreateView,
     GalleryIndexView,
+    GalleryImageIndexView,
+    GalleryImageAddView,
     GalleryRepository,
     MediaLibraryView,
     TemplateOptionsView
@@ -81,8 +86,10 @@ define([
             // create repository
             var galleryRepository = new GalleryRepository();
             var callback = function(gallery){
+                // 
                 var editGalleryView = new GalleryCreateView({model: gallery});
                 that.contentRegion.show(editGalleryView);
+                // that.loadModal(editGalleryView);
                 var ckeditor = CKEDITOR.replace('content_body');
                 editGalleryView.$('.datetimepicker').datetimepicker();
                 editGalleryView.$('.ace-popover').popover();
@@ -100,6 +107,55 @@ define([
             };
             that.startLoading();
             $.when(galleryRepository.getGallery(id)).then(callback);
+        },
+
+        getImages: function(galleryId){
+            var that = this;
+            var galleryRepository = new GalleryRepository();
+            var callback = function(images, gallery){
+
+                var galleryImageIndexView = new GalleryImageIndexView({collection: images, gallery: gallery});
+                that.contentRegion.show(galleryImageIndexView);
+                that.endLoading();
+                // $('[data-toggle="tooltip"]').tooltip();
+                // console.log(images);
+            };
+            that.startLoading();
+            $.when(galleryRepository.getImages(galleryId), galleryRepository.getGallery(galleryId)).then(callback);
+
+        },
+
+        addGalleryImage: function(galleryId){
+            var that = this;
+            var galleryRepository = new GalleryRepository();
+            var callback = function(gallery){
+                var galleryImageAddView = new GalleryImageAddView({gallery: gallery});
+                that.contentRegion.show(galleryImageAddView);
+                galleryImageAddView.$('.dropzone').dropzone({
+                    url: 'api/content/galleries/'+gallery.get('id')+'/images',
+                    paramName: "file", // The name that will be used to transfer the file
+                    maxFilesize: 0.5, // MB
+                  
+                    addRemoveLinks : true,
+                    dictDefaultMessage :'<span class="bigger-150 bolder"><i class="icon-caret-right red"></i> 将照片拖到这里</span> \
+                    <span class="smaller-80 grey">(或者 点击选择照片)</span> <br /> \
+                    <i class="upload-icon icon-cloud-upload blue icon-3x"></i>',
+                    dictResponseError: '上传图片故障!',
+                    
+                    //change the previewTemplate to use Bootstrap progress bars
+                    previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-success progress-striped active\"><span class=\"bar\" data-dz-uploadprogress></span></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
+                    sending: function(file, xhr, formData){
+                        // 准备相应的数据
+                        formData.append('name', 'xxxxxxxxxxxxxx');
+                    }
+
+                });
+                that.endLoading();
+                // $('[data-toggle="tooltip"]').tooltip();
+                // console.log(images);
+            };
+            that.startLoading();
+            $.when(galleryRepository.getGallery(galleryId)).then(callback);
         },
 
         submitGallery: function(options){

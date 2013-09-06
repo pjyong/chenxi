@@ -49,7 +49,7 @@ class Gallery
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="ChenXi\ContentBundle\Entity\Image")
+     * @ORM\ManyToMany(targetEntity="ChenXi\ContentBundle\Entity\Image", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="gallery_image_xref", 
      * joinColumns={@ORM\JoinColumn(name="gallery_id", referencedColumnName="id")}, 
      * inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true)}
@@ -177,9 +177,9 @@ class Gallery
      * @param \ChenXi\ContentBundle\Entity\Image $images
      * @return Gallery
      */
-    public function addImage(\ChenXi\ContentBundle\Entity\Image $images)
+    public function addImage(\ChenXi\ContentBundle\Entity\Image $image)
     {
-        $this->images[] = $images;
+        $this->images[] = $image;
     
         return $this;
     }

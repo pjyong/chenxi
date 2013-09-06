@@ -1,13 +1,13 @@
 define([
     'marionette', 
     'vent',
-    'view/content/GalleryItemView',
-    'text!template/content/gallery/GalleryIndex.html',
+    'view/content/GalleryImageItemView',
+    'text!template/content/gallery/GalleryImageIndex.html',
 ], function(
     Marionette,
     vent, 
-    GalleryItemView,
-    GalleryIndex
+    GalleryImageItemView,
+    GalleryImageIndex
 ){
 
     return Marionette.CompositeView.extend({
@@ -15,8 +15,9 @@ define([
         className: 'row-fluid',
 
         template: function(){
-            // return _.template(ContentIndexTemplate, data, {variable: 'args'});
-            return GalleryIndex;
+            // console.log(this.gallery);
+            var data = this.gallery.toJSON();
+            return _.template(GalleryImageIndex, data, {variable: 'gallery'});
         },
 
         ui: {
@@ -24,17 +25,21 @@ define([
         },
 
         events: {
-            'click #creat_content': 'createContent'
+            // 'click #creat_content': 'createContent'
         },        
 
-        itemView: GalleryItemView,
+        itemView: GalleryImageItemView,
 
         appendHtml: function(collectionView, itemView, index){
-            collectionView.$("#gallery_list").append(itemView.el);
+            collectionView.$("#gallery_image_list").append(itemView.el);
         },
 
         initialize: function(){
 
+            this.gallery = this.options.gallery;
+            _.bindAll(this, 'template');
+            // this.collection = this.options.collection;
+            // console.log(this.options.collection);
             // this.contentType = this.options.type;
 
             // // get information about contentType
@@ -48,16 +53,12 @@ define([
 
             // save gallery collection
             // this.collection = this.options.collection;
-            
+            // this.render();
         },
 
         createContent: function(){
             // vent.trigger('contentModule:createContent', {type: this.contentType});
         },
-
-        // render: function(){
-        //     this.$el.html(this.template({type: this.contentTypeName}));
-        // }
 
     });
 });

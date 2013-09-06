@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="article")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Article implements Taggable
 {
@@ -226,6 +227,7 @@ class Article implements Taggable
     /**
      *
      * @ORM\PreUpdate
+     * @ORM\PrePersist
      *
      */
     public function setUpdatedDate()

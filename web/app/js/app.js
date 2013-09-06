@@ -18,7 +18,7 @@ define([
         modalRegion: ModalRegion
     });
 
-    // show breadcrumb view
+    // 加载导航视图
     var breadcrumbView = new BreadcrumbView({el: '#breadcrumbs'});
 
     app.on("initialize:after", function(){

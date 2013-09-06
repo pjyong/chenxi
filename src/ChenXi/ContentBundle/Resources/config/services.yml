@@ -4,6 +4,8 @@ parameters:
     chenxi_article.class: ChenXi\ContentBundle\Entity\Article
     chenxi_gallery_manager.class: ChenXi\ContentBundle\Entity\GalleryManager
     chenxi_gallery.class: ChenXi\ContentBundle\Entity\Gallery
+    chenxi_image_manager.class: ChenXi\ContentBundle\Entity\ImageManager
+    chenxi_image.class: ChenXi\ContentBundle\Entity\Image
 
 
 services:
@@ -18,3 +20,7 @@ services:
     chenxi_gallery_manager:
         class: %chenxi_gallery_manager.class%
         arguments: [@doctrine.orm.default_entity_manager, %chenxi_gallery.class%]
+
+    chenxi_image_manager:
+        class: %chenxi_image_manager.class%
+        arguments: [@doctrine.orm.default_entity_manager, %chenxi_image.class%]

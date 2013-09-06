@@ -42,3 +42,74 @@ z-index: 10000;
 #template_options_view label{
 	text-align:right;
 }
+
+
+
+
+/*****************相册列表******************/
+#gallery_list li{
+	float: left;
+	width: 151px;
+	height: 210px;
+	margin: 0 19px 0 0;
+	position: relative;
+	list-style: none;
+}
+
+.gallery_bg{
+	height: 145px;
+	width: 145px;
+	position: absolute;
+	z-index: 1;
+	left: 4px;
+	top: 4px;
+	border: 1px solid #C4E9EA;
+}
+
+.gallery_wrap{
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+}
+
+.gallery_inner{
+	position: relative;
+	z-index: 2;
+	_zoom: 1;
+	height: 145px;
+	width: 145px;
+	border: 1px solid #C4E9EA;
+}
+
+.gallery_image{
+	width: 135px;
+	height: 135px;
+	margin: 5px;
+	font-size: 0;
+	line-height: 0;
+}
+
+.gallery_image_a{
+	display: block;
+	width: 135px;
+	height: 135px;
+	overflow: hidden;
+}
+
+.gallery_image_a img{
+	width: 200px;
+	height: 134px;
+	/*margin-left: -32px;*/
+	margin-top: 1px;
+	border: none;
+}
+
+
+
+
+
+
+
+/*dropzone*/
+.dropzone .dz-default.dz-message{background-image:none;font-size:24px;text-align:center;line-height:32px;left:0;width:100%;margin-left:auto}.dropzone .dz-default.dz-message span{display:inline;color:#555}.dropzone .dz-default.dz-message span .upload-icon{opacity:.7;filter:alpha(opacity=70);margin-top:8px;cursor:pointer}.dropzone .dz-default.dz-message span .upload-icon:hover{opacity:1;filter:alpha(opacity=100)}.dropzone .dz-preview .dz-error-mark,.dropzone-previews .dz-preview .dz-error-mark,.dropzone .dz-preview .dz-success-mark,.dropzone-previews .dz-preview .dz-success-mark{background-image:none;background-color:rgba(255,255,255,0.8);border-radius:100%;text-align:center;line-height:35px}.dropzone .dz-preview .dz-error-mark:before,.dropzone-previews .dz-preview .dz-error-mark:before{font-family:FontAwesome;font-size:30px;color:#db6262;content:"\f00d"}.dropzone .dz-preview .dz-success-mark:before,.dropzone-previews .dz-preview .dz-success-mark:before{font-family:FontAwesome;font-size:30px;color:#6da552;content:"\f00c"}.dropzone a.dz-remove,.dropzone-previews a.dz-remove{border:0;border-radius:0;color:#FFF;background:#d15b47;cursor:pointer}.dropzone a.dz-remove:hover,.dropzone-previews a.dz-remove:hover{color:#FFF;background:#b74635}.dropzone .progress,.dropzone-previews .progress{margin-bottom:0}.dropzone .dz-preview.dz-success .progress,.dropzone-previews .dz-preview.dz-success .progress,.dropzone .dz-preview.dz-error .progress,.dropzone-previews .dz-preview.dz-error .progress{display:none}

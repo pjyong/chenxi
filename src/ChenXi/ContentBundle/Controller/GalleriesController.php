@@ -6,9 +6,11 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 
 use ChenXi\ContentBundle\Entity\Gallery;
+use ChenXi\ContentBundle\Entity\Image;
 use ChenXi\ContentBundle\Form\Type\GalleryType;
+use ChenXi\ContentBundle\Form\Type\ImageType;
 
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class GalleriesController extends FOSRestController
@@ -22,6 +24,70 @@ class GalleriesController extends FOSRestController
 
 		return $this->handleView($this->view($galleries));
 	}
+
+	// 得到某个相册所有图片
+	public function getGalleryImagesAction($galleryId)
+	{
+		$galleryManager = $this->container->get('chenxi_gallery_manager');
+		$gallery = $galleryManager->find($galleryId);
+
+		$images = $gallery->getImages();
+
+		// 响应数据
+		$data = array();
+		foreach($images as $image){
+			$row = array();
+			$row['id'] = $image->getId();
+			$row['name'] = $image->getName();
+			$row['path'] = $image->getWebPath();
+			$data[] = $row;
+		}
+
+		return $this->handleView($this->view($data));
+	}
+
+	// 插入相册图片
+	public function postGalleryImagesAction($galleryId)
+	{
+		$file = $this->getRequest()->files->get('file');
+		// // print_r($this->getRequest()->request->get('file'));
+		$image = new Image();
+		// 指定website
+		$website = $this->container->get('chenxi_website_manager')->find($this->getWebsiteId());
+		$image->setWebsite($website);
+		$image->setName('teststs');
+		$image->setFile($file);
+
+		// $form = $this->createForm(new ImageType(), $image);
+		// $data = $this->getRequest()->request->all();
+		// $children = $form->all();
+		// $toBind = array_intersect_key($data, $children);
+
+		// // print_r($toBind);
+		// // $toBind['start_date'] = new \DateTime($toBind['start_date']);
+		// // $toBind['end_date'] = new \DateTime($toBind['end_date']);
+
+		// $form->bind($toBind);
+
+		// if($form->isValid()){
+			$gallery = $this->container->get('chenxi_gallery_manager')->find($galleryId);
+			$gallery->addImage($image);
+
+			$this->container->get('chenxi_gallery_manager')->update($gallery);
+		// }
+
+		
+		// $this->container->get('chenxi_image_manager')->update($image);
+
+
+
+		// 响应数据
+		// $data = array();
+		$data = array();
+		return $this->handleView($this->view($data));
+	}
+
+
 
 	// create
 	public function postGalleriesAction()
@@ -62,6 +128,7 @@ class GalleriesController extends FOSRestController
 	public function getGalleryAction($id)
 	{
 		$gallery = $this->container->get('chenxi_gallery_manager')->find($id);
+
 		// load tags
 		// $tagManager = $this->container->get('fpn_tag.tag_manager');
 		// $tagManager->loadTagging($gallery);
@@ -70,9 +137,16 @@ class GalleriesController extends FOSRestController
 		{
 			$gallery = array('error' => 1);
 		}
-		
 
-		return $this->handleView($this->view($gallery));
+
+		// 响应数据
+		$data = array();
+		$data['id'] = $gallery->getId();
+		$data['title'] = $gallery->getTitle();
+		$data['created_date'] = $gallery->getCreatedDate();
+		$data['description'] = $gallery->getDescription();
+
+		return $this->handleView($this->view($data));
 	}
 
 

@@ -1,69 +1,24 @@
-<td class="center  sorting_1">
-    <label>
-        <input type="checkbox">
-        <span class="lbl"></span>
-    </label>
-</td>
-<td class=" ">
-    <a href="#"><%=args.title%></a>
-</td>
-<td class=" ">$45</td>
-<td class="hidden-phone ">Feb 12</td>
-
-<td class="hidden-480 ">
-    <span class="label label-warning">Expiring</span>
-</td>
-
-<td class="td-actions ">
-    <div class="hidden-phone visible-desktop btn-group">
-        <button class="btn btn-mini btn-success">
-            <i class="icon-ok bigger-120"></i>
-        </button>
-
-        <a href="#/content/gallery/edit/<%=args.id%>" class="btn btn-mini btn-info" data-toggle="tooltip" data-placement="top" title="编辑">
-            <i class="icon-edit bigger-120"></i>
-        </a>
-
-        <button class="btn btn-mini btn-danger delete" data-toggle="tooltip" data-placement="top" title="删除">
-            <i class="icon-trash bigger-120"></i>
-        </button>
-
-        <button class="btn btn-mini btn-warning">
-            <i class="icon-flag bigger-120"></i>
-        </button>
+<div class="gallery_bg"></div>
+<div class="gallery_wrap">
+    <div class="gallery_inner">
+        <p class="gallery_image">
+            <a href="#content/gallery/<%=args.id%>/image" class="gallery_image_a">
+                <img src="/app/img/no_image.gif">
+            </a>
+        </p>
     </div>
+    <div class="gallery_foot">
+        <p><a href=""><%=args.title%></a></p>
+        <p>133张</p>
+        <p>
+            <a href="#content/gallery/edit/<%=args.id%>" class="btn btn-mini btn-info" data-toggle="tooltip" data-placement="top" title="编辑">
+                <i class="icon-edit bigger-120"></i>
+            </a>
 
-    <div class="hidden-desktop visible-phone">
-        <div class="inline position-relative">
-            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-caret-down icon-only bigger-120"></i>
+            <button class="btn btn-mini btn-danger delete" data-toggle="tooltip" data-placement="top" title="删除">
+                <i class="icon-trash bigger-120"></i>
             </button>
 
-            <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                <li>
-                    <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-placement="left" data-original-title="Edit">
-                        <span class="green">
-                            <i class="icon-edit"></i>
-                        </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="tooltip-warning" data-rel="tooltip" title="" data-placement="left" data-original-title="Flag">
-                        <span class="blue">
-                            <i class="icon-flag"></i>
-                        </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-placement="left" data-original-title="Delete">
-                        <span class="red">
-                            <i class="icon-trash"></i>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        </p>
     </div>
-</td>
+</div>

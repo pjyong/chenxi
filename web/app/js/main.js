@@ -15,6 +15,7 @@ require.config({
         'backbone.babysitter': 'lib/backbone.babysitter',
         'bootstrap': 'lib/bootstrap/bootstrap.min',
         'moment': 'lib/bootstrap/moment.min',
+        'dropzone': 'lib/dropzone',
         // 'bootstrap.tooltip': 'lib/bootstrap/bootstrap-tooltip',
         'bootstrap.daterangepicker': 'lib/bootstrap/daterangepicker',
         'bootstrap.datetimepicker': 'lib/bootstrap/bootstrap-datetimepicker.min',
@@ -27,6 +28,9 @@ require.config({
         },
         underscore : {
             exports : '_'
+        },
+        dropzone: {
+            deps: ['jquery']
         },
         jqueryui: {
             deps: ['jquery']

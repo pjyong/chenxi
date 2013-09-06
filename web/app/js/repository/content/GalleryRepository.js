@@ -1,11 +1,13 @@
 define([
     'marionette',
     'model/content/GalleryModel',
-    'collection/content/GalleryCollection'
+    'collection/content/GalleryCollection',
+    'collection/content/ImageCollection'
 ], function(
     Marionette,
     GalleryModel,
-    GalleryCollection
+    GalleryCollection,
+    ImageCollection
 ){
     var articleRepository = Marionette.Controller.extend({
 
@@ -49,6 +51,16 @@ define([
                     deferred.resolve(article);
                 });
             }
+            return deferred.promise();
+        },
+
+        getImages: function(galleryId){
+            var deferred = $.Deferred();
+            var images = new ImageCollection([], {url: 'api/content/galleries/' + galleryId + '/images'});
+            images.on('sync', function(){
+                deferred.resolve(images);
+            });
+            images.fetch();
             return deferred.promise();
         },
 
