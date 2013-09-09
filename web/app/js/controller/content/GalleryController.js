@@ -9,6 +9,8 @@ define([
     'repository/content/GalleryRepository',
     'view/modal/MediaLibraryView',
     'view/common/TemplateOptionsView',
+    'view/content/GalleryImageEditView',
+    'repository/content/ImageRepository',
     'ckeditor',
     'bootstrap.datetimepicker',
     'jquery.tagsinput',
@@ -24,7 +26,9 @@ define([
     GalleryImageAddView,
     GalleryRepository,
     MediaLibraryView,
-    TemplateOptionsView
+    TemplateOptionsView,
+    GalleryImageEditView,
+    ImageRepository
 ){
     // helper function 
     function convertTagsToString(tagCollection){
@@ -40,10 +44,13 @@ define([
 
 
         initialize: function(){
-            _.bindAll(this, 'submitGallery', 'deleteGallery', 'loadMediaLibrary');
+            _.bindAll(this, 'submitGallery', 'deleteGallery', 'loadMediaLibrary', 'editImage', 'saveImage', 'deleteImage');
             vent.on('galleryController:submitGallery', this.submitGallery);
             vent.on('galleryController:deleteGallery', this.deleteGallery);
             vent.on('galleryController:loadMediaLibrary', this.loadMediaLibrary);
+            vent.on('galleryController:editImage', this.editImage);
+            vent.on('galleryController:saveImage', this.saveImage);
+            vent.on('galleryController:deleteImage', this.deleteImage);
 
         },
 
@@ -113,7 +120,10 @@ define([
             var that = this;
             var galleryRepository = new GalleryRepository();
             var callback = function(images, gallery){
-
+                // set the property of models
+                images.each(function(ele){
+                    ele.set({contentId: gallery.get('id'), contentType: 'gallery'});
+                });
                 var galleryImageIndexView = new GalleryImageIndexView({collection: images, gallery: gallery});
                 that.contentRegion.show(galleryImageIndexView);
                 that.endLoading();
@@ -158,6 +168,51 @@ define([
             $.when(galleryRepository.getGallery(galleryId)).then(callback);
         },
 
+        editImage: function(options){
+            var galleryImageEditView = new GalleryImageEditView({model: options.model});
+            this.loadModal(galleryImageEditView);
+        },
+
+        deleteImage: function(options){
+            var that = this;
+            var imageRepository = new ImageRepository();
+            var callback = function(image){
+                that.endLoading();
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: '删除图片成功!',
+                    // (string | mandatory) the text inside the notification
+                    text: '',
+                    class_name: 'gritter-success'
+                });
+
+            };
+            that.startLoading();
+
+            $.when(imageRepository.deleteImage(options.model)).then(callback);
+
+        },
+
+        saveImage: function(options){
+            var that = this;
+            var imageRepository = new ImageRepository();
+            var callback = function(image){
+                that.endLoading();
+                that.closeModal();
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: '修改图片信息成功!',
+                    // (string | mandatory) the text inside the notification
+                    text: '',
+                    class_name: 'gritter-success'
+                });
+
+            };
+            that.startLoading();
+
+            $.when(imageRepository.createImage(options.model)).then(callback);
+        },
+
         submitGallery: function(options){
             var that = this;
             var galleryRepository = new GalleryRepository();
@@ -185,6 +240,9 @@ define([
             vent.off('galleryController:submitGallery');
             vent.off('galleryController:deleteGallery');
             vent.off('galleryController:loadMediaLibrary');
+            vent.off('galleryController:editImage');
+            vent.off('galleryController:saveImage');
+            vent.off('galleryController:deleteImage');
         },
 
         test: function(){alert('successful');}

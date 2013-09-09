@@ -13,7 +13,7 @@ use ChenXi\ContentBundle\Form\Type\ArticleType;
 
 class ArticlesController extends FOSRestController
 {
-	// get the collection
+	// 获得相册列表
 	public function getArticlesAction()
 	{
 		$criteria = array('websiteId' => $this->getWebsiteId());
@@ -23,7 +23,7 @@ class ArticlesController extends FOSRestController
 		return $this->handleView($this->view($articles));
 	}
 
-	// create
+	// 创建相册
 	public function postArticlesAction()
 	{
 		$article = new Article();
@@ -34,7 +34,7 @@ class ArticlesController extends FOSRestController
 		return $this->process($article, true);
 	}
 
-	// delete
+	// 删除相册
 	public function deleteArticleAction($id)
 	{
 		$articleManager = $this->container->get('chenxi_article_manager');
@@ -50,7 +50,7 @@ class ArticlesController extends FOSRestController
 		return $this->handleView($this->view(null, 204));
 	}
 
-	// update
+	// 修改相册
 	public function putArticleAction($id)
 	{
 		$article = $this->container->get('chenxi_article_manager')->find($id);
@@ -58,7 +58,7 @@ class ArticlesController extends FOSRestController
 		return $this->process($article);
 	}
 
-	// read
+	// 得到相册
 	public function getArticleAction($id)
 	{
 		$article = $this->container->get('chenxi_article_manager')->find($id);
@@ -74,8 +74,6 @@ class ArticlesController extends FOSRestController
 
 		return $this->handleView($this->view($article));
 	}
-
-
 
 	public function process(Article $article, $new = false)
 	{
@@ -106,9 +104,8 @@ class ArticlesController extends FOSRestController
 
 			return $this->handleView($this->view($new ? $article : null, $statusCode));
 		}
+		
 		return $this->handleView($this->view($form, 400));
-
-
 		// $isValid = true;
 		// $title = $this->getRequest()->request->get('title');
 		// $start_date = $this->getRequest()->request->get('start_date');
@@ -126,7 +123,6 @@ class ArticlesController extends FOSRestController
 
 		// 	return $this->handleView($this->view($article));
 		// }
-		
 	}
 
 	function getWebsiteId()

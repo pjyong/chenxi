@@ -15,9 +15,7 @@ class TagsController extends FOSRestController implements ClassResourceInterface
 		$articles = array(array('name' => 'wokao'), array('name' => 'haaa'));
 		// $session = new Session();
 		print_r($this->getRequest()->getSession()->get('websiteId'));
+		
 		return $this->handleView($this->view($articles));
 	}
-
-	
-
 }

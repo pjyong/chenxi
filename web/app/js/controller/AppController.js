@@ -17,7 +17,6 @@ define([
             // this.navRegion = app.navRegion;
             this.contentRegion = app.contentRegion;
             this.modalRegion = app.modalRegion;
-
             Marionette.Controller.prototype.constructor.call(this, options);
         },
 
@@ -34,6 +33,10 @@ define([
 
         loadModal: function(view){
             this.modalRegion.show(view);
+        },
+
+        closeModal: function(){
+            this.modalRegion.close();
         }
 
     });

@@ -8,7 +8,6 @@ define([
     var imageCollection = Backbone.Collection.extend({
         model: ImageModel,
         // initialize: function()
-        url: 'api/content/images'
     });
 
     return imageCollection;

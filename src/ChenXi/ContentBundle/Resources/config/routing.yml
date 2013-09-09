@@ -14,6 +14,11 @@ content_galleries:
     prefix: /api/content
 
 
+# content_images:
+#     type:     rest
+#     resource: ChenXi\ContentBundle\Controller\ImagesController
+#     prefix: /api/content
+
 
 
 

@@ -28,6 +28,8 @@ define([
             // 'click #creat_content': 'createContent'
         },        
 
+        
+
         itemView: GalleryImageItemView,
 
         appendHtml: function(collectionView, itemView, index){
