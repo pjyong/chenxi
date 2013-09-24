@@ -80,6 +80,7 @@ z-index: 10000;
 	height: 145px;
 	width: 145px;
 	border: 1px solid #C4E9EA;
+	margin-bottom: 8px;
 }
 
 .gallery_image{
@@ -125,4 +126,9 @@ line-height: 1.39;
 .modal-backdrop, .modal-backdrop.fade.in{
 	opacity: 0.6;
 filter: alpha(opacity=60);
+}
+
+
+#gallery_list{
+	margin:0px;
 }
