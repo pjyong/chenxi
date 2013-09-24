@@ -31,6 +31,11 @@ class Image
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="ImageRef", mappedBy="Image", fetch="EAGER")
+     **/
+    private $imageRef;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="path", type="string", length=255)
@@ -49,6 +54,7 @@ class Image
      * @ORM\JoinColumn(name="website_id", referencedColumnName="id")
      **/
     private $website;
+
     /**
      * Get id
      *

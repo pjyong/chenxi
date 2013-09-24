@@ -6,13 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use ChenXi\ContentBundle\Interface\Imaging;
+
 /**
  * ChenXi\ContentBundle\Entity\Gallery
  *
  * @ORM\Table(name="gallery")
  * @ORM\Entity
  */
-class Gallery
+class Gallery implements Imaging
 {
     /**
      * @var integer
@@ -48,15 +50,7 @@ class Gallery
      */
     private $description;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="ChenXi\ContentBundle\Entity\Image", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="gallery_image_xref", 
-     * joinColumns={@ORM\JoinColumn(name="gallery_id", referencedColumnName="id")}, 
-     * inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true)}
-     * )
-     */
-    protected $images;
-
+    private $images;
     /**
      * @ORM\ManyToOne(targetEntity="ChenXi\MainBundle\Entity\Website")
      * @ORM\JoinColumn(name="website_id", referencedColumnName="id")
@@ -125,6 +119,28 @@ class Gallery
         return $this->description;
     }
 
+    public function getContentType()
+    {
+        return 'gallery';
+    }
+
+    public function getContentId()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * Get images
+     *
+     * @return \ChenXi\ContentBundle\Entity\Image 
+     */
+    public function getImages()
+    {
+        $this->images = $this->images ?: new ArrayCollection();
+
+        return $this->images;
+    }
+
     /**
      * Set images
      *
@@ -138,15 +154,7 @@ class Gallery
         return $this;
     }
 
-    /**
-     * Get images
-     *
-     * @return \ChenXi\ContentBundle\Entity\Image 
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
+    
 
     /**
      * Set website
