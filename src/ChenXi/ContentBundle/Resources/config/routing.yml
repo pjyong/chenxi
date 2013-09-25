@@ -3,6 +3,11 @@ content_articles:
     resource: ChenXi\ContentBundle\Controller\ArticlesController
     prefix: /api/content
 
+content_pages:
+    type:     rest
+    resource: ChenXi\ContentBundle\Controller\PagesController
+    prefix: /api/content
+
 content_tags:
     type: rest
     resource: ChenXi\ContentBundle\Controller\TagsController

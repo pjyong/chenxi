@@ -21,7 +21,7 @@ services:
 
     chenxi_page_manager:
         class: %chenxi_page_manager.class%
-        arguments: [@doctrine.orm.default_entity_manager, %page.class%]
+        arguments: [@doctrine.orm.default_entity_manager, %chenxi_page.class%]
     
     chenxi_gallery_manager:
         class: %chenxi_gallery_manager.class%
