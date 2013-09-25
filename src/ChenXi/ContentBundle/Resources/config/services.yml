@@ -2,6 +2,8 @@ parameters:
 #    chen_xi_content.example.class: ChenXi\ContentBundle\Example
     chenxi_article_manager.class: ChenXi\ContentBundle\Entity\ArticleManager
     chenxi_article.class: ChenXi\ContentBundle\Entity\Article
+    chenxi_page_manager.class: ChenXi\ContentBundle\Entity\PageManager
+    chenxi_page.class: ChenXi\ContentBundle\Entity\Page
     chenxi_gallery_manager.class: ChenXi\ContentBundle\Entity\GalleryManager
     chenxi_gallery.class: ChenXi\ContentBundle\Entity\Gallery
     chenxi_image_manager.class: ChenXi\ContentBundle\Entity\ImageManager
@@ -16,6 +18,10 @@ services:
     chenxi_article_manager:
         class: %chenxi_article_manager.class%
         arguments: [@doctrine.orm.default_entity_manager, %chenxi_article.class%]
+
+    chenxi_page_manager:
+        class: %chenxi_page_manager.class%
+        arguments: [@doctrine.orm.default_entity_manager, %page.class%]
     
     chenxi_gallery_manager:
         class: %chenxi_gallery_manager.class%

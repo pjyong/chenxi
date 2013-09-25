@@ -4,6 +4,7 @@ define([
     'controller/ContentController',
     'controller/content/ArticleController',
     'controller/content/GalleryController',
+    'controller/content/PageController',
     'router/ContentRouter',
 ], function(
     Marionette,
@@ -11,6 +12,7 @@ define([
     ContentController,
     ArticleController,
     GalleryController,
+    PageController,
     ContentRouter
 ){
     var content = app.module('m.content');

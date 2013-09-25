@@ -42,12 +42,12 @@ define([
         },
 
         getPages: function(){
-            app.module('sidebar').controller.activeNav({nav: '#content/article'});
+            app.module('sidebar').controller.activeNav({nav: '#content/page'});
             app.module('m.content').loadController('page').getPages();
         },
 
         editPage: function(id){
-            app.module('sidebar').controller.activeNav({nav: '#content/article'});
+            app.module('sidebar').controller.activeNav({nav: '#content/page'});
             app.module('m.content').loadController('page').editPage(id);
         },
 
