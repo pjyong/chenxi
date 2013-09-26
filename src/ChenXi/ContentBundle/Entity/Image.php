@@ -31,7 +31,7 @@ class Image
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="ImageRef", mappedBy="Image", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="ImageRef", mappedBy="image", fetch="EAGER")
      **/
     private $imageRef;
 
@@ -238,5 +238,45 @@ class Image
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->imageRef = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add imageRef
+     *
+     * @param \ChenXi\ContentBundle\Entity\ImageRef $imageRef
+     * @return Image
+     */
+    public function addImageRef(\ChenXi\ContentBundle\Entity\ImageRef $imageRef)
+    {
+        $this->imageRef[] = $imageRef;
+    
+        return $this;
+    }
+
+    /**
+     * Remove imageRef
+     *
+     * @param \ChenXi\ContentBundle\Entity\ImageRef $imageRef
+     */
+    public function removeImageRef(\ChenXi\ContentBundle\Entity\ImageRef $imageRef)
+    {
+        $this->imageRef->removeElement($imageRef);
+    }
+
+    /**
+     * Get imageRef
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImageRef()
+    {
+        return $this->imageRef;
     }
 }

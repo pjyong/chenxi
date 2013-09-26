@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use ChenXi\ContentBundle\Interface\Imaging;
+use ChenXi\ContentBundle\Base\Imaging;
 
 /**
  * ChenXi\ContentBundle\Entity\Gallery

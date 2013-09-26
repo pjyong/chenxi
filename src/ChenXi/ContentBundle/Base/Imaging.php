@@ -1,5 +1,5 @@
 <?php
-namespace ChenXi\ContentBundle\Interface;
+namespace ChenXi\ContentBundle\Base;
 /*
  * 为内容类型增加一个图片功能
  *

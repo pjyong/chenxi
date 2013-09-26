@@ -21,7 +21,7 @@ class ImageRef
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Image", inversedBy="imageRef")
+     * @ORM\ManyToOne(targetEntity="Image")
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      **/
     protected $image;
@@ -83,31 +83,5 @@ class ImageRef
     public function getContentId()
     {
         return $this->contentId;
-    }
-
-    /**
-     * Set contentType
-     *
-     * @param string $contentType
-     * @return ImageRef
-     */
-    public function setContentType($contentType)
-    {
-        $this->contentType = $contentType;
-    
-        return $this;
-    }
-
-    /**
-     * Set contentId
-     *
-     * @param integer $contentId
-     * @return ImageRef
-     */
-    public function setContentId($contentId)
-    {
-        $this->contentId = $contentId;
-    
-        return $this;
     }
 }

@@ -6,13 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use ChenXi\ContentBundle\Base\Imaging;
+
 /**
  * ChenXi\ContentBundle\Entity\Gallery
  *
  * @ORM\Table(name="gallery")
  * @ORM\Entity
  */
-class Gallery
+class Gallery implements Imaging
 {
     /**
      * @var integer
@@ -48,15 +50,7 @@ class Gallery
      */
     private $description;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="ChenXi\ContentBundle\Entity\Image")
-     * @ORM\JoinTable(name="gallery_image_xref", 
-     * joinColumns={@ORM\JoinColumn(name="gallery_id", referencedColumnName="id")}, 
-     * inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", unique=true)}
-     * )
-     */
-    protected $images;
-
+    private $images;
     /**
      * @ORM\ManyToOne(targetEntity="ChenXi\MainBundle\Entity\Website")
      * @ORM\JoinColumn(name="website_id", referencedColumnName="id")
@@ -66,6 +60,7 @@ class Gallery
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->updated_date = new \DateTime();
     }
 
     /**
@@ -124,6 +119,28 @@ class Gallery
         return $this->description;
     }
 
+    public function getContentType()
+    {
+        return 'gallery';
+    }
+
+    public function getContentId()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * Get images
+     *
+     * @return \ChenXi\ContentBundle\Entity\Image 
+     */
+    public function getImages()
+    {
+        $this->images = $this->images ?: new ArrayCollection();
+
+        return $this->images;
+    }
+
     /**
      * Set images
      *
@@ -137,15 +154,7 @@ class Gallery
         return $this;
     }
 
-    /**
-     * Get images
-     *
-     * @return \ChenXi\ContentBundle\Entity\Image 
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
+    
 
     /**
      * Set website
@@ -176,9 +185,9 @@ class Gallery
      * @param \ChenXi\ContentBundle\Entity\Image $images
      * @return Gallery
      */
-    public function addImage(\ChenXi\ContentBundle\Entity\Image $images)
+    public function addImage(\ChenXi\ContentBundle\Entity\Image $image)
     {
-        $this->images[] = $images;
+        $this->images[] = $image;
     
         return $this;
     }
@@ -201,6 +210,39 @@ class Gallery
     public function setUpdatedDate()
     {
         $this->updated_date = new \DateTime();
+    }    
+
+
+    /**
+     * Set created_date
+     *
+     * @param \DateTime $createdDate
+     * @return Gallery
+     */
+    public function setCreatedDate($createdDate)
+    {
+        $this->created_date = $createdDate;
+    
+        return $this;
     }
 
+    /**
+     * Get created_date
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedDate()
+    {
+        return $this->created_date;
+    }
+
+    /**
+     * Get updated_date
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedDate()
+    {
+        return $this->updated_date;
+    }
 }

@@ -3,9 +3,11 @@
 namespace ChenXi\ContentBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr;
 use ChenXi\ContentBundle\Entity\Image;
 
-use ChenXi\ContentBundle\Interface\Imaging;
+use ChenXi\ContentBundle\Base\Imaging;
+
 class ImageManager
 {
 
@@ -43,6 +45,12 @@ class ImageManager
             }
         }
     }
+
+    public function createImageRef(Image $image, Imaging $content)
+    {
+        return new ImageRef($image, $content);
+    }
+
     // 绑定图片到某个内容
     public function saveImageRef(Imaging $content)
     {
@@ -50,6 +58,7 @@ class ImageManager
     	$oldImages = $this->getImageRef($content);
     	$newImages = $content->getImages();
     	$imagesToAdd = $newImages;
+        $imagesToRemove = array();
 
     	foreach ($oldImages as $oldImage) {
             if ($newImages->exists(function ($index, $newImage) use ($oldImage) {
@@ -78,6 +87,18 @@ class ImageManager
                 ;
         }
 
+        // 插入图片
+        foreach($imagesToAdd as $image)
+        {
+            $this->em->persist($image);
+            $this->em->persist($this->createImageRef($image, $content));
+        }
+
+        if(count($imagesToAdd))
+        {
+            $this->em->flush();
+        }
+
 
     }
 
@@ -86,7 +107,7 @@ class ImageManager
     // 为某个内容载入图片
     public function loadImageRef(Imaging $content)
     {
-    	$images = $this->getImageRef($content);
+        $images = $this->getImageRef($content);
     	$this->replaceImages($images, $content);
     }
 
@@ -97,7 +118,7 @@ class ImageManager
             ->createQueryBuilder()
 
             ->select('i')
-            ->from($this->class, 'i')
+            ->from('ChenXi\ContentBundle\Entity\Image', 'i')
 
             ->innerJoin('i.imageRef', 'i2', Expr\Join::WITH, 'i2.contentId = :id AND i2.contentType = :type')
             ->setParameter('id', $content->getContentId())
@@ -117,7 +138,10 @@ class ImageManager
     	$this->addImages($images, $content);
     }
 
-
+    public function deleteImageFromContent(Image $image, Imaging $content)
+    {
+        $content->getImages()->removeElement($image);
+    }
 
 
 	public function delete(Image $image)

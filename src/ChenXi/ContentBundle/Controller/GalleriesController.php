@@ -139,6 +139,10 @@ class GalleriesController extends FOSRestController
 		$galleryManager = $this->container->get('chenxi_gallery_manager');
 		$gallery = $galleryManager->find($galleryId);
 
+		// 载入图片
+		$imageManager = $this->container->get('chenxi_image_manager');
+		$imageManager->loadImageRef($gallery);
+
 		$images = $gallery->getImages();
 
 		// 响应数据
@@ -156,10 +160,15 @@ class GalleriesController extends FOSRestController
 
 	// 删除相册图片
 	public function deleteGalleryImagesAction($galleryId, $imageId){
-		$image = $this->container->get('chenxi_image_manager')->find($imageId);
+		$imageManager = $this->container->get('chenxi_image_manager');
+		$image = $imageManager->find($imageId);
+
+
 		$gallery = $this->container->get('chenxi_gallery_manager')->find($galleryId);
-		$gallery->removeImage($image);
-		$this->container->get('chenxi_gallery_manager')->update($gallery);
+
+		$imageManager->loadImageRef($gallery);
+		$imageManager->deleteImageFromContent($image, $gallery);
+		$imageManager->saveImageRef($gallery);
 
 		return $this->handleView($this->view(null, 204));
 	}
@@ -208,9 +217,13 @@ class GalleriesController extends FOSRestController
 
 		// if($form->isValid()){
 		$gallery = $this->container->get('chenxi_gallery_manager')->find($galleryId);
-		$gallery->addImage($image);
 
-		$this->container->get('chenxi_gallery_manager')->update($gallery);
+		$imageManager = $this->container->get('chenxi_image_manager');
+
+
+		$imageManager->loadImageRef($gallery);
+		$imageManager->addImage($image, $gallery);
+		$imageManager->saveImageRef($gallery);
 		// }
 		
 		// $this->container->get('chenxi_image_manager')->update($image);
