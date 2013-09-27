@@ -6,11 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /*
  *
- * @ORM\Table(name="column")
+ * @ORM\Table(name="column_template")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Column{
+class ColumnTemplate{
 
 	/**
      * @ORM\Column(name="id", type="integer")
@@ -21,10 +21,10 @@ class Column{
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Page", inversedBy="columns")
+     * @ORM\ManyToOne(targetEntity="PageTemplate", inversedBy="column_templates")
      * @ORM\JoinColumn(name="page_template_id", referencedColumnName="id")
      */
-    private $page;
+    private $page_template;
 
     
 
