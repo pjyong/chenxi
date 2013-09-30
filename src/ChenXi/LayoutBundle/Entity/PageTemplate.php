@@ -41,9 +41,9 @@ class PageTemplate{
     private $website;
 
     /**
-     * @ORM\Column(name="is_primary", type="integer", options={"default" = 0})
+     * @ORM\Column(name="is_primary", type="boolean", options={"default" = false})
      */
-    private $isPrimary = 0;
+    private $isPrimary = false;
 
 
     /**

@@ -48,6 +48,31 @@ class ColumnTemplate{
      */
     private $parentColumn;
 
+    /**
+     * @ORM\OneToOne(targetEntity="ChenXi\ContentBundle\Entity\Text")
+     * @ORM\JoinColumn(name="styleId", referencedColumnName="id")
+     */
+    private $style;
+
+    /**
+     * @ORM\Column(name="is_liquid", type="boolean", options={"default" = false})
+     */
+    private $isLiquid = false;
+
+    /**
+     * @ORM\Column(name="can_modify", type="boolean", options={"default" = false})
+     */
+    private $canModify = false;
+
+    /**
+     * @ORM\Column(name="min_width", type="smallint")
+     */
+    private $minWidth;
+
+    /**
+     * @ORM\Column(name="max_width", type="smallint")
+     */
+    private $maxWidth;
 
     
     /**
@@ -191,5 +216,120 @@ class ColumnTemplate{
     public function getParentColumn()
     {
         return $this->parentColumn;
+    }
+
+    /**
+     * Set isLiquid
+     *
+     * @param boolean $isLiquid
+     * @return ColumnTemplate
+     */
+    public function setIsLiquid($isLiquid)
+    {
+        $this->isLiquid = $isLiquid;
+    
+        return $this;
+    }
+
+    /**
+     * Get isLiquid
+     *
+     * @return boolean 
+     */
+    public function getIsLiquid()
+    {
+        return $this->isLiquid;
+    }
+
+    /**
+     * Set canModify
+     *
+     * @param boolean $canModify
+     * @return ColumnTemplate
+     */
+    public function setCanModify($canModify)
+    {
+        $this->canModify = $canModify;
+    
+        return $this;
+    }
+
+    /**
+     * Get canModify
+     *
+     * @return boolean 
+     */
+    public function getCanModify()
+    {
+        return $this->canModify;
+    }
+
+    /**
+     * Set minWidth
+     *
+     * @param integer $minWidth
+     * @return ColumnTemplate
+     */
+    public function setMinWidth($minWidth)
+    {
+        $this->minWidth = $minWidth;
+    
+        return $this;
+    }
+
+    /**
+     * Get minWidth
+     *
+     * @return integer 
+     */
+    public function getMinWidth()
+    {
+        return $this->minWidth;
+    }
+
+    /**
+     * Set maxWidth
+     *
+     * @param integer $maxWidth
+     * @return ColumnTemplate
+     */
+    public function setMaxWidth($maxWidth)
+    {
+        $this->maxWidth = $maxWidth;
+    
+        return $this;
+    }
+
+    /**
+     * Get maxWidth
+     *
+     * @return integer 
+     */
+    public function getMaxWidth()
+    {
+        return $this->maxWidth;
+    }
+
+    /**
+     * Set style
+     *
+     * @param \ChenXi\ContentBundle\Entity\Text $style
+     * @return ColumnTemplate
+     */
+    public function setStyle(\ChenXi\ContentBundle\Entity\Text $style = null)
+    {
+        $this->style = $style;
+    
+        return $this;
+    }
+
+    /**
+     * Get style
+     *
+     * @return \ChenXi\ContentBundle\Entity\Text 
+     */
+    public function getStyle()
+    {
+        return $this->style;
     }
 }

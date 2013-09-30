@@ -51,7 +51,7 @@ class Article implements Taggable
     private $updated_date;
 
     /**
-     * @ORM\Column(type="integer", options={"default" = 1})
+     * @ORM\Column(type="smallint", options={"default" = 1})
      */
     private $status = 1;
 
