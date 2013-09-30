@@ -35,6 +35,9 @@ require.config({
         jqueryui: {
             deps: ['jquery']
         },
+        'jquery.chosen': {
+            deps: ['jquery']
+        },
         'jquery.tagsinput': {
             deps: ['jquery']
         },
@@ -75,6 +78,7 @@ require([
     'module/sidebarModule',
     'module/contentModule',
     'module/configModule',
+    'module/layoutModule',
     'vent',
 ], function(
     app

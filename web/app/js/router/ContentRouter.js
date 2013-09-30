@@ -5,7 +5,7 @@ define([
     Marionette,
     app
 ){
-    var contentRouter = Backbone.Router.extend({
+    return Backbone.Router.extend({
 
         routes: {
             'content/article': 'getArticles',
@@ -74,6 +74,4 @@ define([
         },
 
     });  
-
-    return contentRouter;
 });

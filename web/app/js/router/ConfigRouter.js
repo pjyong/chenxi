@@ -5,7 +5,7 @@ define([
     Marionette,
     app
 ){
-    var websiteRouter = Backbone.Router.extend({
+    return Backbone.Router.extend({
 
         routes: {
             'config/website': 'editWebsite',
@@ -21,13 +21,11 @@ define([
         },
 
         editWebsite: function(){
-            app.module('sidebar').controller.activeNav({nav: '#/config/website'});
+            app.module('sidebar').controller.activeNav({nav: '#config/website'});
             app.module('m.config').loadController('website').editWebsite();
         }
 
 
 
     });  
-
-    return websiteRouter;
 });
