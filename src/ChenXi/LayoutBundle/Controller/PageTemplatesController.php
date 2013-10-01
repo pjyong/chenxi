@@ -94,35 +94,16 @@ class PageTemplatesController extends FOSRestController
 			// return;
 			$this->container->get('chenxi_page_template_manager')->update($pageTemplate);
 
-			// save tags
-			// $tagManager = $this->container->get('fpn_tag.tag_manager');
-			// $tagNames = $tagManager->splitTagNames($this->getRequest()->request->get('tags'));
-			// $tags = $tagManager->loadOrCreateTags($tagNames);
-			// $tagManager->addTags($tags, $pageTemplate);
-			// $tagManager->saveTagging($pageTemplate);
+			$data = array();
+			$data['id'] = $pageTemplate->getId();
+			$data['name'] = $pageTemplate->getName();
+			$data['isPrimary'] = $pageTemplate->getIsPrimary();
+			$data['contentType'] = $pageTemplate->getContentType();
 
-
-			return $this->handleView($this->view($new ? $pageTemplate : null, $statusCode));
+			return $this->handleView($this->view($new ? $data : null, $statusCode));
 		}
 		
 		return $this->handleView($this->view($form, 400));
-		// $isValid = true;
-		// $title = $this->getRequest()->request->get('title');
-		// $start_date = $this->getRequest()->request->get('start_date');
-		// $end_date = $this->getRequest()->request->get('end_date');
-		// $body = $this->getRequest()->request->get('body');
-
-
-		// if($isValid){
-		// 	$pageTemplate->setTitle($title);
-		// 	$pageTemplate->setBody($body);
-		// 	$pageTemplate->setStartDate(new \DateTime($start_date));
-		// 	$pageTemplate->setEndDate(new \DateTime($end_date));
-
-		// 	$this->container->get('chenxi_page_template_manager')->update($pageTemplate);
-
-		// 	return $this->handleView($this->view($pageTemplate));
-		// }
 	}
 
 	function getWebsiteId()

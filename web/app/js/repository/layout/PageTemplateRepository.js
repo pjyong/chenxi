@@ -22,7 +22,7 @@ define([
         createPageTemplate: function(pageTemplate){
             var deferred = $.Deferred();
             pageTemplate.on('sync', function(pageTemplate, response){
-                deferred.resolve(response);
+                deferred.resolve(pageTemplate);
             });
             pageTemplate.save();
             return deferred.promise();

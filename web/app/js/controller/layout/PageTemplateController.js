@@ -6,7 +6,8 @@ define([
     'view/layout/PageTemplateIndexView',
     'view/layout/PageTemplateEditView',
     'model/layout/PageTemplateModel',
-    'repository/layout/PageTemplateRepository'
+    'repository/layout/PageTemplateRepository',
+    'view/layout/PageTemplateAddColumnsView',
 ], function(
     Marionette,
     app,
@@ -15,7 +16,8 @@ define([
     PageTemplateIndexView,
     PageTemplateEditView,
     PageTemplateModel,
-    PageTemplateRepository
+    PageTemplateRepository,
+    PageTemplateAddColumnsView
 ){
 
     return AppController.extend({
@@ -27,8 +29,16 @@ define([
         },
 
         getPageTemplates: function(){
-            var pageTemplateIndexView = new PageTemplateIndexView();
-            this.contentRegion.show(pageTemplateIndexView);     
+            var that = this;
+            var pageTemplateRepository = new PageTemplateRepository();
+            var callback = function(pageTemplates){
+                var pageTemplateIndexView = new PageTemplateIndexView({collection: pageTemplates});
+                that.contentRegion.show(pageTemplateIndexView);
+                that.endLoading();
+                // $('[data-toggle="tooltip"]').tooltip();
+            };
+            that.startLoading();
+            $.when(pageTemplateRepository.getPageTemplates()).then(callback);
         },
 
         editPageTemplate: function(){
@@ -53,10 +63,11 @@ define([
                     class_name: 'gritter-success'
                 });
                 // close the modal
+                that.closeModal();
                 if(isNew){
                     // 转向添加列页面
-                    console.log(pageTemplate);
-                    app.navigate('layout/templates/edit/' + pageTemplate.id);
+                    Backbone.history.navigate('layout/templates/edit/' + pageTemplate.id, true);
+                    // app.navigate('layout/templates/edit/' + pageTemplate.id);
                 }else{
 
                 }
@@ -66,7 +77,10 @@ define([
         },
 
         addColumnsToPageTemplate: function(id){
-            alert(123);
+
+            var pageTemplateAddColumns = new PageTemplateAddColumnsView();
+            this.contentRegion.show(pageTemplateAddColumns);   
+            // alert(123);
 
         },
 

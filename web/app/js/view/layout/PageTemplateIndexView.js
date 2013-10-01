@@ -25,11 +25,11 @@ define([
             'click #add_page_template': 'addPageTemplate'
         },        
 
-        // itemView: ArticleItemView,
+        itemView: PageTemplateItemView,
 
-        // appendHtml: function(collectionView, itemView, index){
-        //     collectionView.$("tbody").append(itemView.el);
-        // },
+        appendHtml: function(collectionView, itemView, index){
+            collectionView.$("tbody").append(itemView.el);
+        },
 
         initialize: function(){
 
