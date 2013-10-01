@@ -10,7 +10,7 @@ define([
         routes: {
             'layout/template': 'getPageTemplates',
             'layout/template/add': 'editPageTemplate',
-            
+            'layout/templates/edit/:id': 'addColumnsToPageTemplate',
         },
 
         before: function(){
@@ -30,6 +30,12 @@ define([
         editPageTemplate: function(){
             app.module('sidebar').controller.activeNav({nav: '#layout/template'});
             app.module('m.layout').loadController('page_template').editPageTemplate();
+
+        },
+
+        addColumnsToPageTemplate: function(id){
+            app.module('sidebar').controller.activeNav({nav: '#layout/template'});
+            app.module('m.layout').loadController('page_template').addColumnsToPageTemplate(id);
 
         }
 

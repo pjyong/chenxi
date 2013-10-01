@@ -1,15 +1,21 @@
 define([
     'marionette',
+    'app',
     'vent',
     'controller/AppController',
     'view/layout/PageTemplateIndexView',
-    'view/layout/PageTemplateEditView'
+    'view/layout/PageTemplateEditView',
+    'model/layout/PageTemplateModel',
+    'repository/layout/PageTemplateRepository'
 ], function(
     Marionette,
+    app,
     vent,
     AppController,
     PageTemplateIndexView,
-    PageTemplateEditView
+    PageTemplateEditView,
+    PageTemplateModel,
+    PageTemplateRepository
 ){
 
     return AppController.extend({
@@ -26,25 +32,47 @@ define([
         },
 
         editPageTemplate: function(){
-            var pageTemplate = {};
+            var pageTemplate = new PageTemplateModel();
             var pageTemplateEditView = new PageTemplateEditView({model: pageTemplate});
             this.loadModal(pageTemplateEditView);
         },
 
-        savePageTemplate: fucntion(options){
+        savePageTemplate: function(options){
             var pageTemplate = options.model;
             var isNew = pageTemplate.isNew();
-            
-            if(isNew){
-                // 转向添加列页面
+            var that = this;
+            var pageTemplateRepository = new PageTemplateRepository();
+            // console.log('start');
+            var callback = function(pageTemplate){
+                that.endLoading();
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: '创建页面模板成功!',
+                    // (string | mandatory) the text inside the notification
+                    text: '',
+                    class_name: 'gritter-success'
+                });
+                // close the modal
+                if(isNew){
+                    // 转向添加列页面
+                    console.log(pageTemplate);
+                    app.navigate('layout/templates/edit/' + pageTemplate.id);
+                }else{
 
-            }else{
+                }
+            };
+            that.startLoading();
+            $.when(pageTemplateRepository.createPageTemplate(pageTemplate)).then(callback);
+        },
 
-            }
+        addColumnsToPageTemplate: function(id){
+            alert(123);
+
         },
 
         onClose: function(){
             vent.off('pageTemplateController:editPageTemplate');
+            vent.off('pageTemplateController:savePageTemplate');
         }
 
 

@@ -1,3 +1,4 @@
-layout_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: LayoutBundle:Default:index }
+layout_page_templates:
+    type:     rest
+    resource: ChenXi\LayoutBundle\Controller\PageTemplatesController
+    prefix: /api/layout

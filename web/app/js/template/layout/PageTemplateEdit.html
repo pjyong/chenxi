@@ -7,10 +7,10 @@
 	<div class="modal-body overflow-visible">
 		<div class="form-horizontal">
 			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right" for="image_name">模板名称 </label>
+				<label class="col-sm-3 control-label no-padding-right" for="page_template_name">模板名称 </label>
 
 				<div class="col-sm-9">
-					<input type="text" id="image_name" class="col-xs-10 col-sm-5" value="<%=args.name%>">
+					<input type="text" id="page_template_name" class="col-xs-10 col-sm-5" value="<%=args.name%>">
 				</div>
 			</div>
 	
@@ -26,18 +26,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right" for="image_name">默认模板 </label>
-				<div class="col-sm-9">
-					<label>
-						<input name="form-field-radio" type="radio" class="ace">
-						<span class="lbl"> 是</span>
-					
-						<input name="form-field-radio" type="radio" class="ace">
-						<span class="lbl">否</span>
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="image_name">是否为手机模板 </label>
 
 				<div class="col-sm-9">
@@ -50,6 +38,19 @@
 					</label>
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right">默认模板 </label>
+				<div class="col-sm-9">
+					<label>
+						<input type="radio" class="ace is_primary_option" value="1">
+						<span class="lbl"> 是</span>
+					
+						<input type="radio" class="ace is_primary_option" value="0">
+						<span class="lbl">否</span>
+					</label>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 
