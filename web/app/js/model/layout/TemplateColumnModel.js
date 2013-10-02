@@ -12,7 +12,8 @@ define([
             isLiquid: false,
             canModify: false,
             minWidth: 0,
-            maxWidth: 0
+            maxWidth: 0,
+            cssCode: ''
         },
 
 

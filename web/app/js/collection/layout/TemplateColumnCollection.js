@@ -7,7 +7,7 @@ define([
 ){
     var templateColumnCollection = Backbone.Collection.extend({
         model: TemplateColumnModel,
-        // url: 'api/layout/templates'
+        url: 'api/layout/templates'
     });
 
     return templateColumnCollection;

@@ -5,7 +5,7 @@ define([
     'text!template/layout/TemplateColumnEdit.html',
     'collection/layout/TemplateColumnCollection',
     'model/layout/TemplateColumnModel',
-    'view/layout/TemplateColumnCollectionView'
+    'view/layout/TemplateColumnItemEditView'
 ], function(
     Marionette,
     vent, 
@@ -13,7 +13,7 @@ define([
     TemplateColumnEdit,
     TemplateColumnCollection,
     TemplateColumnModel,
-    TemplateColumnCollectionView
+    TemplateColumnItemEditView
 ){
 
     return Marionette.ItemView.extend({
@@ -33,8 +33,9 @@ define([
         initialize: function(){
             _.bindAll(this, 'goNextStep', 'goLastStep');
 
-            this.step = 1;
+            this.readySubmit = false;
             this.columnCollection = new TemplateColumnCollection();
+            this.childViews = [];
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
@@ -46,10 +47,12 @@ define([
 
         goNextStep: function(){
             // 
-            if(this.step == 1){
-
+            if(this.readySubmit){
+                // submit
+                this.submit();
+            }else{
                 var columnsNum = this.$('#template_columns_num').val();
-                if(columnsNum != this.columnCollection.length){
+                if(columnsNum != this.childViews.length){
                     this.renderStep2(columnsNum);
                 }
                 this.$('#step1').removeClass('active');
@@ -57,6 +60,7 @@ define([
                 this.$('.btn-prev').attr('disabled', false);
                 this.$('#step1_title').removeClass('active');
                 this.$('#step2_title').addClass('active');
+                this.readySubmit = true;
             }
         },
 
@@ -66,46 +70,50 @@ define([
             this.$('.btn-prev').attr('disabled', true);
             this.$('#step2_title').removeClass('active');
             this.$('#step1_title').addClass('active');
+            this.readySubmit = false;
         },
 
         renderStep2: function(num){
             // 如果列的值超过先前，就添加一个视图
-            if(num > this.columnCollection.length){
-                var addNum = num - this.columnCollection.length;
+            if(num > this.childViews.length){
+                var addNum = num - this.childViews.length;
                 for(var i = 0; i < addNum; i++){
                     var templateColumnModel = new TemplateColumnModel();
-                    this.columnCollection.add(templateColumnModel);
+                    var templateColumnItemEditView = new TemplateColumnItemEditView({model: templateColumnModel});
+                    this.$('#step2').append(templateColumnItemEditView.$el);
+                    templateColumnItemEditView.render();
+                    this.childViews.push(templateColumnItemEditView);
+                    // this.columnCollection.add(templateColumnModel);
                 }
             }else{
-                var reduceNum = this.columnCollection.length - num;
+                var reduceNum = this.childViews.length - num;
                 for(var i = 0; i < reduceNum; i++){
-                    this.columnCollection.pop();
+                    var lastChild = this.childViews.pop();
+                    lastChild.close();
                 }
             }
 
             // 渲染columnCollection的视图
-            var templateColumnCollectionView = new TemplateColumnCollectionView({collection: this.columnCollection});
-            templateColumnCollectionView.render();
+            // var templateColumnCollectionView = new TemplateColumnCollectionView({collection: this.columnCollection});
+            // templateColumnCollectionView.render();
+            // this.$('#step2').html(templateColumnCollectionView.$el);
+        },
+
+        submit: function(){
+            alert('fuck');
+            // 
+            for(var i = 0, length = this.childViews.length; i < length; i ++){
+                var child = this.childViews[i];
+                var childModel = child.model;
+                childModel.set('minWidth', child.$('.min_width_option').val());
+                childModel.set('canModify', child.$('.can_modify_option').val());
+                childModel.set('cssCode', child.$('.css_code_option').val());
+                this.columnCollection.add(childModel);
+            }
             console.log(this.columnCollection);
-            this.$('#step2').html(templateColumnCollectionView.$el);
-
-
-        }
-
-
-
-
-        // savePageTemplate: function(){
-        //     // var imageName = this.$('#image_name').val();
-        //     var pageTemplateName = this.$('#page_template_name').val();
-        //     var contentType = this.$('#content_type_option').val();
-        //     var isPrimary = this.$('.is_primary_option:checked').val() == '1' ? true : false;
-        //     this.model.set('name', pageTemplateName);
-        //     this.model.set('contentType', contentType);
-        //     this.model.set('isPrimary', isPrimary);
-        //     vent.trigger('pageTemplateController:savePageTemplate', {model: this.model});
-            
-        // }
+            // sync 所有创建的列
+            this.columnCollection.sync();
+        },
 
 
 

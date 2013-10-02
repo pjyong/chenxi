@@ -115,6 +115,7 @@ define([
         onClose: function(){
             vent.off('pageTemplateController:editPageTemplate');
             vent.off('pageTemplateController:savePageTemplate');
+            vent.off('pageTemplateController:editRow');
         }
 
 

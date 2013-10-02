@@ -11,6 +11,8 @@ define([
     return Marionette.ItemView.extend({
 
         // tagName: 'li',
+
+        className: 'edit_column_form',
         
 
         template: function(data){
