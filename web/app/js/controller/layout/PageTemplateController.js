@@ -5,7 +5,9 @@ define([
     'controller/AppController',
     'view/layout/PageTemplateIndexView',
     'view/layout/PageTemplateEditView',
+    'view/layout/TemplateColumnEditView',
     'model/layout/PageTemplateModel',
+    'model/layout/TemplateColumnModel',
     'repository/layout/PageTemplateRepository',
     'view/layout/PageTemplateAddColumnsView',
 ], function(
@@ -15,7 +17,9 @@ define([
     AppController,
     PageTemplateIndexView,
     PageTemplateEditView,
+    TemplateColumnEditView,
     PageTemplateModel,
+    TemplateColumnModel,
     PageTemplateRepository,
     PageTemplateAddColumnsView
 ){
@@ -23,9 +27,11 @@ define([
     return AppController.extend({
 
         initialize: function(){
-            _.bindAll(this, 'editPageTemplate', 'savePageTemplate');
+            _.bindAll(this, 'editPageTemplate', 'savePageTemplate', 'editRow');
             vent.on('pageTemplateController:editPageTemplate', this.editPageTemplate);
             vent.on('pageTemplateController:savePageTemplate', this.savePageTemplate);
+            vent.on('pageTemplateController:editRow', this.editRow);
+
         },
 
         getPageTemplates: function(){
@@ -78,10 +84,32 @@ define([
 
         addColumnsToPageTemplate: function(id){
 
-            var pageTemplateAddColumns = new PageTemplateAddColumnsView();
-            this.contentRegion.show(pageTemplateAddColumns);   
+            var that = this;
+            // create repository
+            var pageTemplateRepository = new PageTemplateRepository();
+            var callback = function(pageTemplate){
+                var pageTemplateAddColumns = new PageTemplateAddColumnsView({model: pageTemplate});
+                that.contentRegion.show(pageTemplateAddColumns);
+                that.endLoading();
+            };
+            that.startLoading();
+            $.when(pageTemplateRepository.getPageTemplate(id)).then(callback);
             // alert(123);
 
+        },
+
+        // 添加行
+        editRow: function(options){
+            //
+            var templateColumn = new TemplateColumnModel();
+            templateColumn.set('pageTemplateId', options.pageTemplateId);
+            templateColumn.set('pagePartId', options.pagePartId);
+            templateColumn.set('columnPartId', 1);
+            templateColumn.set('parentColumnId', 0);
+
+            var templateColumnEditView = new TemplateColumnEditView({model: templateColumn});
+            this.loadModal(templateColumnEditView);
+            
         },
 
         onClose: function(){

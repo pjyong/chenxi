@@ -6,15 +6,15 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 
 use ChenXi\LayoutBundle\Entity\PageTemplate;
-use ChenXi\LayoutBundle\Form\Type\PageTemplateType;
+use ChenXi\LayoutBundle\Entity\ColumnTemplate;
+
+// PageTemplate 资源
 
 
-
-
-class PageTemplatesController extends FOSRestController
+class ColumnsController extends FOSRestController
 {
 	// 获得
-	public function getPageTemplatesAction()
+	public function getColumnsAction($pageTemplateId)
 	{
 		$criteria = array('websiteId' => $this->getWebsiteId());
 
@@ -24,7 +24,7 @@ class PageTemplatesController extends FOSRestController
 	}
 
 	// 创建
-	public function postPageTemplatesAction()
+	public function postColumnsAction()
 	{
 		$pageTemplate = new PageTemplate();
 		// 指定website
@@ -35,7 +35,7 @@ class PageTemplatesController extends FOSRestController
 	}
 
 	// 删除相册
-	public function deletePageTemplateAction($id)
+	public function deleteColumnAction($id)
 	{
 		$pageTemplateManager = $this->container->get('chenxi_page_template_manager');
 		$pageTemplate = $pageTemplateManager->find($id);
@@ -51,28 +51,27 @@ class PageTemplatesController extends FOSRestController
 	}
 
 	// 修改相册
-	public function putPageTemplateAction($id)
+	public function putTemplateAction($id)
 	{
 		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
 
 		return $this->process($pageTemplate);
 	}
 
-	// 得到相册
-	public function getPageTemplateAction($id)
+	// 得到
+	public function getTemplateAction($id)
 	{
 		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
 
-		// load tags
-		$tagManager = $this->container->get('fpn_tag.tag_manager');
-		$tagManager->loadTagging($pageTemplate);
-
+		
 		if(!$pageTemplate)
 		{
 			$pageTemplate = array('error' => 1);
 		}
 
-		return $this->handleView($this->view($pageTemplate));
+		$data = $this->getData($pageTemplate);
+
+		return $this->handleView($this->view($data));
 	}
 
 	public function process(PageTemplate $pageTemplate, $new = false)
@@ -94,16 +93,22 @@ class PageTemplatesController extends FOSRestController
 			// return;
 			$this->container->get('chenxi_page_template_manager')->update($pageTemplate);
 
-			$data = array();
-			$data['id'] = $pageTemplate->getId();
-			$data['name'] = $pageTemplate->getName();
-			$data['isPrimary'] = $pageTemplate->getIsPrimary();
-			$data['contentType'] = $pageTemplate->getContentType();
+			$data = $this->getData($pageTemplate);
 
 			return $this->handleView($this->view($new ? $data : null, $statusCode));
 		}
 		
 		return $this->handleView($this->view($form, 400));
+	}
+
+	function getData(PageTemplate $pageTemplate){
+		$data = array();
+		$data['id'] = $pageTemplate->getId();
+		$data['name'] = $pageTemplate->getName();
+		$data['isPrimary'] = $pageTemplate->getIsPrimary();
+		$data['contentType'] = $pageTemplate->getContentType();
+
+		return $data;
 	}
 
 	function getWebsiteId()

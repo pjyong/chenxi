@@ -14,7 +14,7 @@ define([
         initialize: function(){
         },
 
-        urlRoot: 'api/layout/page/templates',
+        urlRoot: 'api/layout/templates',
     });
 
     return pageTemplateModel;

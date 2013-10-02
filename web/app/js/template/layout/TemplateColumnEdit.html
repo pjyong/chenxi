@@ -1,0 +1,37 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<h4 class="blue bigger">添加行</h4>
+	</div>
+
+	<div class="modal-body overflow-visible">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="page_template_name">这一行分成几列 </label>
+
+				<div class="col-sm-9">
+					<input type="text" id="page_template_name" class="col-xs-10 col-sm-5" value="<%=args.name%>">
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="image_name">这行的最大宽度 </label>
+				<div class="col-sm-9">
+					<input type="text" id="page_template_name" class="col-xs-10 col-sm-5" value="<%=args.name%>">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-sm" data-dismiss="modal">
+			<i class="icon-remove"></i>
+			上一步
+		</button>
+
+		<button class="btn btn-sm btn-primary template_save">
+			<i class="icon-ok"></i>
+			下一步
+		</button>
+	</div>
+</div>

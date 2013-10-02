@@ -7,7 +7,7 @@ define([
 ){
     var pageTemplateCollection = Backbone.Collection.extend({
         model: PageTemplateModel,
-        url: 'api/content/page/templates'
+        url: 'api/layout/templates'
     });
 
     return pageTemplateCollection;

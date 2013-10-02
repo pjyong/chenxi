@@ -1,4 +1,5 @@
 layout:
+    type: rest
     resource: "@LayoutBundle/Resources/config/routing.yml"
     prefix:   /
 

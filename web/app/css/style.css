@@ -132,3 +132,24 @@ filter: alpha(opacity=60);
 #gallery_list{
 	margin:0px;
 }
+
+
+
+
+
+
+/**
+定制模板
+
+
+*/
+.page_part{
+	margin-bottom:20px;
+}
+.page_part_header{
+
+}
+.page_part_area{
+	border-top:1px solid rgb(221, 221, 221);
+	border-bottom:1px solid rgb(221, 221, 221);
+}

@@ -1,10 +1,12 @@
 define([
     'marionette', 
     'vent',
+    'view/layout/PageTemplateItemView',
     'text!template/layout/PageTemplateIndex.html',
 ], function(
     Marionette,
     vent, 
+    PageTemplateItemView,
     PageTemplateIndex
 ){
 
@@ -28,7 +30,7 @@ define([
         itemView: PageTemplateItemView,
 
         appendHtml: function(collectionView, itemView, index){
-            collectionView.$("tbody").append(itemView.el);
+            collectionView.$(".template_list").append(itemView.el);
         },
 
         initialize: function(){
