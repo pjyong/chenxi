@@ -35,7 +35,7 @@ define([
 
         addColumnsToPageTemplate: function(id){
             app.module('sidebar').controller.activeNav({nav: '#layout/template'});
-            app.module('m.layout').loadController('page_template').addColumnsToPageTemplate(id);
+            app.module('m.layout').loadController('custom_template').addColumnsToPageTemplate(id);
 
         }
 

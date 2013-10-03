@@ -3,12 +3,14 @@ define([
     'app',
     'controller/LayoutController',
     'controller/layout/PageTemplateController',
+    'controller/layout/CustomTemplateController',
     'router/LayoutRouter',
 ], function(
     Marionette,
     app,
     LayoutController,
     PageTemplateController,
+    CustomTemplateController,
     LayoutRouter
 ){
     var layout = app.module('m.layout');
@@ -27,6 +29,11 @@ define([
                 this.controller.close();
             }
             this.controller = new PageTemplateController();
+        }else if(name === 'custom_template' && this.controllerType != 'custom_template'){
+            if(!_.isUndefined(this.controller)){
+                this.controller.close();
+            }
+            this.controller = new CustomTemplateController();
         }
         this.controllerType = name;
         return this.controller;

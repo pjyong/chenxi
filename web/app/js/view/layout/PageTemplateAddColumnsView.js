@@ -42,8 +42,9 @@ define([
             this.model.set('name', pageTemplateName);
             this.model.set('contentType', contentType);
             this.model.set('isPrimary', isPrimary);
-            vent.trigger('pageTemplateController:savePageTemplate', {model: this.model});
             
+            vent.trigger('pageTemplateController:savePageTemplate', {model: this.model}); 
+
         },
 
         addColumnsToHeader: function(){

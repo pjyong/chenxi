@@ -3,7 +3,6 @@ define([
     'vent',
     'view/layout/TemplateColumnItemEditView',
     'text!template/layout/TemplateColumnEdit.html',
-    'collection/layout/TemplateColumnCollection',
     'model/layout/TemplateColumnModel',
     'view/layout/TemplateColumnItemEditView'
 ], function(
@@ -11,7 +10,6 @@ define([
     vent, 
     TemplateColumnItemEditView,
     TemplateColumnEdit,
-    TemplateColumnCollection,
     TemplateColumnModel,
     TemplateColumnItemEditView
 ){
@@ -34,8 +32,8 @@ define([
             _.bindAll(this, 'goNextStep', 'goLastStep');
 
             this.readySubmit = false;
-            this.columnCollection = new TemplateColumnCollection();
             this.childViews = [];
+            
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
@@ -100,7 +98,6 @@ define([
         },
 
         submit: function(){
-            alert('fuck');
             // 
             for(var i = 0, length = this.childViews.length; i < length; i ++){
                 var child = this.childViews[i];
@@ -108,11 +105,10 @@ define([
                 childModel.set('minWidth', child.$('.min_width_option').val());
                 childModel.set('canModify', child.$('.can_modify_option').val());
                 childModel.set('cssCode', child.$('.css_code_option').val());
-                this.columnCollection.add(childModel);
+
             }
             console.log(this.columnCollection);
             // sync 所有创建的列
-            this.columnCollection.sync();
         },
 
 
