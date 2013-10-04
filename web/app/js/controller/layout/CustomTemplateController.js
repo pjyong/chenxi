@@ -24,6 +24,7 @@ define([
     PageTemplateAddColumnsView,
     TemplateColumnCollection,
     PageTemplateRowView,
+    PageTemplatePartView,
     PageTemplateColumnView
 ){
     // 计算列的位置
@@ -34,50 +35,58 @@ define([
 
     // }
 
-    function renderTemplatePage(columnCollection){
-        var pageView = [];
-        for(var i = 1; i <=3; i++){
-            // 创建一个区域视图
-            page[i] = new PageTemplatePartView();
-            page[i].append(renderTemplateColumn(0, i, columnCollection));
-        }
-        return pageView;
+
+    function compare(a, b, index) {
+      if (a.columnPartId < b.columnPartId)
+         return -1;
+      if (a.columnPartId > b.columnPartId)
+        return 1;
+      return 0;
     }
 
 
-    function renderTemplateColumn(parentColumnId, pagePartId, columnCollection){
+    function renderTemplateColumn(parentColumnId, currentColumn, pagePartId, columnCollection){
+
+        if(parentColumnId == 0){
+            var pageTemplateColumnView = new PageTemplatePartView();
+        }else{
+            var pageTemplateColumnView = new PageTemplateColumnView({model: currentColumn});
+        }
+        pageTemplateColumnView.render();
         // 得到所有的子列
         var columns = columnCollection.where({parentColumnId:parentColumnId});
         // 得到最大行数
 
         // columns = columns.sortedIndex(function(column){column.get('columnPartId')});
-        columns = _.sortedIndex(columns, {}, 'columnPartId');
-        console.log(columns);
+        // columns = _.sortedIndex(columns, {}, 'columnPartId');
+        // console.log(columns.sort(compare));
+        columns = columns.sort(compare);
+        // console.log(columns);
         if(columns.length > 0){
-            var pageTemplateColumnView = new PageTemplateColumnView();
-            pageTemplateColumnView.render();
-            console.log(pageTemplateColumnView);
+            // console.log('go on');
+            
+            // console.log(pageTemplateColumnView);
             // 创建一个行视图
             var templateRow = new PageTemplateRowView();
             templateRow.render();
-            pageTemplateColumnView.append(templateRow.$el);
+            pageTemplateColumnView.$el.append(templateRow.$el);
 
             var initColumnPartId = 0;
-            for(var column in columns){
+            for(var key in columns){
+                var column = columns[key];
                 tempColumnPartId = column.get('columnPartId');
                 if(tempColumnPartId == initColumnPartId){
                     // 再创建一个行视图
                     templateRow = new PageTemplateRowView();
                     templateRow.render();
-                    pageTemplateColumnView.append(templateRow.$el);
+                    pageTemplateColumnView.$el.append(templateRow.$el);
                 }
-                templateRow.$el.append(renderTemplateColumn(column.get('parentColumnId'), pagePartId, columnCollection));
+                templateRow.$el.append(renderTemplateColumn(column.get('id'),column, pagePartId, columnCollection));
                 initColumnPartId = tempColumnPartId;
             }
-            return pageTemplateColumnView.$el;
         }
-
-        return '';
+        // console.log('exit');
+        return pageTemplateColumnView.$el;
     }
 
 
@@ -161,13 +170,13 @@ define([
             var customTemplateRepository = new TemplateColumnRepository();
             var callback = function(pageTemplate, columns){
                 var pageTemplateAddColumns = new PageTemplateAddColumnsView({model: pageTemplate});
-                
-                pageTemplateAddColumns.$('#template_header .page_part_area').append(renderTemplateColumn(0, 1, columns));
-                pageTemplateAddColumns.$('#template_body .page_part_area').append(renderTemplateColumn(0, 2, columns));
-                pageTemplateAddColumns.$('#template_footer .page_part_area').append(renderTemplateColumn(0, 3, columns));
-
-
                 that.contentRegion.show(pageTemplateAddColumns);
+                
+                pageTemplateAddColumns.$('#template_header .page_part_area').append(renderTemplateColumn(0, {}, 1, columns));
+                // pageTemplateAddColumns.$('#template_body .page_part_area').append(renderTemplateColumn(0, 2, columns));
+                // pageTemplateAddColumns.$('#template_footer .page_part_area').append(renderTemplateColumn(0, 3, columns));
+
+
                 that.endLoading();
             };
             that.startLoading();

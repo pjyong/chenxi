@@ -1,9 +1,11 @@
 define([
     'marionette', 
     'vent',
+    'text!template/layout/PageTemplateColumn.html',
 ], function(
     Marionette,
-    vent
+    vent,
+    PageTemplateColumn
 ){
 
     return Marionette.ItemView.extend({
@@ -12,7 +14,10 @@ define([
 
         className: 'column',
         
-
+        template: function(){
+            // return _.template(ContentIndexTemplate, data, {variable: 'args'});
+            return PageTemplateColumn;
+        },
         
 
         events: {
@@ -24,7 +29,13 @@ define([
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
+            // console.log(this.model.get('id'));
         },
+
+        render: function(){
+            this.$el.attr('style', 'width:' + this.model.get('minWidth') + 'px;');
+            this.$el.html(this.template());
+        }
 
         
 

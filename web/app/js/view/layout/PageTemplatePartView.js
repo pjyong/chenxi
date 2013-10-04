@@ -1,9 +1,11 @@
 define([
     'marionette', 
     'vent',
+    'text!template/layout/PageTemplatePart.html',
 ], function(
     Marionette,
-    vent
+    vent,
+    PageTemplatePart
 ){
 
     return Marionette.ItemView.extend({
@@ -12,7 +14,10 @@ define([
 
         className: 'part',
         
-
+        template: function(){
+            // return _.template(ContentIndexTemplate, data, {variable: 'args'});
+            return PageTemplatePart;
+        },
         
 
         events: {
