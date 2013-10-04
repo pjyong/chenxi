@@ -6,8 +6,14 @@ define([
     TemplateColumnModel
 ){
     var templateColumnCollection = Backbone.Collection.extend({
+    	initialize: function(options){
+    		// this.options.pageTemplateId;
+    		this.pageTemplateId = options.pageTemplateId;
+    	},
         model: TemplateColumnModel,
-        // url: 'api/layout/templates'
+        url: function(){
+        	return 'api/layout/templates/' + this.pageTemplateId + '/columns'
+        }
     });
 
     return templateColumnCollection;

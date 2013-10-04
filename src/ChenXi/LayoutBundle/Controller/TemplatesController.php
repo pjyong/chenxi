@@ -63,6 +63,8 @@ class TemplatesController extends FOSRestController
 	{
 		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
 
+
+
 		
 		if(!$pageTemplate)
 		{
@@ -70,6 +72,7 @@ class TemplatesController extends FOSRestController
 		}
 
 		$data = $this->getData($pageTemplate);
+		
 
 		return $this->handleView($this->view($data));
 	}

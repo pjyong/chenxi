@@ -16,11 +16,26 @@ class ColumnsController extends FOSRestController
 	// 获得
 	public function getColumnsAction($pageTemplateId)
 	{
-		$criteria = array('websiteId' => $this->getWebsiteId());
+		// $criteria = array('websiteId' => $this->getWebsiteId());
 
-		$pageTemplates = $this->container->get('chenxi_page_template_manager')->findBy($criteria);
+		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($pageTemplateId);
 
-		return $this->handleView($this->view($pageTemplates));
+		$columns = $pageTemplate->getColumnTemplates();
+
+		$data = array();
+		foreach($columns as $column){
+			$temp = array();
+			$temp['id'] = $column->getId();
+			$temp['pageTemplateId'] = $pageTemplateId;
+			$temp['pagePartId'] = $column->getPagePartId();
+			$temp['columnPartId'] = $column->getColumnPartId();
+			$parentColumn = $column->getParentColumn();
+			$temp['parentColumnId'] = ($parentColumn == null) ? 0 : $parentColumn->getId();
+			$temp['minWidth'] = $column->getMinWidth();
+			$temp['maxWidth'] = $column->getMaxWidth();
+			$data[] = $temp;
+		}
+		return $this->handleView($this->view($data));
 	}
 
 	// 创建
