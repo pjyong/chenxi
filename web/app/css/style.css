@@ -156,6 +156,9 @@ filter: alpha(opacity=60);
 .edit_column_form{
 	
 }
-.page_part_area .part{display:table;width:100%;}
-.page_part_area .column{display:table-cell;min-height:100px;border:1px solid black;}
+.page_part_area .part{width:100%;}
+.page_part_area .page_template_column{display:table-cell;border:1px solid black;}
 .page_part_area .row{display:table-row;}
+
+
+.page_template_row{display:table;width:100%;min-height:300px;}

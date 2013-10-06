@@ -60,29 +60,43 @@ define([
         // columns = columns.sortedIndex(function(column){column.get('columnPartId')});
         // columns = _.sortedIndex(columns, {}, 'columnPartId');
         // console.log(columns.sort(compare));
-        columns = columns.sort(compare);
+        // columns = columns.sort(compare);
+
+
+
+
+
         // console.log(columns);
         if(columns.length > 0){
-            // console.log('go on');
             
-            // console.log(pageTemplateColumnView);
-            // 创建一个行视图
-            var templateRow = new PageTemplateRowView();
-            templateRow.render();
-            pageTemplateColumnView.$el.append(templateRow.$el);
-
-            var initColumnPartId = 0;
+            // 对这些列进行分组
+            var group = [];
+            var widthGroup = [];
             for(var key in columns){
                 var column = columns[key];
-                tempColumnPartId = column.get('columnPartId');
-                if(tempColumnPartId == initColumnPartId){
-                    // 再创建一个行视图
-                    templateRow = new PageTemplateRowView();
-                    templateRow.render();
-                    pageTemplateColumnView.$el.append(templateRow.$el);
+                if(_.isUndefined(group[column.get('columnPartId')])){
+                    group[column.get('columnPartId')] = [];
+                    widthGroup[column.get('columnPartId')] = 0;
                 }
-                templateRow.$el.append(renderTemplateColumn(column.get('id'),column, pagePartId, columnCollection));
-                initColumnPartId = tempColumnPartId;
+                widthGroup[column.get('columnPartId')] += column.get('minWidth');
+                group[column.get('columnPartId')].push(column);
+            }
+
+
+            for(var key in group){
+                var row = group[key];
+                // 创建一个行视图
+                var templateRow = new PageTemplateRowView();
+                templateRow.render();
+                pageTemplateColumnView.$el.append(templateRow.$el);
+
+                var totalWidth = widthGroup[key];
+                for(var key in row){
+                    var column = row[key];
+                    // 设置宽度百分比
+                    column.set('widthPercent', Math.floor((column.get('minWidth') * 100)/totalWidth) + '%');
+                    templateRow.$el.append(renderTemplateColumn(column.get('id'), column, pagePartId, columnCollection));
+                }
             }
         }
         // console.log('exit');

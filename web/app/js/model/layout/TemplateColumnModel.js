@@ -13,7 +13,8 @@ define([
             canModify: false,
             minWidth: 0,
             maxWidth: 0,
-            cssCode: ''
+            cssCode: '',
+            widthPercent: '100%'
         },
 
 

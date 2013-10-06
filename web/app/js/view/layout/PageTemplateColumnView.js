@@ -12,7 +12,7 @@ define([
 
         // tagName: 'li',
 
-        className: 'column',
+        className: 'page_template_column',
         
         template: function(){
             // return _.template(ContentIndexTemplate, data, {variable: 'args'});
@@ -33,7 +33,7 @@ define([
         },
 
         render: function(){
-            this.$el.attr('style', 'width:' + this.model.get('minWidth') + 'px;');
+            this.$el.attr('style', 'width:' + this.model.get('widthPercent') + ';');
             this.$el.html(this.template());
         }
 

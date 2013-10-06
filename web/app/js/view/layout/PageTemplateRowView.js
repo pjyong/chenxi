@@ -12,7 +12,7 @@ define([
 
         // tagName: 'li',
 
-        className: 'row',
+        className: 'page_template_row',
         
         template: function(){
             // return _.template(ContentIndexTemplate, data, {variable: 'args'});
