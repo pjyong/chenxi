@@ -34,6 +34,9 @@ define([
 
             this.readySubmit = false;
             this.childViews = [];
+            this.pageTemplateId = this.options.pageTemplateId;
+            this.pagePartId = this.options.pagePartId;
+            this.parentColumnId = this.options.parentColumnId;
             
             // _.bind(this.editImage, this);
             // console.log(this.model);
@@ -79,6 +82,10 @@ define([
                 for(var i = 0; i < addNum; i++){
                     var currentIndex = this.childViews.length + 1;
                     var templateColumnModel = new TemplateColumnModel();
+                    templateColumnModel.set('pageTemplateId', this.pageTemplateId);
+                    templateColumnModel.set('pagePartId', this.pagePartId);
+                    templateColumnModel.set('parentColumnId', this.parentColumnId);
+                    
                     var templateColumnItemEditView = new TemplateColumnItemEditView({model: templateColumnModel, index: currentIndex});
                     this.$('#step2').append(templateColumnItemEditView.$el);
                     templateColumnItemEditView.render();
@@ -101,15 +108,16 @@ define([
 
         submit: function(){
             // 
-            for(var i = 0, length = this.childViews.length; i < length; i ++){
-                var child = this.childViews[i];
-                var childModel = child.model;
-                childModel.set('minWidth', child.$('.min_width_option').val());
-                childModel.set('canModify', child.$('.can_modify_option').val());
-                childModel.set('cssCode', child.$('.css_code_option').val());
+            vent.trigger('CustomTemplateController:submitRow', {rowViews: this.childViews, pagePartId: this.pagePartId});
+            // for(var i = 0, length = this.childViews.length; i < length; i ++){
+            //     var child = this.childViews[i];
+            //     var childModel = child.model;
+            //     childModel.set('minWidth', child.$('.min_width_option').val());
+            //     childModel.set('canModify', child.$('.can_modify_option').val());
+            //     childModel.set('cssCode', child.$('.css_code_option').val());
 
-            }
-            console.log(this.columnCollection);
+            // }
+            // console.log(this.columnCollection);
             // sync 所有创建的列
         },
 

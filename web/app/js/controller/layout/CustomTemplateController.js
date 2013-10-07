@@ -44,6 +44,18 @@ define([
       return 0;
     }
 
+    function getColumnPartId(parentColumnId, pagePartId, columnCollection){
+        // 获取新行索引
+        var columns = columnCollection.where({parentColumnId:parentColumnId, pagePartId: pagePartId});
+        var maxColumnPartId = 1;
+        for(var key in columns){
+            if(columns[key].get('columnPartId') > maxColumnPartId){
+                maxColumnPartId = columns[key].get('columnPartId');
+            }
+        }
+        return maxColumnPartId + 1;
+    }
+
 
     function renderTemplateColumn(parentColumnId, currentColumn, pagePartId, columnCollection){
 
@@ -54,19 +66,7 @@ define([
         }
         pageTemplateColumnView.render();
         // 得到所有的子列
-        var columns = columnCollection.where({parentColumnId:parentColumnId});
-        // 得到最大行数
-
-        // columns = columns.sortedIndex(function(column){column.get('columnPartId')});
-        // columns = _.sortedIndex(columns, {}, 'columnPartId');
-        // console.log(columns.sort(compare));
-        // columns = columns.sort(compare);
-
-
-
-
-
-        // console.log(columns);
+        var columns = columnCollection.where({parentColumnId:parentColumnId, pagePartId: pagePartId});
         if(columns.length > 0){
             
             // 对这些列进行分组
@@ -82,7 +82,6 @@ define([
                 group[column.get('columnPartId')].push(column);
             }
 
-
             for(var key in group){
                 var row = group[key];
                 // 创建一个行视图
@@ -95,7 +94,13 @@ define([
                     var column = row[key];
                     // 设置宽度百分比
                     column.set('widthPercent', Math.floor((column.get('minWidth') * 100)/totalWidth) + '%');
-                    templateRow.$('.template_row_body').append(renderTemplateColumn(column.get('id'), column, pagePartId, columnCollection));
+                    // 如果当前的列是新的
+                    if(column.isNew()){
+                        var pid = column.cid;
+                    }else{
+                        var pid = column.get('id');
+                    }
+                    templateRow.$('.template_row_body').append(renderTemplateColumn(pid, column, pagePartId, columnCollection));
                 }
             }
         }
@@ -169,8 +174,10 @@ define([
     return AppController.extend({
 
         initialize: function(){
-            _.bindAll(this, 'editRow');
-            vent.on('pageTemplateController:editRow', this.editRow);
+            _.bindAll(this, 'editRow', 'submitRow');
+            vent.on('CustomTemplateController:editRow', this.editRow);
+            vent.on('CustomTemplateController:submitRow', this.submitRow);
+
             // vent.on('pageTemplateController:saveColumn', this.saveColumn);
         },
 
@@ -185,10 +192,11 @@ define([
             var callback = function(pageTemplate, columns){
                 var pageTemplateAddColumns = new PageTemplateAddColumnsView({model: pageTemplate});
                 that.contentRegion.show(pageTemplateAddColumns);
-                
-                pageTemplateAddColumns.$('#template_header .page_part_area').append(renderTemplateColumn(0, {}, 1, columns));
-                // pageTemplateAddColumns.$('#template_body .page_part_area').append(renderTemplateColumn(0, 2, columns));
-                // pageTemplateAddColumns.$('#template_footer .page_part_area').append(renderTemplateColumn(0, 3, columns));
+                that.columnCollection = columns;
+                that.pageTemplateAddColumns = pageTemplateAddColumns;
+                pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, 1, columns));
+                pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, 2, columns));
+                pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, 3, columns));
 
 
                 that.endLoading();
@@ -197,6 +205,42 @@ define([
             $.when(pageTemplateRepository.getPageTemplate(id), customTemplateRepository.getTemplateColumns(id)).then(callback);
             // alert(123);
 
+        },
+
+        // 提交添加行的表单
+        submitRow: function(options){
+            // 得到所有的行视图
+            var rowViews = options.rowViews;
+            var pagePartId = options.pagePartId;
+            var parentColumnId = 0;
+            // 得到columnPartId
+            var columnPartId = getColumnPartId(parentColumnId, pagePartId, this.columnCollection);
+            for(var i = 0, length = rowViews.length; i < length; i ++){
+                var child = rowViews[i];
+                var childModel = child.model;
+                childModel.set('minWidth', parseInt(child.$('.min_width_option').val()));
+                childModel.set('canModify', child.$('.can_modify_option').val());
+                childModel.set('cssCode', child.$('.css_code_option').val());
+
+                
+                childModel.set('columnPartId', columnPartId);
+
+                // 添加进collection
+                this.columnCollection.add(childModel);
+            }
+
+            // 重新渲染这部分的
+            if(pagePartId == 1){
+                this.pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
+
+            }else if(pagePartId == 2){
+                this.pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
+
+            }else{
+                this.pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
+                
+            }
+            this.closeModal();
         },
 
         // 添加行
@@ -212,7 +256,7 @@ define([
         },
 
         onClose: function(){
-            vent.off('pageTemplateController:editRow');
+            vent.off('CustomTemplateController:editRow');
         }
 
 

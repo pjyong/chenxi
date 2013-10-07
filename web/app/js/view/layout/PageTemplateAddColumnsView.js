@@ -48,15 +48,15 @@ define([
         },
 
         addColumnsToHeader: function(){
-            vent.trigger('pageTemplateController:editRow', {pagePartId: 1, pageTemplateId: this.model.get('id')});
+            vent.trigger('CustomTemplateController:editRow', {pagePartId: 1, parentColumnId: 0, pageTemplateId: this.model.get('id')});
         },
 
         addColumnsToBody: function(){
-            vent.trigger('pageTemplateController:editRow', {pagePartId: 2, pageTemplateId: this.model.get('id')});
+            vent.trigger('CustomTemplateController:editRow', {pagePartId: 2, parentColumnId: 0, pageTemplateId: this.model.get('id')});
         },
 
         addColumnsToFooter: function(){
-            vent.trigger('pageTemplateController:editRow', {pagePartId: 3, pageTemplateId: this.model.get('id')});
+            vent.trigger('CustomTemplateController:editRow', {pagePartId: 3, parentColumnId: 0, pageTemplateId: this.model.get('id')});
 
         }
 
