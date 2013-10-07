@@ -27,6 +27,7 @@ define([
             'click .btn-next': 'goNextStep',
             'click .btn-prev': 'goLastStep'
         },
+        className: 'modal-dialog',
 
         initialize: function(){
             _.bindAll(this, 'goNextStep', 'goLastStep');
@@ -76,8 +77,9 @@ define([
             if(num > this.childViews.length){
                 var addNum = num - this.childViews.length;
                 for(var i = 0; i < addNum; i++){
+                    var currentIndex = this.childViews.length + 1;
                     var templateColumnModel = new TemplateColumnModel();
-                    var templateColumnItemEditView = new TemplateColumnItemEditView({model: templateColumnModel});
+                    var templateColumnItemEditView = new TemplateColumnItemEditView({model: templateColumnModel, index: currentIndex});
                     this.$('#step2').append(templateColumnItemEditView.$el);
                     templateColumnItemEditView.render();
                     this.childViews.push(templateColumnItemEditView);

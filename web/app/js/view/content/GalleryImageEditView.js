@@ -16,6 +16,7 @@ define([
         template: function(data){
             return _.template(GalleryImageEdit, data, {variable: 'args'});
         },
+        className: 'modal-dialog',
 
         events: {
             'click .image_save': 'saveImage'

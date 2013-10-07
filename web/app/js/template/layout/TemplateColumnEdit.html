@@ -1,21 +1,19 @@
 <div class="modal-content">
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h4 class="blue bigger">添加行</h4>
-	</div>
-
-	<div class="modal-body overflow-visible">
-		<div id="fuelux-wizard" class="row-fluid" data-target="#step-container">
-			<ul class="wizard-steps">
+		<ul class="wizard-steps">
 				<li id="step1_title" class="active">
-					<span class="step">编辑行</span>
+					<span class="step">1</span>
+					<span class="title">编辑行</span>
 				</li>
 
 				<li id="step2_title">
-					<span class="step">编辑列</span>
+					<span class="step">2</span>
+					<span class="title">编辑列</span>
 				</li>
-			</ul>
-		</div>
+		</ul>
+	</div>
+
+	<div class="modal-body overflow-visible">
 		<div id="step_container" class="step-content">
 			<div class="step-pane active" id="step1">
 				<div class="form-horizontal">
@@ -44,15 +42,21 @@
 
 	<div class="modal-footer">
 		<div class="row-fluid wizard-actions">
-			<button class="btn btn-prev" disabled="disabled">
+			<button class="btn btn-prev btn-sm" disabled="disabled">
 				<i class="icon-arrow-left"></i>
 				上一步
 			</button>
 
-			<button class="btn btn-success btn-next">
+			<button class="btn btn-success btn-next btn-sm">
 				下一步
 				<i class="icon-arrow-right icon-on-right"></i>
 			</button>
+
+			<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">
+													<i class="icon-remove"></i>
+													取消
+												</button>
+
 		</div>
 		<!--
 		<button class="btn btn-sm" data-dismiss="modal">

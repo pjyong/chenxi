@@ -28,10 +28,11 @@ define([
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
+            this.index = this.options.index;
         },
 
         render: function(){
-            this.$el.html(this.template({}));
+            this.$el.html(this.template({index: this.index}));
         },
 
         // savePageTemplate: function(){

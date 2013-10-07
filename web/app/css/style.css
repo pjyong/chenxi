@@ -1,3 +1,10 @@
+/*图标大小*/
+.icon-14{
+	font-size:14px;
+}
+
+
+
 .btn-div{
     width:100%;
 }
@@ -157,8 +164,8 @@ filter: alpha(opacity=60);
 	
 }
 .page_part_area .part{width:100%;}
-.page_part_area .page_template_column{display:table-cell;border:1px solid black;}
+.page_part_area .page_template_column{display:table-cell;border:1px solid #ccc;background-color:#DFF4FF;}
 .page_part_area .row{display:table-row;}
 
+.template_row_body{display:table;width:100%;min-height:300px;}
 
-.page_template_row{display:table;width:100%;min-height:300px;}

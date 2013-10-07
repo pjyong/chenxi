@@ -11,7 +11,7 @@ define([
             // return _.template(BreadcrumbTemplate, data, {variable: 'args'});
             return BreadcrumbTemplate;
         },
-
+        
         ui: {
         },
 

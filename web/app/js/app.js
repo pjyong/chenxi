@@ -14,7 +14,7 @@ define([
     var app = new Marionette.Application();
 
     app.addRegions({
-        contentRegion: '#page-content',
+        contentRegion: '.page-content',
         modalRegion: ModalRegion
     });
 

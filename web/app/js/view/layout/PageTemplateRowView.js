@@ -31,6 +31,11 @@ define([
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
         },
 
+        render: function(){
+            this.$el.html(this.template());
+            this.$('[data-toggle="tooltip"]').tooltip();
+        }
+
         
 
         // savePageTemplate: function(){

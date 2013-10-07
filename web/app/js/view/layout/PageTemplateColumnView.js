@@ -14,9 +14,8 @@ define([
 
         className: 'page_template_column',
         
-        template: function(){
-            // return _.template(ContentIndexTemplate, data, {variable: 'args'});
-            return PageTemplateColumn;
+        template: function(data){
+            return _.template(PageTemplateColumn, data, {variable: 'args'});
         },
         
 
@@ -34,7 +33,8 @@ define([
 
         render: function(){
             this.$el.attr('style', 'width:' + this.model.get('widthPercent') + ';');
-            this.$el.html(this.template());
+            this.$el.html(this.template(this.model.toJSON()));
+            this.$('[data-toggle="tooltip"]').tooltip();
         }
 
         

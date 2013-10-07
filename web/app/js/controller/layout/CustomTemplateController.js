@@ -95,7 +95,7 @@ define([
                     var column = row[key];
                     // 设置宽度百分比
                     column.set('widthPercent', Math.floor((column.get('minWidth') * 100)/totalWidth) + '%');
-                    templateRow.$el.append(renderTemplateColumn(column.get('id'), column, pagePartId, columnCollection));
+                    templateRow.$('.template_row_body').append(renderTemplateColumn(column.get('id'), column, pagePartId, columnCollection));
                 }
             }
         }

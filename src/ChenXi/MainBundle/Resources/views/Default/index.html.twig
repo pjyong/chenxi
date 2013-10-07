@@ -2,8 +2,8 @@
 
 {% block stylesheets %}
 <link href="/app/css/bootstrap.min.css" rel="stylesheet" />
-<link href="/app/css/bootstrap-responsive.min.css" rel="stylesheet" />
 <link href="/app/css/jquery.tagsinput.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
 <link href="/app/css/dropzone.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="/app/css/font-awesome.min.css" />
 <link rel="stylesheet" href="/app/css/bootstrap-datetimepicker.min.css" />
@@ -13,7 +13,6 @@
 <![endif]-->
 <link rel="stylesheet" href="/app/css/jquery.gritter.css" />
 <link rel="stylesheet" href="/app/css/ace.min.css" />
-<link rel="stylesheet" href="/app/css/ace-responsive.min.css" />
 <link rel="stylesheet" href="/app/css/ace-skins.min.css" />
 <link rel="stylesheet" href="/app/css/daterangepicker.css" />
 <link rel="stylesheet" href="/app/css/style.css" />
@@ -26,25 +25,31 @@
 {% block title %}CMS{% endblock %}
 
 {% block body %}
-   <div class="navbar navbar-inverse">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a href="#" class="brand">
+   <div class="navbar navbar-default" id="navbar">
+            <script type="text/javascript">
+                try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+            </script>
+
+            <div class="navbar-container" id="navbar-container">
+                <div class="navbar-header pull-left">
+                    <a href="#" class="navbar-brand">
                         <small>
                             <i class="icon-leaf"></i>
-                            Sunshine
+                            Ace Admin
                         </small>
-                    </a><!--/.brand-->
+                    </a><!-- /.brand -->
+                </div><!-- /.navbar-header -->
 
-                    <ul class="nav ace-nav pull-right">
+                <div class="navbar-header pull-right" role="navigation">
+                    <ul class="nav ace-nav">
                         <li class="grey">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-tasks"></i>
                                 <span class="badge badge-grey">4</span>
                             </a>
 
-                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
-                                <li class="nav-header">
+                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
                                     <i class="icon-ok"></i>
                                     4 Tasks to complete
                                 </li>
@@ -57,7 +62,7 @@
                                         </div>
 
                                         <div class="progress progress-mini ">
-                                            <div style="width:65%" class="bar"></div>
+                                            <div style="width:65%" class="progress-bar "></div>
                                         </div>
                                     </a>
                                 </li>
@@ -69,8 +74,8 @@
                                             <span class="pull-right">35%</span>
                                         </div>
 
-                                        <div class="progress progress-mini progress-danger">
-                                            <div style="width:35%" class="bar"></div>
+                                        <div class="progress progress-mini ">
+                                            <div style="width:35%" class="progress-bar progress-bar-danger"></div>
                                         </div>
                                     </a>
                                 </li>
@@ -82,8 +87,8 @@
                                             <span class="pull-right">15%</span>
                                         </div>
 
-                                        <div class="progress progress-mini progress-warning">
-                                            <div style="width:15%" class="bar"></div>
+                                        <div class="progress progress-mini ">
+                                            <div style="width:15%" class="progress-bar progress-bar-warning"></div>
                                         </div>
                                     </a>
                                 </li>
@@ -95,8 +100,8 @@
                                             <span class="pull-right">90%</span>
                                         </div>
 
-                                        <div class="progress progress-mini progress-success progress-striped active">
-                                            <div style="width:90%" class="bar"></div>
+                                        <div class="progress progress-mini progress-striped active">
+                                            <div style="width:90%" class="progress-bar progress-bar-success"></div>
                                         </div>
                                     </a>
                                 </li>
@@ -112,12 +117,12 @@
 
                         <li class="purple">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-bell-alt icon-only icon-animated-bell"></i>
+                                <i class="icon-bell-alt icon-animated-bell"></i>
                                 <span class="badge badge-important">8</span>
                             </a>
 
-                            <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-closer">
-                                <li class="nav-header">
+                            <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
                                     <i class="icon-warning-sign"></i>
                                     8 Notifications
                                 </li>
@@ -126,7 +131,7 @@
                                     <a href="#">
                                         <div class="clearfix">
                                             <span class="pull-left">
-                                                <i class="btn btn-mini no-hover btn-pink icon-comment"></i>
+                                                <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
                                                 New Comments
                                             </span>
                                             <span class="pull-right badge badge-info">+12</span>
@@ -136,7 +141,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <i class="btn btn-mini btn-primary icon-user"></i>
+                                        <i class="btn btn-xs btn-primary icon-user"></i>
                                         Bob just signed up as an editor ...
                                     </a>
                                 </li>
@@ -145,7 +150,7 @@
                                     <a href="#">
                                         <div class="clearfix">
                                             <span class="pull-left">
-                                                <i class="btn btn-mini no-hover btn-success icon-shopping-cart"></i>
+                                                <i class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>
                                                 New Orders
                                             </span>
                                             <span class="pull-right badge badge-success">+8</span>
@@ -157,7 +162,7 @@
                                     <a href="#">
                                         <div class="clearfix">
                                             <span class="pull-left">
-                                                <i class="btn btn-mini no-hover btn-info icon-twitter"></i>
+                                                <i class="btn btn-xs no-hover btn-info icon-twitter"></i>
                                                 Followers
                                             </span>
                                             <span class="pull-right badge badge-info">+11</span>
@@ -176,19 +181,19 @@
 
                         <li class="green">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-envelope-alt icon-only icon-animated-vertical"></i>
+                                <i class="icon-envelope icon-animated-vertical"></i>
                                 <span class="badge badge-success">5</span>
                             </a>
 
-                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
-                                <li class="nav-header">
-                                    <i class="icon-envelope"></i>
+                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
+                                    <i class="icon-envelope-alt"></i>
                                     5 Messages
                                 </li>
 
                                 <li>
                                     <a href="#">
-                                        <img src="app/assets/avatars/avatar.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                        <img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar">
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Alex:</span>
@@ -205,7 +210,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="app/assets/avatars/avatar3.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                        <img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar">
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Susan:</span>
@@ -222,7 +227,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="app/assets/avatars/avatar4.png" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                        <img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar">
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Bob:</span>
@@ -238,7 +243,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="#">
+                                    <a href="inbox.html">
                                         See all messages
                                         <i class="icon-arrow-right"></i>
                                     </a>
@@ -246,10 +251,10 @@
                             </ul>
                         </li>
 
-                        <li class="light-blue user-profile">
-                            <a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
-                                <img class="nav-user-photo" src="app/assets/avatars/user.jpg" tppabs="http://easy-themes.tk/themes/preview/ace/assets/avatars/user.jpg" alt="Jason's Photo" />
-                                <span id="user_info">
+                        <li class="light-blue">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo">
+                                <span class="user-info">
                                     <small>Welcome,</small>
                                     Jason
                                 </span>
@@ -257,7 +262,7 @@
                                 <i class="icon-caret-down"></i>
                             </a>
 
-                            <ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer" id="user_menu">
+                            <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                                 <li>
                                     <a href="#">
                                         <i class="icon-cog"></i>
@@ -282,66 +287,68 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul><!--/.ace-nav-->
-                </div><!--/.container-fluid-->
-            </div><!--/.navbar-inner-->
+                    </ul><!-- /.ace-nav -->
+                </div><!-- /.navbar-header -->
+            </div><!-- /.container -->
         </div>
 
-        <div class="container-fluid" id="main-container">
-            <a id="menu-toggler" href="#">
-                <span></span>
+        <div class="main-container" id="main-container">
+            <div class="main-container-inner">
+            <a id="menu-toggler" class="menu-toggler" href="#">
+                <span class="menu-text"></span>
+
             </a>
 
-            <div id="sidebar">
-                <div id="sidebar-shortcuts">
-                    <div id="sidebar-shortcuts-large">
-                        <button class="btn btn-small btn-success">
-                            <i class="icon-signal"></i>
-                        </button>
+            <div id="sidebar" class="sidebar">
+                <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                            <button class="btn btn-success">
+                                <i class="icon-signal"></i>
+                            </button>
 
-                        <button class="btn btn-small btn-info">
-                            <i class="icon-pencil"></i>
-                        </button>
+                            <button class="btn btn-info">
+                                <i class="icon-pencil"></i>
+                            </button>
 
-                        <button class="btn btn-small btn-warning">
-                            <i class="icon-group"></i>
-                        </button>
+                            <button class="btn btn-warning">
+                                <i class="icon-group"></i>
+                            </button>
 
-                        <button class="btn btn-small btn-danger">
-                            <i class="icon-cogs"></i>
-                        </button>
-                    </div>
+                            <button class="btn btn-danger">
+                                <i class="icon-cogs"></i>
+                            </button>
+                        </div>
 
-                    <div id="sidebar-shortcuts-mini">
-                        <span class="btn btn-success"></span>
+                        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                            <span class="btn btn-success"></span>
 
-                        <span class="btn btn-info"></span>
+                            <span class="btn btn-info"></span>
 
-                        <span class="btn btn-warning"></span>
+                            <span class="btn btn-warning"></span>
 
-                        <span class="btn btn-danger"></span>
-                    </div>
-                </div><!--#sidebar-shortcuts-->
+                            <span class="btn btn-danger"></span>
+                        </div>
+                    </div><!-- #sidebar-shortcuts -->
 
                 <ul class="nav nav-list">
                     <li class="active">
                         <a href="#dashboard">
                             <i class="icon-dashboard"></i>
-                            <span>控制板</span>
+                            <span class="menu-text">控制板</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#">
                             <i class="icon-text-width"></i>
-                            <span>收件箱</span>
+                            <span class="menu-text">收件箱</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
-                            <span>内容</span>
+                            <span class="menu-text">内容</span>
 
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -350,56 +357,56 @@
                             <li>
                                 <a href="#content/article">
                                     <i class="icon-double-angle-right"></i>
-                                    文章
+                                    <span class="menu-text">文章</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#content/page">
                                     <i class="icon-double-angle-right"></i>
-                                    页面
+                                    <span class="menu-text">页面</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#content/gallery">
                                     <i class="icon-double-angle-right"></i>
-                                    相册
+                                    <span class="menu-text">相册</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#">
                                     <i class="icon-double-angle-right"></i>
-                                    音频
+                                    <span class="menu-text">音频</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#">
                                     <i class="icon-double-angle-right"></i>
-                                    视频
+                                    <span class="menu-text">视频</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#">
                                     <i class="icon-double-angle-right"></i>
-                                    表单
+                                    <span class="menu-text">表单</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#">
                                     <i class="icon-double-angle-right"></i>
-                                    投票
+                                    <span class="menu-text">投票</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#">
                                     <i class="icon-double-angle-right"></i>
-                                    挂件
+                                    <span class="menu-text">挂件</span>
                                 </a>
                             </li>
 
@@ -410,7 +417,7 @@
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-list"></i>
-                            <span>多媒体</span>
+                            <span class="menu-text">多媒体</span>
 
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -419,20 +426,20 @@
                             <li>
                                 <a href="">
                                     <i class="icon-double-angle-right"></i>
-                                    图片
+                                    <span class="menu-text">图片</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="">
                                     <i class="icon-double-angle-right"></i>
-                                    音频播放器
+                                    <span class="menu-text">音频播放器</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <i class="icon-double-angle-right"></i>
-                                    视频播放器
+                                    <span class="menu-text">视频播放器</span>
                                 </a>
                             </li>
 
@@ -444,7 +451,7 @@
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-list-alt"></i>
-                            <span>模板管理</span>
+                            <span class="menu-text">模板管理</span>
 
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -453,14 +460,14 @@
                             <li>
                                 <a href="#layout/template">
                                     <i class="icon-double-angle-right"></i>
-                                    页面模板
+                                    <span class="menu-text">页面模板</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#layout/box">
                                     <i class="icon-double-angle-right"></i>
-                                    区块模板
+                                    <span class="menu-text">区块模板</span>
                                 </a>
                             </li>
                             <li>
@@ -476,28 +483,28 @@
                     <li>
                         <a href="#">
                             <i class="icon-calendar"></i>
-                            <span>插件</span>
+                            <span class="menu-text">插件</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#">
                             <i class="icon-picture"></i>
-                            <span>用户</span>
+                            <span class="menu-text">用户</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#">
                             <i class="icon-th"></i>
-                            <span>工具</span>
+                            <span class="menu-text">工具</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-edit"></i>
-                            <span>网站管理</span>
+                            <span class="menu-text">网站管理</span>
 
                             <b class="arrow icon-angle-down"></b>
                         </a>
@@ -506,7 +513,7 @@
                             <li>
                                 <a href="#config/website">
                                     <i class="icon-double-angle-right"></i>
-                                    站点配置
+                                    <span class="menu-text">站点配置</span>
                                 </a>
                             </li>
                         </ul>
@@ -514,26 +521,27 @@
                     </li>
                 </ul><!--/.nav-list-->
 
-                <div id="sidebar-collapse">
-                    <i class="icon-double-angle-left"></i>
-                </div>
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    </div>
             </div>
 
-            <div id="main-content" class="clearfix">
-                <div id="breadcrumbs">
+            <div class="main-content">
+                <div id="breadcrumbs" class="breadcrumbs">
                 </div><!--/#breadcrumbs-->
 
-                <div id="page-content" class="clearfix">
+                <div class="page-content">
 
                 </div><!--/#page-content-->
 
             </div><!--/#main-content-->
+            </div><!--/.main-container-inner-->
         </div><!--/.fluid-container#main-container-->
 
         <a href="#" id="btn-scroll-up" class="btn btn-small btn-inverse">
             <i class="icon-double-angle-up icon-only bigger-110"></i>
         </a>
-        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   
 </div>
 
