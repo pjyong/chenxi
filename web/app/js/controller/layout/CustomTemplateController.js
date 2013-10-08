@@ -11,7 +11,8 @@ define([
     'collection/layout/TemplateColumnCollection',
     'view/layout/PageTemplateRowView',
     'view/layout/PageTemplatePartView',
-    'view/layout/PageTemplateColumnView'
+    'view/layout/PageTemplateColumnView',
+    'model/layout/TemplateColumnCollectionWrapper'
 ], function(
     Marionette,
     app,
@@ -25,25 +26,9 @@ define([
     TemplateColumnCollection,
     PageTemplateRowView,
     PageTemplatePartView,
-    PageTemplateColumnView
+    PageTemplateColumnView,
+    TemplateColumnCollectionWrapper
 ){
-    // 计算列的位置
-    // function calculateColumnPart(columns, parentColumnId){
-    //     for(var column in columns){
-    //         // if(column.id)
-    //     }
-
-    // }
-
-
-    function compare(a, b, index) {
-      if (a.columnPartId < b.columnPartId)
-         return -1;
-      if (a.columnPartId > b.columnPartId)
-        return 1;
-      return 0;
-    }
-
     function getColumnPartId(parentColumnId, pagePartId, columnCollection){
         // 获取新行索引
         var columns = columnCollection.where({parentColumnId:parentColumnId, pagePartId: pagePartId});
@@ -174,9 +159,10 @@ define([
     return AppController.extend({
 
         initialize: function(){
-            _.bindAll(this, 'editRow', 'submitRow');
+            _.bindAll(this, 'editRow', 'submitRow', 'saveTemplate');
             vent.on('CustomTemplateController:editRow', this.editRow);
             vent.on('CustomTemplateController:submitRow', this.submitRow);
+            vent.on('CustomTemplateController:saveTemplate', this.saveTemplate);
 
             // vent.on('pageTemplateController:saveColumn', this.saveColumn);
         },
@@ -243,6 +229,29 @@ define([
             this.closeModal();
         },
 
+        saveTemplate: function(){
+            var templateColumnCollectionWrapper = new TemplateColumnCollectionWrapper({columns: this.columnCollection});
+            // 
+            var that = this;
+            this.startLoading();
+            templateColumnCollectionWrapper.on('sync', function(model, response){
+                // 同步collection
+                that.columnCollection = new TemplateColumnCollection(response);
+                that.endLoading();
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: '保存页面模板成功!',
+                    // (string | mandatory) the text inside the notification
+                    text: '',
+                    class_name: 'gritter-success'
+                });
+
+            });
+            // 保存所有的列
+            templateColumnCollectionWrapper.save();
+            // 
+        },
+
         // 添加行
         editRow: function(options){
             //
@@ -257,6 +266,8 @@ define([
 
         onClose: function(){
             vent.off('CustomTemplateController:editRow');
+            vent.off('CustomTemplateController:submitRow');
+            vent.off('CustomTemplateController:saveTemplate');
         }
 
 

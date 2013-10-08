@@ -2,6 +2,8 @@ parameters:
 #    layout.example.class: ChenXi\LayoutBundle\Example
     chenxi_page_template_manager.class: ChenXi\LayoutBundle\Entity\PageTemplateManager
     chenxi_page_template.class: ChenXi\LayoutBundle\Entity\PageTemplate
+    chenxi_column_template_manager.class: ChenXi\LayoutBundle\Entity\ColumnTemplateManager
+    chenxi_column_template.class: ChenXi\LayoutBundle\Entity\ColumnTemplate
 
 services:
 #    layout.example:
@@ -11,3 +13,6 @@ services:
     chenxi_page_template_manager:
         class: %chenxi_page_template_manager.class%
         arguments: [@doctrine.orm.default_entity_manager, %chenxi_page_template.class%]
+    chenxi_column_template_manager:
+        class: %chenxi_column_template_manager.class%
+        arguments: [@doctrine.orm.default_entity_manager, %chenxi_column_template.class%]

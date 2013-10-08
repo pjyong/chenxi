@@ -20,11 +20,12 @@ define([
         events: {
             'click #add_to_header': 'addColumnsToHeader',
             'click #add_to_body': 'addColumnsToBody',
-            'click #add_to_footer': 'addColumnsToFooter'
+            'click #add_to_footer': 'addColumnsToFooter',
+            'click #save_template': 'saveTemplate'
         },
 
         initialize: function(){
-            _.bindAll(this, 'savePageTemplate', 'addColumnsToHeader', 'addColumnsToBody', 'addColumnsToFooter');
+            _.bindAll(this, 'savePageTemplate', 'addColumnsToHeader', 'addColumnsToBody', 'addColumnsToFooter', 'saveTemplate');
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
@@ -58,6 +59,10 @@ define([
         addColumnsToFooter: function(){
             vent.trigger('CustomTemplateController:editRow', {pagePartId: 3, parentColumnId: 0, pageTemplateId: this.model.get('id')});
 
+        },
+
+        saveTemplate: function(){
+            vent.trigger('CustomTemplateController:saveTemplate');
         }
 
       
