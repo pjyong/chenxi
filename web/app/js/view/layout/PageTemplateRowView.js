@@ -22,10 +22,11 @@ define([
 
         events: {
             // 'click .template_save': 'savePageTemplate'
+            'click .add_column_to_row': 'addColumnToRow'
         },
 
         initialize: function(){
-            // _.bindAll(this, 'savePageTemplate');
+            _.bindAll(this, 'addColumnToRow');
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
@@ -34,6 +35,10 @@ define([
         render: function(){
             this.$el.html(this.template());
             this.$('[data-toggle="tooltip"]').tooltip();
+        },
+
+        addColumnToRow: function(){
+            vent.trigger('CustomTemplateController:addColumnToRow', {});
         }
 
         

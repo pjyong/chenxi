@@ -159,10 +159,11 @@ define([
     return AppController.extend({
 
         initialize: function(){
-            _.bindAll(this, 'editRow', 'submitRow', 'saveTemplate');
+            _.bindAll(this, 'editRow', 'submitRow', 'saveTemplate', 'addColumnToRow');
             vent.on('CustomTemplateController:editRow', this.editRow);
             vent.on('CustomTemplateController:submitRow', this.submitRow);
             vent.on('CustomTemplateController:saveTemplate', this.saveTemplate);
+            vent.on('CustomTemplateController:addColumnToRow', this.addColumnToRow);
 
             // vent.on('pageTemplateController:saveColumn', this.saveColumn);
         },
@@ -250,6 +251,10 @@ define([
             // 保存所有的列
             templateColumnCollectionWrapper.save();
             // 
+        },
+
+        addColumnToRow: function(){
+            
         },
 
         // 添加行
