@@ -20,6 +20,7 @@ define([
         events: {
             'click .template_save': 'savePageTemplate'
         },
+        className: 'modal-dialog',
 
         initialize: function(){
             _.bindAll(this, 'savePageTemplate');
