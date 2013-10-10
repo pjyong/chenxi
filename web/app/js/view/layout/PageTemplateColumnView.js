@@ -21,10 +21,12 @@ define([
 
         events: {
             // 'click .template_save': 'savePageTemplate'
+            'click .add_row_to_column': 'addRowToColumn'
         },
 
         initialize: function(){
-            // _.bindAll(this, 'savePageTemplate');
+            _.bindAll(this, 'addRowToColumn');
+            this.model = this.options.model;
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
@@ -35,9 +37,12 @@ define([
             this.$el.attr('style', 'width:' + this.model.get('widthPercent') + ';');
             this.$el.html(this.template(this.model.toJSON()));
             this.$('[data-toggle="tooltip"]').tooltip();
-        }
+        },
 
-        
+        addRowToColumn: function(){
+            alert(123);
+            vent.trigger('CustomTemplateController:editRow', {pagePartId: this.model.get('pagePartId'), parentColumnId: this.model.get('id'), pageTemplateId: this.model.get('pageTemplateId')});
+        }
 
         // savePageTemplate: function(){
         //     // var imageName = this.$('#image_name').val();

@@ -36,7 +36,9 @@ define([
             this.childViews = [];
             this.pageTemplateId = this.options.pageTemplateId;
             this.pagePartId = this.options.pagePartId;
-            this.parentColumnId = this.options.parentColumnId;
+            this.parentColumnId = this.options.parentColumnId || 0;
+
+            
             
             // _.bind(this.editImage, this);
             // console.log(this.model);
@@ -108,7 +110,7 @@ define([
 
         submit: function(){
             // 
-            vent.trigger('CustomTemplateController:submitRow', {rowViews: this.childViews, pagePartId: this.pagePartId});
+            vent.trigger('CustomTemplateController:submitRow', {rowViews: this.childViews, pagePartId: this.pagePartId, parentColumnId: this.parentColumnId});
             // for(var i = 0, length = this.childViews.length; i < length; i ++){
             //     var child = this.childViews[i];
             //     var childModel = child.model;

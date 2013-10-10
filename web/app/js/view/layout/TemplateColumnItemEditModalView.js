@@ -1,35 +1,31 @@
 define([
     'marionette', 
     'vent',
-    'text!template/layout/PageTemplateRow.html',
+    'text!template/layout/TemplateColumnItemEditModal.html',
 ], function(
     Marionette,
-    vent,
-    PageTemplateRow
+    vent, 
+    TemplateColumnItemEditModal
 ){
 
     return Marionette.ItemView.extend({
 
         // tagName: 'li',
 
-        className: 'page_template_row',
-        
-        template: function(){
-            // return _.template(ContentIndexTemplate, data, {variable: 'args'});
-            return PageTemplateRow;
-        },
+        className: 'modal-dialog',
         
 
+        template: function(data){
+            return _.template(TemplateColumnItemEditModal, data, {variable: 'args'});
+        },
+
         events: {
-            // 'click .template_save': 'savePageTemplate'
-            'click .add_column_to_row': 'addColumnToRow'
+            'click .column_save': 'saveColumn'
         },
 
         initialize: function(){
-            _.bindAll(this, 'addColumnToRow');
-            this.columnPartId = this.options.columnPartId;
-            this.pagePartId = this.options.pagePartId;
-            this.parentColumnId = this.options.parentColumnId;
+            _.bindAll(this, 'saveColumn');
+            this.model = this.options.model;
             // _.bind(this.editImage, this);
             // console.log(this.model);
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
@@ -37,14 +33,12 @@ define([
 
         render: function(){
             this.$el.html(this.template());
-            this.$('[data-toggle="tooltip"]').tooltip();
         },
 
-        addColumnToRow: function(){
-            vent.trigger('CustomTemplateController:addColumnToRow', {columnPartId: this.columnPartId, pagePartId: this.pagePartId, parentColumnId: this.parentColumnId});
+        saveColumn: function(){
+            this.model.set('minWidth', parseInt(this.$('.min_width_option').val()));
+            vent.trigger('CustomTemplateController:saveColumn', {model: this.model});
         }
-
-        
 
         // savePageTemplate: function(){
         //     // var imageName = this.$('#image_name').val();
