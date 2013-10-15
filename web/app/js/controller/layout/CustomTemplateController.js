@@ -45,7 +45,6 @@ define([
 
 
     function renderTemplateColumn(parentColumnId, currentColumn, pagePartId, columnCollection){
-        console.log(currentColumn.id);
         if(parentColumnId == 0){
             var pageTemplateColumnView = new PageTemplatePartView();
         }else{
@@ -54,7 +53,6 @@ define([
         pageTemplateColumnView.render();
         // 得到所有的子列
         var columns = columnCollection.where({parentColumnId:parentColumnId, pagePartId: pagePartId});
-        console.log(columns);
         if(columns.length > 0){
             
             // 将上面得到的列按columnPartId分组，即行，并得到每行的总宽度
@@ -72,16 +70,14 @@ define([
 
             for(var key in group){
                 var row = group[key];
-                // 如果是0
-                if(parentColumnId == 0){
+                key = parseInt(key);
+                // 如果是0,创建行视图，带工具栏
+                // if(parentColumnId == 0){
                     var templateRow = new PageTemplateRowView({columnPartId: key, pagePartId: pagePartId, parentColumnId: parentColumnId});
-                }else{
-                    var templateRow = new PageTemplatePartView();
-                }
-                templateRow.render();
-                pageTemplateColumnView.$el.append(templateRow.$el);
+                    templateRow.render();
+                    pageTemplateColumnView.$el.append(templateRow.$el);
+                // }
                 var totalWidth = widthGroup[key];
-                console.log(totalWidth);
                 for(var key in row){
                     var column = row[key];
                     // 设置宽度百分比
@@ -92,15 +88,18 @@ define([
                     }else{
                         var pid = column.get('id');
                     }
-                    templateRow.$('.template_row_body').append(renderTemplateColumn(pid, column, pagePartId, columnCollection));
+                    // 
+                    // if(parentColumnId == 0){
+                        templateRow.$el.children('.template_row_body').append(renderTemplateColumn(pid, column, pagePartId, columnCollection));  
+                    // }else{
+                        // pageTemplateColumnView.$('.template_column_body').append(renderTemplateColumn(pid, column, pagePartId, columnCollection));
+                    // }
                 }
             }
         }
         // console.log('exit');
         return pageTemplateColumnView.$el;
     }
-
-
 
     // var columns = [
     //     {
@@ -178,8 +177,8 @@ define([
 
         
 
-        addColumnsToPageTemplate: function(id){
-            
+        addColumnsToPageTemplate: function(id){            
+            id = parseInt(id);
             var that = this;
             // create repository
             this.pageTemplateId = id;
@@ -190,6 +189,7 @@ define([
                 that.contentRegion.show(pageTemplateAddColumns);
                 that.columnCollection = columns;
                 that.pageTemplateAddColumns = pageTemplateAddColumns;
+
                 pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, 1, columns));
                 pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, 2, columns));
                 pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, 3, columns));
@@ -211,15 +211,15 @@ define([
             var parentColumnId = options.parentColumnId;
             // 得到columnPartId
             // 如果parentColumnId是零，则是头部添加行，否则是列添加行
-            if(parentColumnId == 0){
+            // if(parentColumnId == 0){
                 var columnPartId = getColumnPartId(parentColumnId, pagePartId, this.columnCollection);
-            }
+            // }
             for(var i = 0, length = rowViews.length; i < length; i ++){
                 var child = rowViews[i];
                 var childModel = child.model;
-                if(parentColumnId != 0){
-                    var columnPartId = getColumnPartId(parentColumnId, pagePartId, this.columnCollection); 
-                }
+                // if(parentColumnId != 0){
+                //     var columnPartId = getColumnPartId(parentColumnId, pagePartId, this.columnCollection); 
+                // }
                 childModel.set('minWidth', parseInt(child.$('.min_width_option').val()));
                 childModel.set('canModify', child.$('.can_modify_option').val());
                 childModel.set('cssCode', child.$('.css_code_option').val());
@@ -260,7 +260,9 @@ define([
             // 
         },
 
+        // 添加列到行
         addColumnToRow: function(options){
+            console.log(options);
             var newColumn = new TemplateColumnModel();
             newColumn.set('pageTemplateId', this.pageTemplateId);
             newColumn.set('pagePartId', options.pagePartId);
@@ -290,6 +292,7 @@ define([
         },
 
         renderPagePart: function(pagePartId){
+            console.log(this.columnCollection);
             if(pagePartId == 1){
                 this.pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
 

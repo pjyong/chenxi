@@ -26,7 +26,7 @@ class ColumnsController extends FOSRestController
 		foreach($columns as $column){
 			$temp = array();
 			$temp['id'] = $column->getId();
-			$temp['pageTemplateId'] = $pageTemplateId;
+			$temp['pageTemplateId'] = (int)$pageTemplateId;
 			$temp['pagePartId'] = $column->getPagePartId();
 			$temp['columnPartId'] = $column->getColumnPartId();
 			$parentColumn = $column->getParentColumn();

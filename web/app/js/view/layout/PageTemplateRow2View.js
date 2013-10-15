@@ -12,19 +12,21 @@ define([
 
         // tagName: 'li',
 
-        className: 'page_template_row widget-box no-border',
+        className: 'page_template_row',
         
         template: function(){
+            // return _.template(ContentIndexTemplate, data, {variable: 'args'});
             return PageTemplateRow;
         },
         
 
         events: {
-            // 'click .add_column_to_row': 'addColumnToRow'
+            // 'click .template_save': 'savePageTemplate'
+            'click .add_column_to_row': 'addColumnToRow'
         },
 
         initialize: function(){
-            // _.bindAll(this);
+            _.bindAll(this, 'addColumnToRow');
             this.columnPartId = this.options.columnPartId;
             this.pagePartId = this.options.pagePartId;
             this.parentColumnId = this.options.parentColumnId;
@@ -36,14 +38,10 @@ define([
         render: function(){
             this.$el.html(this.template());
             this.$('[data-toggle="tooltip"]').tooltip();
-            var event = {columnPartId: this.columnPartId, pagePartId: this.pagePartId, parentColumnId: this.parentColumnId};
-            this.$('.add_column_to_row').on('click', event, this.addColumnToRow);
         },
 
-        addColumnToRow: function(event){
-            // console.log(data);
-            // console.log();
-            vent.trigger('CustomTemplateController:addColumnToRow', {columnPartId: event.data.columnPartId, pagePartId: event.data.pagePartId, parentColumnId: event.data.parentColumnId});
+        addColumnToRow: function(){
+            vent.trigger('CustomTemplateController:addColumnToRow', {columnPartId: this.columnPartId, pagePartId: this.pagePartId, parentColumnId: this.parentColumnId});
         }
 
         

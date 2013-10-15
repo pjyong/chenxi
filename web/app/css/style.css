@@ -165,6 +165,9 @@ filter: alpha(opacity=60);
 }
 .page_part_area .part{width:100%;}
 .page_part_area .page_template_column{display:table-cell;border:1px solid #ccc;background-color:#DFF4FF;}
+.page_template_column .page_template_row{margin-top:100px;}
+.page_template_column .page_template_row .template_row_header{background-color:green;}
+/*.page_template_column .page_template_column{display:block;border:none;margin-top:100px;border-top:1px solid #ccc;}*/
 .page_part_area .row{display:table-row;}
 
 .template_row_body{display:table;width:100%;min-height:300px;}

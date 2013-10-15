@@ -20,12 +20,11 @@ define([
         
 
         events: {
-            // 'click .template_save': 'savePageTemplate'
-            'click .add_row_to_column': 'addRowToColumn'
+            // 'click .add_row_to_column': 'addRowToColumn'
         },
 
         initialize: function(){
-            _.bindAll(this, 'addRowToColumn');
+            _.bindAll(this);
             this.model = this.options.model;
             // _.bind(this.editImage, this);
             // console.log(this.model);
@@ -37,11 +36,18 @@ define([
             this.$el.attr('style', 'width:' + this.model.get('widthPercent') + ';');
             this.$el.html(this.template(this.model.toJSON()));
             this.$('[data-toggle="tooltip"]').tooltip();
+            // 如果这个列是个新的model，那么将他的cid作为新添加的列的父id
+            if(this.model.isNew()){
+                var parentColumnId = this.model.cid;
+            }else{
+                var parentColumnId = this.model.get('id');
+            }
+            var event = {pagePartId: this.model.get('pagePartId'), parentColumnId: parentColumnId, pageTemplateId: this.model.get('pageTemplateId')};
+            this.$el.find('.add_row_to_column').on('click', event, this.addRowToColumn);
         },
 
-        addRowToColumn: function(){
-            alert(123);
-            vent.trigger('CustomTemplateController:editRow', {pagePartId: this.model.get('pagePartId'), parentColumnId: this.model.get('id'), pageTemplateId: this.model.get('pageTemplateId')});
+        addRowToColumn: function(event){
+            vent.trigger('CustomTemplateController:editRow', {pagePartId: event.data.pagePartId, parentColumnId: event.data.parentColumnId, pageTemplateId: event.data.pageTemplateId});
         }
 
         // savePageTemplate: function(){

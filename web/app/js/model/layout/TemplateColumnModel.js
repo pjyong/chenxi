@@ -5,7 +5,7 @@ define([
 ){
     var templateColumnModel = Backbone.Model.extend({
         defaults: {
-            pageTemplateId: '',
+            pageTemplateId: 0,
             pagePartId: '',
             columnPartId: '',
             parentColumnId: '',
