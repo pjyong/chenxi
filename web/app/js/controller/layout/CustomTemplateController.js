@@ -13,7 +13,7 @@ define([
     'view/layout/PageTemplatePartView',
     'view/layout/PageTemplateColumnView',
     'model/layout/TemplateColumnCollectionWrapper',
-    'view/layout/TemplateColumnItemEditModalView'
+    'view/layout/TemplateColumnItemEditModalView',
 ], function(
     Marionette,
     app,
@@ -193,6 +193,20 @@ define([
                 pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, 1, columns));
                 pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, 2, columns));
                 pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, 3, columns));
+
+        $(window).scroll(function () { 
+        var vScrollPosition = $(document).scrollTop(); //retrieve the document scroll ToP position
+        var bottomPart = pageTemplateAddColumns.$("#wn").height();
+        
+            
+        pageTemplateAddColumns.$("#wn").stop().animate({"top": (($(window).height()-bottomPart+vScrollPosition- 50) + "px")}, "slow" );
+        
+        //$scrollingChildDiv.stop().animate({"marginTop": ($(window).scrollTop()) + "px"}, "slow");
+    });
+
+
+
+
 
 
                 that.endLoading();

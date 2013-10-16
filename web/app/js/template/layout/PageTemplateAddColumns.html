@@ -48,11 +48,582 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row" style="padding-bottom:100px;">
 
-			<button class="btn btn-success btn-block" id="save_template">
+			<button class="btn btn-success" id="save_template">
 				保存
 			</button>
 		</div>
 	</div>
 </div>
+
+
+
+<div id="wn">
+	<div id="lyr1">
+	<!--category span will come here-->
+	<div id="categoryDiv"> 
+		<span class="boxTypeCategoryClass largeCategoryClass" style="display: block;">内容</span>
+		<span class="boxTypeCategoryClass ShortCategoryClass" style="display: block;">博客</span>
+		<span class="boxTypeCategoryClass" style="display: block;">日历</span>
+		<span class="boxTypeCategoryClass" style="display: block;">表单</span>
+		<span class="boxTypeCategoryClass" style="display: block;">Features</span>
+		<span class="boxTypeCategoryClass ShortCategoryClass" style="display: block;">多媒体</span>
+		<span class="boxTypeCategoryClass ShortCategoryClass" style="display: block;">Misc</span>
+		<span class="boxTypeCategoryClass" style="display: block;">Structure</span>
+		<span class="boxTypeCategoryClass categoryClicked" style="display: block;">工具<img src="/app/img/double_arrow_down.png" class="downArrowImgClass"></span>
+		<span class="boxTypeCategoryClass" style="display: block;">VIP Club</span>
+		<span class="boxTypeCategoryClass" id="goToWidgets" style="background-image: url(http://devapp.dzpiz682v.com/image/vortali/widget-tab-bg.png); display: block; background-position: initial initial; background-repeat: initial initial;">挂件</span>
+		<span class="widgetCategoryClass" attacheddiv="widget_5" style="display: none;">Feeds</span>
+		<span class="widgetCategoryClass " style="width: 20.16% !important; display: none;" attacheddiv="widget_2">Image Galllery Flippers</span>
+		<span class="widgetCategoryClass " attacheddiv="widget_6" style="display: none;">Other</span>
+		<span class="widgetCategoryClass" id="goToBoxTypes" style="background-image: url(http://devapp.dzpiz682v.com/image/vortali/widget-tab-bg.png); width: 150px; display: none; background-position: initial initial; background-repeat: initial initial;">Back to Boxes</span>
+	</div>
+	<!--end of category span -->
+	<div id="t1" style="float:left;width:100%;margin-top:0px;">
+<div id="Blog" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 96 -->
+				<div class="dragTable Blog ui-draggable" index="0" id="tableImg_96" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Blog Archive					<input type="hidden" id="imgLeft_96" value="0">
+					<input type="hidden" id="boxTypeId_96_category" value="Blog">
+				</div>
+				<!-- box type span : 97 -->
+				<div class="dragTable Blog ui-draggable" index="1" id="tableImg_97" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Blog Category					<input type="hidden" id="imgLeft_97" value="0">
+					<input type="hidden" id="boxTypeId_97_category" value="Blog">
+				</div>
+				<!-- box type span : 94 -->
+				<div class="dragTable Blog ui-draggable" index="2" id="tableImg_94" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Blog Recent Post					<input type="hidden" id="imgLeft_94" value="0">
+					<input type="hidden" id="boxTypeId_94_category" value="Blog">
+				</div>
+				<!-- box type span : 95 -->
+				<div class="dragTable Blog ui-draggable" index="3" id="tableImg_95" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Tag Cloud					<input type="hidden" id="imgLeft_95" value="0">
+					<input type="hidden" id="boxTypeId_95_category" value="Blog">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Blog" id="totalNumberOfBoxes_Blog" value="4">
+				
+				</div> <!-- end div of category -->
+<div id="BannersSBN" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 11 -->
+				<div class="dragTable BannersSBN ui-draggable" index="0" id="tableImg_11" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Banner Group					<input type="hidden" id="imgLeft_11" value="0">
+					<input type="hidden" id="boxTypeId_11_category" value="BannersSBN">
+				</div>
+				<!-- box type span : 41 -->
+				<div class="dragTable BannersSBN ui-draggable" index="1" id="tableImg_41" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					SBN Random Business List					<input type="hidden" id="imgLeft_41" value="0">
+					<input type="hidden" id="boxTypeId_41_category" value="BannersSBN">
+				</div>
+				<!-- box type span : 42 -->
+				<div class="dragTable BannersSBN ui-draggable" index="2" id="tableImg_42" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					SBN Search					<input type="hidden" id="imgLeft_42" value="0">
+					<input type="hidden" id="boxTypeId_42_category" value="BannersSBN">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_BannersSBN" id="totalNumberOfBoxes_BannersSBN" value="3">
+				
+				</div> <!-- end div of category -->
+<div id="Calendar" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 92 -->
+				<div class="dragTable Calendar ui-draggable" index="0" id="tableImg_92" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Community Calendar					<input type="hidden" id="imgLeft_92" value="0">
+					<input type="hidden" id="boxTypeId_92_category" value="Calendar">
+				</div>
+				<!-- box type span : 93 -->
+				<div class="dragTable Calendar ui-draggable" index="1" id="tableImg_93" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Community Calendar Form					<input type="hidden" id="imgLeft_93" value="0">
+					<input type="hidden" id="boxTypeId_93_category" value="Calendar">
+				</div>
+				<!-- box type span : 105 -->
+				<div class="dragTable Calendar ui-draggable" index="2" id="tableImg_105" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Upcoming Calendar Events					<input type="hidden" id="imgLeft_105" value="0">
+					<input type="hidden" id="boxTypeId_105_category" value="Calendar">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Calendar" id="totalNumberOfBoxes_Calendar" value="3">
+				
+				</div> <!-- end div of category -->
+<div id="Content" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 17 -->
+				<div class="dragTable Content ui-draggable" index="0" id="tableImg_17" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Content					<input type="hidden" id="imgLeft_17" value="0">
+					<input type="hidden" id="boxTypeId_17_category" value="Content">
+				</div>
+				<!-- box type span : 47 -->
+				<div class="dragTable Content ui-draggable" index="1" id="tableImg_47" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Form					<input type="hidden" id="imgLeft_47" value="0">
+					<input type="hidden" id="boxTypeId_47_category" value="Content">
+				</div>
+				<!-- box type span : 50 -->
+				<div class="dragTable Content ui-draggable" index="2" id="tableImg_50" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Gallery Thumbnail					<input type="hidden" id="imgLeft_50" value="0">
+					<input type="hidden" id="boxTypeId_50_category" value="Content">
+				</div>
+				<!-- box type span : 82 -->
+				<div class="dragTable Content ui-draggable" index="3" id="tableImg_82" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Most Popular					<input type="hidden" id="imgLeft_82" value="0">
+					<input type="hidden" id="boxTypeId_82_category" value="Content">
+				</div>
+				<!-- box type span : 8 -->
+				<div class="dragTable Content ui-draggable" index="4" id="tableImg_8" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Poll					<input type="hidden" id="imgLeft_8" value="0">
+					<input type="hidden" id="boxTypeId_8_category" value="Content">
+				</div>
+				<!-- box type span : 80 -->
+				<div class="dragTable Content ui-draggable" index="5" id="tableImg_80" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Related Content					<input type="hidden" id="imgLeft_80" value="0">
+					<input type="hidden" id="boxTypeId_80_category" value="Content">
+				</div>
+				<!-- box type span : 22 -->
+				<div class="dragTable Content ui-draggable" index="6" id="tableImg_22" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Topic Poll					<input type="hidden" id="imgLeft_22" value="0">
+					<input type="hidden" id="boxTypeId_22_category" value="Content">
+				</div>
+				<!-- box type span : 70 -->
+				<div class="dragTable Content ui-draggable" index="7" id="tableImg_70" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					User Generated Content					<input type="hidden" id="imgLeft_70" value="0">
+					<input type="hidden" id="boxTypeId_70_category" value="Content">
+				</div>
+				<!-- box type span : 14 -->
+				<div class="dragTable Content ui-draggable" index="8" id="tableImg_14" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Weather					<input type="hidden" id="imgLeft_14" value="0">
+					<input type="hidden" id="boxTypeId_14_category" value="Content">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Content" id="totalNumberOfBoxes_Content" value="9">
+				
+				</div> <!-- end div of category -->
+<div id="Features" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 2 -->
+				<div class="dragTable Features ui-draggable" index="0" id="tableImg_2" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Feature Group					<input type="hidden" id="imgLeft_2" value="0">
+					<input type="hidden" id="boxTypeId_2_category" value="Features">
+				</div>
+				<!-- box type span : 27 -->
+				<div class="dragTable Features ui-draggable" index="1" id="tableImg_27" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Feature Group Horizontal					<input type="hidden" id="imgLeft_27" value="0">
+					<input type="hidden" id="boxTypeId_27_category" value="Features">
+				</div>
+				<!-- box type span : 58 -->
+				
+				<!-- box type span : 90 -->
+				<div class="dragTable Features ui-draggable" index="3" id="tableImg_90" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Media Flipper					<input type="hidden" id="imgLeft_90" value="0">
+					<input type="hidden" id="boxTypeId_90_category" value="Features">
+				</div>
+				<!-- box type span : 9 -->
+				<div class="dragTable Features ui-draggable" index="4" id="tableImg_9" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Time Feature Horizontal					<input type="hidden" id="imgLeft_9" value="0">
+					<input type="hidden" id="boxTypeId_9_category" value="Features">
+				</div>
+				<!-- box type span : 63 -->
+				<div class="dragTable Features ui-draggable" index="5" id="tableImg_63" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Time Feature Schedule					<input type="hidden" id="imgLeft_63" value="0">
+					<input type="hidden" id="boxTypeId_63_category" value="Features">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Features" id="totalNumberOfBoxes_Features" value="6">
+				
+				</div> <!-- end div of category -->
+<div id="Media" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 104 -->
+				<div class="dragTable Media ui-draggable" index="0" id="tableImg_104" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					A/V Player					<input type="hidden" id="imgLeft_104" value="0">
+					<input type="hidden" id="boxTypeId_104_category" value="Media">
+				</div>
+				<!-- box type span : 99 -->
+				<div class="dragTable Media ui-draggable" index="1" id="tableImg_99" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Enhanced Now Playing					<input type="hidden" id="imgLeft_99" value="0">
+					<input type="hidden" id="boxTypeId_99_category" value="Media">
+				</div>
+				<!-- box type span : 28 -->
+				<div class="dragTable Media ui-draggable" index="2" id="tableImg_28" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Recent Episodes					<input type="hidden" id="imgLeft_28" value="0">
+					<input type="hidden" id="boxTypeId_28_category" value="Media">
+				</div>
+				<!-- box type span : 23 -->
+				<div class="dragTable Media ui-draggable" index="3" id="tableImg_23" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Recent Program Episodes					<input type="hidden" id="imgLeft_23" value="0">
+					<input type="hidden" id="boxTypeId_23_category" value="Media">
+				</div>
+				<!-- box type span : 56 -->
+				<div class="dragTable Media ui-draggable" index="4" id="tableImg_56" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Recent Video Episode					<input type="hidden" id="imgLeft_56" value="0">
+					<input type="hidden" id="boxTypeId_56_category" value="Media">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Media" id="totalNumberOfBoxes_Media" value="5">
+				
+				</div> <!-- end div of category -->
+<div id="Misc" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 62 -->
+				<div class="dragTable Misc ui-draggable" index="0" id="tableImg_62" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Comment Threads					<input type="hidden" id="imgLeft_62" value="0">
+					<input type="hidden" id="boxTypeId_62_category" value="Misc">
+				</div>
+				<!-- box type span : 35 -->
+				<div class="dragTable Misc ui-draggable" index="1" id="tableImg_35" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					External Rss					<input type="hidden" id="imgLeft_35" value="0">
+					<input type="hidden" id="boxTypeId_35_category" value="Misc">
+				</div>
+				<!-- box type span : 106 -->
+				<div class="dragTable Misc ui-draggable" index="2" id="tableImg_106" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Most Recent					<input type="hidden" id="imgLeft_106" value="0">
+					<input type="hidden" id="boxTypeId_106_category" value="Misc">
+				</div>
+				<!-- box type span : 65 -->
+				<div class="dragTable Misc ui-draggable" index="3" id="tableImg_65" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Secret Word					<input type="hidden" id="imgLeft_65" value="0">
+					<input type="hidden" id="boxTypeId_65_category" value="Misc">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Misc" id="totalNumberOfBoxes_Misc" value="4">
+				
+				</div> <!-- end div of category -->
+<div id="Structure" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 52 -->
+				<div class="dragTable Structure ui-draggable" index="0" id="tableImg_52" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Box Group					<input type="hidden" id="imgLeft_52" value="0">
+					<input type="hidden" id="boxTypeId_52_category" value="Structure">
+				</div>
+				<!-- box type span : 10 -->
+				<div class="dragTable Structure ui-draggable" index="1" id="tableImg_10" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					HTML Box					<input type="hidden" id="imgLeft_10" value="0">
+					<input type="hidden" id="boxTypeId_10_category" value="Structure">
+				</div>
+				<!-- box type span : 25 -->
+				<div class="dragTable Structure ui-draggable" index="2" id="tableImg_25" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Image Box					<input type="hidden" id="imgLeft_25" value="0">
+					<input type="hidden" id="boxTypeId_25_category" value="Structure">
+				</div>
+				<!-- box type span : 3 -->
+				<div class="dragTable Structure ui-draggable" index="3" id="tableImg_3" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Link Box					<input type="hidden" id="imgLeft_3" value="0">
+					<input type="hidden" id="boxTypeId_3_category" value="Structure">
+				</div>
+				<!-- box type span : 20 -->
+				<div class="dragTable Structure ui-draggable" index="4" id="tableImg_20" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Nav Horizontal					<input type="hidden" id="imgLeft_20" value="0">
+					<input type="hidden" id="boxTypeId_20_category" value="Structure">
+				</div>
+				<!-- box type span : 24 -->
+				<div class="dragTable Structure ui-draggable" index="5" id="tableImg_24" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Title Bar					<input type="hidden" id="imgLeft_24" value="0">
+					<input type="hidden" id="boxTypeId_24_category" value="Structure">
+				</div>
+				<!-- box type span : 108 -->
+				<div class="dragTable Structure ui-draggable" index="6" id="tableImg_108" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Toolbar					<input type="hidden" id="imgLeft_108" value="0">
+					<input type="hidden" id="boxTypeId_108_category" value="Structure">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Structure" id="totalNumberOfBoxes_Structure" value="7">
+				
+				</div> <!-- end div of category -->
+<div id="Utility" class="dropFromList" style="width: 100%; margin-top: 5px; display: block;">				<!-- box type span : 37 -->
+				<div class="dragTable Utility ui-draggable pretty-hover" index="0" id="tableImg_37" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Time					<input type="hidden" id="imgLeft_37" value="0">
+					<input type="hidden" id="boxTypeId_37_category" value="Utility">
+				</div>
+				<!-- box type span : 78 -->
+				<div class="dragTable Utility ui-draggable" index="1" id="tableImg_78" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					User Authentication					<input type="hidden" id="imgLeft_78" value="0">
+					<input type="hidden" id="boxTypeId_78_category" value="Utility">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_Utility" id="totalNumberOfBoxes_Utility" value="2">
+				
+				</div> <!-- end div of category -->
+<div id="VIPClub" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">				<!-- box type span : 68 -->
+				<div class="dragTable VIPClub ui-draggable" index="0" id="tableImg_68" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Closing Login					<input type="hidden" id="imgLeft_68" value="0">
+					<input type="hidden" id="boxTypeId_68_category" value="VIPClub">
+				</div>
+				<!-- box type span : 64 -->
+				<div class="dragTable VIPClub ui-draggable" index="1" id="tableImg_64" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Contest					<input type="hidden" id="imgLeft_64" value="0">
+					<input type="hidden" id="boxTypeId_64_category" value="VIPClub">
+				</div>
+				<!-- box type span : 49 -->
+				<div class="dragTable VIPClub ui-draggable" index="2" id="tableImg_49" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					ListenLive User					<input type="hidden" id="imgLeft_49" value="0">
+					<input type="hidden" id="boxTypeId_49_category" value="VIPClub">
+				</div>
+				<!-- box type span : 18 -->
+				<div class="dragTable VIPClub ui-draggable" index="3" id="tableImg_18" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Listener Club Login					<input type="hidden" id="imgLeft_18" value="0">
+					<input type="hidden" id="boxTypeId_18_category" value="VIPClub">
+				</div>
+				<!-- box type span : 61 -->
+				<div class="dragTable VIPClub ui-draggable" index="4" id="tableImg_61" style="width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;">
+					Survey					<input type="hidden" id="imgLeft_61" value="0">
+					<input type="hidden" id="boxTypeId_61_category" value="VIPClub">
+				</div>
+				<input type="hidden" name="totalNumberOfBoxes_VIPClub" id="totalNumberOfBoxes_VIPClub" value="5">
+				
+				</div> <!-- end div of category -->
+<div id="widget_5" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;"><div id="next_button_widget" class="next_boxes_class"> &gt; </div><div id="prev_button_widget" class="prev_boxes_class"> &lt; </div>						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_657" index="0">
+							Email_Newsletter_widget							<input type="hidden" name="widgetChild_657" value="657">
+							<input type="hidden" name="boxTypeLabel_657" value="Email_Newsletter_widget">
+							<input type="hidden" id="imgLeft_98_657" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_656" index="1">
+							ESPN Top stories and videos -- CLONED							<input type="hidden" name="widgetChild_656" value="656">
+							<input type="hidden" name="boxTypeLabel_656" value="ESPN Top stories and videos -- CLONED">
+							<input type="hidden" id="imgLeft_98_656" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_403" index="2">
+							Facebook Comment Engine fix							<input type="hidden" name="widgetChild_403" value="403">
+							<input type="hidden" name="boxTypeLabel_403" value="Facebook Comment Engine fix">
+							<input type="hidden" id="imgLeft_98_403" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_405" index="3">
+							Gallery Thumbnails							<input type="hidden" name="widgetChild_405" value="405">
+							<input type="hidden" name="boxTypeLabel_405" value="Gallery Thumbnails">
+							<input type="hidden" id="imgLeft_98_405" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_655" index="4">
+							output include files for no reason at all							<input type="hidden" name="widgetChild_655" value="655">
+							<input type="hidden" name="boxTypeLabel_655" value="output include files for no reason at all">
+							<input type="hidden" id="imgLeft_98_655" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_654" index="5">
+							Twitter Hashtag -- API 1.1, version 2							<input type="hidden" name="widgetChild_654" value="654">
+							<input type="hidden" name="boxTypeLabel_654" value="Twitter Hashtag -- API 1.1, version 2">
+							<input type="hidden" id="imgLeft_98_654" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_16" index="6">
+							Part 1 Top 5 Movie Trailers							<input type="hidden" name="widgetChild_16" value="16">
+							<input type="hidden" name="boxTypeLabel_16" value="Part 1 Top 5 Movie Trailers">
+							<input type="hidden" id="imgLeft_98_16" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_21" index="7">
+							Part 2 Top 5 Movie Trailers							<input type="hidden" name="widgetChild_21" value="21">
+							<input type="hidden" name="boxTypeLabel_21" value="Part 2 Top 5 Movie Trailers">
+							<input type="hidden" id="imgLeft_98_21" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_55" index="8">
+							Facebook Comment Engine							<input type="hidden" name="widgetChild_55" value="55">
+							<input type="hidden" name="boxTypeLabel_55" value="Facebook Comment Engine">
+							<input type="hidden" id="imgLeft_98_55" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_119" index="9">
+							Alpha Nav							<input type="hidden" name="widgetChild_119" value="119">
+							<input type="hidden" name="boxTypeLabel_119" value="Alpha Nav">
+							<input type="hidden" id="imgLeft_98_119" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_200" index="10">
+							Calendar Widget 1 (Calendar)							<input type="hidden" name="widgetChild_200" value="200">
+							<input type="hidden" name="boxTypeLabel_200" value="Calendar Widget 1 (Calendar)">
+							<input type="hidden" id="imgLeft_98_200" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_204" index="11">
+							Calendar Widget 2 (Event Listing)							<input type="hidden" name="widgetChild_204" value="204">
+							<input type="hidden" name="boxTypeLabel_204" value="Calendar Widget 2 (Event Listing)">
+							<input type="hidden" id="imgLeft_98_204" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_226" index="12">
+							Open Close Image Box							<input type="hidden" name="widgetChild_226" value="226">
+							<input type="hidden" name="boxTypeLabel_226" value="Open Close Image Box">
+							<input type="hidden" id="imgLeft_98_226" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_254" index="13">
+							Calendar ViewAll Override							<input type="hidden" name="widgetChild_254" value="254">
+							<input type="hidden" name="boxTypeLabel_254" value="Calendar ViewAll Override">
+							<input type="hidden" id="imgLeft_98_254" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_273" index="14">
+							Facebook Like							<input type="hidden" name="widgetChild_273" value="273">
+							<input type="hidden" name="boxTypeLabel_273" value="Facebook Like">
+							<input type="hidden" id="imgLeft_98_273" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_330" index="15">
+							KNDD Flipper Widget							<input type="hidden" name="widgetChild_330" value="330">
+							<input type="hidden" name="boxTypeLabel_330" value="KNDD Flipper Widget">
+							<input type="hidden" id="imgLeft_98_330" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_344" index="16">
+							KNDD flipper 2, no CSS							<input type="hidden" name="widgetChild_344" value="344">
+							<input type="hidden" name="boxTypeLabel_344" value="KNDD flipper 2, no CSS">
+							<input type="hidden" id="imgLeft_98_344" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_347" index="17">
+							Custom Concert Calendar							<input type="hidden" name="widgetChild_347" value="347">
+							<input type="hidden" name="boxTypeLabel_347" value="Custom Concert Calendar">
+							<input type="hidden" id="imgLeft_98_347" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_349" index="18">
+							WWL More News							<input type="hidden" name="widgetChild_349" value="349">
+							<input type="hidden" name="boxTypeLabel_349" value="WWL More News">
+							<input type="hidden" id="imgLeft_98_349" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_351" index="19">
+							Open Close Text Box							<input type="hidden" name="widgetChild_351" value="351">
+							<input type="hidden" name="boxTypeLabel_351" value="Open Close Text Box">
+							<input type="hidden" id="imgLeft_98_351" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_365" index="20">
+							Open Close Image Box regex selector							<input type="hidden" name="widgetChild_365" value="365">
+							<input type="hidden" name="boxTypeLabel_365" value="Open Close Image Box regex selector">
+							<input type="hidden" id="imgLeft_98_365" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_386" index="21">
+							Mobile - Recent Episodes Buttons							<input type="hidden" name="widgetChild_386" value="386">
+							<input type="hidden" name="boxTypeLabel_386" value="Mobile - Recent Episodes Buttons">
+							<input type="hidden" id="imgLeft_98_386" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_390" index="22">
+							OAssis Flipper To check in Doc type							<input type="hidden" name="widgetChild_390" value="390">
+							<input type="hidden" name="boxTypeLabel_390" value="OAssis Flipper To check in Doc type">
+							<input type="hidden" id="imgLeft_98_390" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_393" index="23">
+							Twitter Hashtag							<input type="hidden" name="widgetChild_393" value="393">
+							<input type="hidden" name="boxTypeLabel_393" value="Twitter Hashtag">
+							<input type="hidden" id="imgLeft_98_393" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_398" index="24">
+							Multiple picked Programs tabbed							<input type="hidden" name="widgetChild_398" value="398">
+							<input type="hidden" name="boxTypeLabel_398" value="Multiple picked Programs tabbed">
+							<input type="hidden" id="imgLeft_98_398" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_407" index="25">
+							Recent Program Episodes Mobile Buttons							<input type="hidden" name="widgetChild_407" value="407">
+							<input type="hidden" name="boxTypeLabel_407" value="Recent Program Episodes Mobile Buttons">
+							<input type="hidden" id="imgLeft_98_407" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_461" index="26">
+							Clickable BG:3rd Party Trackable							<input type="hidden" name="widgetChild_461" value="461">
+							<input type="hidden" name="boxTypeLabel_461" value="Clickable BG:3rd Party Trackable">
+							<input type="hidden" id="imgLeft_98_461" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_478" index="27">
+							Blog Facebook Commenting							<input type="hidden" name="widgetChild_478" value="478">
+							<input type="hidden" name="boxTypeLabel_478" value="Blog Facebook Commenting">
+							<input type="hidden" id="imgLeft_98_478" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_485" index="28">
+							Two Color Title Bar							<input type="hidden" name="widgetChild_485" value="485">
+							<input type="hidden" name="boxTypeLabel_485" value="Two Color Title Bar">
+							<input type="hidden" id="imgLeft_98_485" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_491" index="29">
+							Tablet Redirect (for Homepage)							<input type="hidden" name="widgetChild_491" value="491">
+							<input type="hidden" name="boxTypeLabel_491" value="Tablet Redirect (for Homepage)">
+							<input type="hidden" id="imgLeft_98_491" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_499" index="30">
+							ESPN Widget - CSS and JS							<input type="hidden" name="widgetChild_499" value="499">
+							<input type="hidden" name="boxTypeLabel_499" value="ESPN Widget - CSS and JS">
+							<input type="hidden" id="imgLeft_98_499" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_518" index="31">
+							ESPN Top Stories and Videos - DMA ONLY							<input type="hidden" name="widgetChild_518" value="518">
+							<input type="hidden" name="boxTypeLabel_518" value="ESPN Top Stories and Videos - DMA ONLY">
+							<input type="hidden" id="imgLeft_98_518" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_538" index="32">
+							Ad Collapser							<input type="hidden" name="widgetChild_538" value="538">
+							<input type="hidden" name="boxTypeLabel_538" value="Ad Collapser">
+							<input type="hidden" id="imgLeft_98_538" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_542" index="33">
+							ESPN News Headlines - DMA ONLY							<input type="hidden" name="widgetChild_542" value="542">
+							<input type="hidden" name="boxTypeLabel_542" value="ESPN News Headlines - DMA ONLY">
+							<input type="hidden" id="imgLeft_98_542" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_543" index="34">
+							ESPN Sports Calendar - DMA ONLY							<input type="hidden" name="widgetChild_543" value="543">
+							<input type="hidden" name="boxTypeLabel_543" value="ESPN Sports Calendar - DMA ONLY">
+							<input type="hidden" id="imgLeft_98_543" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_564" index="35">
+							Multi Use Flipper							<input type="hidden" name="widgetChild_564" value="564">
+							<input type="hidden" name="boxTypeLabel_564" value="Multi Use Flipper">
+							<input type="hidden" id="imgLeft_98_564" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_577" index="36">
+							Top stories and videos common							<input type="hidden" name="widgetChild_577" value="577">
+							<input type="hidden" name="boxTypeLabel_577" value="Top stories and videos common">
+							<input type="hidden" id="imgLeft_98_577" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_579" index="37">
+							ESPN Top Stories and Videos							<input type="hidden" name="widgetChild_579" value="579">
+							<input type="hidden" name="boxTypeLabel_579" value="ESPN Top Stories and Videos">
+							<input type="hidden" id="imgLeft_98_579" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_580" index="38">
+							ESPN News Headlines							<input type="hidden" name="widgetChild_580" value="580">
+							<input type="hidden" name="boxTypeLabel_580" value="ESPN News Headlines">
+							<input type="hidden" id="imgLeft_98_580" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_581" index="39">
+							ESPN Sports Calendar							<input type="hidden" name="widgetChild_581" value="581">
+							<input type="hidden" name="boxTypeLabel_581" value="ESPN Sports Calendar">
+							<input type="hidden" id="imgLeft_98_581" value="0">
+						</div>
+						<div class="dragTable widget_5 ui-draggable" style="padding-left: 3px; width: 17%; float: left; display: none; color: rgb(255, 255, 255); white-space: nowrap; overflow: hidden; cursor: move;" id="tableImg_98_585" index="40">
+							Date Time Display							<input type="hidden" name="widgetChild_585" value="585">
+							<input type="hidden" name="boxTypeLabel_585" value="Date Time Display">
+							<input type="hidden" id="imgLeft_98_585" value="0">
+						</div>
+</div><!-- end of main div:widget_5 -->						<input type="hidden" id="totalNumberOfWidget_5" name="totalNumberOfWidget_5" value="41">
+						
+						<div id="widget_6" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_99" index="0">
+							Instant Redirect							<input type="hidden" name="widgetChild_99" value="99">
+							<input type="hidden" name="boxTypeLabel_99" value="Instant Redirect">
+							<input type="hidden" id="imgLeft_98_99" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_114" index="1">
+							Custom Page Background							<input type="hidden" name="widgetChild_114" value="114">
+							<input type="hidden" name="boxTypeLabel_114" value="Custom Page Background">
+							<input type="hidden" id="imgLeft_98_114" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_205" index="2">
+							Oasis X4							<input type="hidden" name="widgetChild_205" value="205">
+							<input type="hidden" name="boxTypeLabel_205" value="Oasis X4">
+							<input type="hidden" id="imgLeft_98_205" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_224" index="3">
+							Back Button							<input type="hidden" name="widgetChild_224" value="224">
+							<input type="hidden" name="boxTypeLabel_224" value="Back Button">
+							<input type="hidden" id="imgLeft_98_224" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_241" index="4">
+							People Tag Widget							<input type="hidden" name="widgetChild_241" value="241">
+							<input type="hidden" name="boxTypeLabel_241" value="People Tag Widget">
+							<input type="hidden" id="imgLeft_98_241" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_362" index="5">
+							Open/Close Text Widget 2+							<input type="hidden" name="widgetChild_362" value="362">
+							<input type="hidden" name="boxTypeLabel_362" value="Open/Close Text Widget 2+">
+							<input type="hidden" id="imgLeft_98_362" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_364" index="6">
+							Open Close Image 2+							<input type="hidden" name="widgetChild_364" value="364">
+							<input type="hidden" name="boxTypeLabel_364" value="Open Close Image 2+">
+							<input type="hidden" id="imgLeft_98_364" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_368" index="7">
+							Open/Close Global Text							<input type="hidden" name="widgetChild_368" value="368">
+							<input type="hidden" name="boxTypeLabel_368" value="Open/Close Global Text">
+							<input type="hidden" id="imgLeft_98_368" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_443" index="8">
+							Mobile - View Full Site							<input type="hidden" name="widgetChild_443" value="443">
+							<input type="hidden" name="boxTypeLabel_443" value="Mobile - View Full Site">
+							<input type="hidden" id="imgLeft_98_443" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_529" index="9">
+							JQ Corner Peel							<input type="hidden" name="widgetChild_529" value="529">
+							<input type="hidden" name="boxTypeLabel_529" value="JQ Corner Peel">
+							<input type="hidden" id="imgLeft_98_529" value="0">
+						</div>
+						<div class="dragTable widget_6 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_625" index="10">
+							Mobile - View Mobile Site							<input type="hidden" name="widgetChild_625" value="625">
+							<input type="hidden" name="boxTypeLabel_625" value="Mobile - View Mobile Site">
+							<input type="hidden" id="imgLeft_98_625" value="0">
+						</div>
+</div><!-- end of main div:widget_6 -->						<input type="hidden" id="totalNumberOfWidget_6" name="totalNumberOfWidget_6" value="11">
+<div id="widget_2" class="dropFromList" style="width: 100%; margin-top: 5px; display: none;">						<div class="dragTable widget_2 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_272" index="0">
+							Banner Refresh Tag Widget							<input type="hidden" name="widgetChild_272" value="272">
+							<input type="hidden" name="boxTypeLabel_272" value="Banner Refresh Tag Widget">
+							<input type="hidden" id="imgLeft_98_272" value="0">
+						</div>
+						<div class="dragTable widget_2 ui-draggable" style="padding-left:3px;width:17%;float:left;display:block;color:#fff;white-space:nowrap;overflow:hidden;cursor:move;" id="tableImg_98_541" index="1">
+							Rotating Site Background							<input type="hidden" name="widgetChild_541" value="541">
+							<input type="hidden" name="boxTypeLabel_541" value="Rotating Site Background">
+							<input type="hidden" id="imgLeft_98_541" value="0">
+						</div>
+</div><!-- end of main div:widget_2 -->						<input type="hidden" id="totalNumberOfWidget_2" name="totalNumberOfWidget_2" value="2">
+		</div> <!--end of t1-->
+    </div><!-- end lyr1 div -->
+</div>
+
+

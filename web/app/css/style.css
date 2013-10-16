@@ -3,6 +3,7 @@
 	font-size:14px;
 }
 
+.main-content{position:relative;}
 
 
 .btn-div{
@@ -171,4 +172,140 @@ filter: alpha(opacity=60);
 .page_part_area .row{display:table-row;}
 
 .template_row_body{display:table;width:100%;min-height:300px;}
+
+
+
+/************* Drag Drop Table Styling ********************/
+div#wn{ 
+    /*left:205px;*/
+    position:absolute;
+    height:auto; /*150px;*/
+    width:100%;
+    background: url("../img/customize-main-bg.png") repeat-x top left transparent;
+    /*left:expression("215px");*/
+}
+#lyr1 {
+	position:relative;
+	padding:0;
+	/*z-index:101;*/
+	width:100%;
+	height:100%;
+}
+.dragBoxInList{
+	position:relative;
+	font-size:70%;
+	background:#ccc;
+	color: #000;
+	float:left;
+	border:1px solid #b9b8b8;
+	cursor:move;
+	display: table; 
+	overflow: hidden;
+	width:67px;
+	height:35px;
+	_padding-right: 100px;
+	_position:relative;
+	#position: relative; 
+	text-align: center;
+}
+.pretty-hover {
+	border:1px solid #b9b8b8;
+	background:#272A2C !important;
+	cursor:move;
+	text-align: center;
+} 
+#categoryDiv{
+	width: 100%;
+	font-weight:bold;
+	font-size:75%;
+}
+#categoryDiv span {
+	background:url("../img/customize-tab-bg.png") no-repeat scroll top left transparent;
+	overflow:visible;
+	color:#fff;
+	height:35px;
+	width:8.16%;
+	float:left;
+	cursor:pointer;
+	text-align:center;
+	line-height:34px;
+	overflow:hidden;
+}
+#categoryDiv span.categoryClicked {
+	background: url("../img/customize-tab-bg-sel.png") no-repeat scroll top left transparent;
+	overflow:visible;
+	color:#fff;
+	height:35px;
+	width:11.16%;
+	float:left;
+	cursor:pointer;
+	text-align:center;
+	line-height:34px;
+	overflow:hidden;
+}
+.next_boxes_class{
+	color:white;
+	font-size:30pt;
+	font-weight:bold;
+	position:relative;
+	float:right;
+	top:30px;
+	padding-right: 5px;
+	display:block;
+	height:90px;
+	cursor:pointer;
+	font-family:monospace;
+}
+.prev_boxes_class{
+	color:white;
+	font-weight:bold;
+	font-size:30pt;
+	float:left;
+	position:relative;
+	top:30px;
+	padding-left: 5px;
+	height:90px;
+	width:35px;
+	display:none;
+	cursor:pointer;
+	font-family:monospace;
+}
+.ShortCategoryClass{
+	width:8.16% !important;
+}
+.largeCategoryClass{
+width:14.16% !important;
+}
+.downArrowImgClass{
+	float:right;
+	margin-right:5px;
+	position:relative;
+	top:10px;
+	top:expression("-25px");
+}
+.emptyBoxesBoxTypeCategory{
+color:white;
+font-size:14pt;
+position:relative;
+top:50px;
+left:20%;
+}
+.dragTable {
+	background-color: #444444;
+	border: 1px solid #B9B8B8;
+	border-radius: 3px 3px 3px 3px;
+	color: #E8E8E8 !important;
+	cursor: move;
+	font-size:8pt ;
+	font-weight:normal;
+	height: 35px;
+	line-height: 30px;
+	margin: 4px 0 0 4px;
+	padding-left: 3px;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+/******************* end drag and drop table styling ***************/
+
 

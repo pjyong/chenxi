@@ -10,6 +10,8 @@ require.config({
         'jquery.tagsinput': 'lib/jquery.tagsinput.min',
         'jquery.gritter': 'lib/jquery.gritter.min',
         'jquery.chosen': 'lib/chosen.jquery.min',
+        'jquery.localscroll': 'lib/jquery.localscroll-min',
+        'jquery.sticklr': 'lib/jquery-sticklr-1.4.pack',
         'backbone.routerilter': 'lib/backbone.routefilter',
         'backbone.wreqr': 'lib/backbone.wreqr',
         'backbone.babysitter': 'lib/backbone.babysitter',
@@ -43,6 +45,12 @@ require.config({
         },
         'jquery.gritter': {
             deps: ['jquery']
+        },
+        'jquery.localscroll': {
+            deps: ['jquery']
+        },
+        'jquery.sticklr': {
+            deps: ['jquery', 'jquery.localscroll']
         },
         backbone : {
             deps : ['jquery','underscore', 'bootstrap', 'jquery.gritter'],

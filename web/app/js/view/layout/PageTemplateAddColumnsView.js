@@ -1,7 +1,7 @@
 define([
     'marionette', 
     'vent',
-    'text!template/layout/PageTemplateAddColumns.html',
+    'text!template/layout/PageTemplateAddColumns.html'
 ], function(
     Marionette,
     vent, 
@@ -11,6 +11,7 @@ define([
     return Marionette.ItemView.extend({
 
         // tagName: 'li',
+        
         
 
         template: function(data){
