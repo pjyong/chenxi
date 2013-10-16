@@ -12,6 +12,11 @@ use ChenXi\LayoutBundle\Entity\ColumnTemplate;
 
 class ColumnswrapperController extends FOSRestController
 {
+	// id
+	public $columns = array();
+	public $data = array();
+
+	public $pageTemplate;
 
 	// 创建
 	public function postColumnswrapperAction()
@@ -22,63 +27,53 @@ class ColumnswrapperController extends FOSRestController
 		// $pageTemplate = $this->container->
 		if(count($columns) > 0){
 			$pageTemplateId = $columns[0]['pageTemplateId'];
-			$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($pageTemplateId);
+			$this->pageTemplate = $this->container->get('chenxi_page_template_manager')->find($pageTemplateId);
 			// 对这些提交过来的列进行重组
 			// $s['id']['parentId']
-			$newColumns = array();
 			foreach($columns as $key => $column){
 				$id = isset($column['id']) ? $column['id'] : $column['cid'];
-				$newColumns[$id] = array();
-				$newColumns[$id] = $column;
+				$this->columns[$id] = $column;
 			}
 
 
-
-			foreach($columns as $key => $column){
-				// 如果id没有设置那就应该添加
-				if(!isset($column['id'])){
-
-
-					
-
-					// 设置返回的ID
-					$columns[$key]['id'] = $columnTemplate->getId();
-				}else{
-					// 修改
-					$columnEntity = $columnManager->find($column['id']);
-
-				}
-			}
+			foreach($this->columns as $key => $column){
+				// 
+				if(is_object($column)){continue;}
+				$this->saveColumn($column);
+			}			
 		}
-		return $this->handleView($this->view($columns));
-		// $pageTemplate = new PageTemplate();
-		// // 指定website
-		// $website = $this->container->get('chenxi_website_manager')->find($this->getWebsiteId());
-		// $pageTemplate->setWebsite($website);
-
-		// return $this->process($pageTemplate, true);
+		return $this->handleView($this->view($this->data));
 	}
 
 	// 保存父列，返回当前列
-	public function saveColumn($column, $columns, $pageTemplate)
+	public function saveColumn($column)
 	{
-		$parentColumnId = $column['parentColumnId'];
-		if($parentColumnId != 0){
-			// 得到父列
-			$parentColumn = $columns[$parentColumnId]
-			$this->saveColumn($parentColumn, $columns);
-
+		if(is_object($column)){ return $column;}
+		if(!isset($column['id'])){
+			// 创建
 			$columnTemplate = new ColumnTemplate();
-			$columnTemplate->setPageTemplate($pageTemplate);
-			$columnTemplate->setPagePartId($column['pagePartId']);
-			$columnTemplate->setColumnPartId($column['columnPartId']);
-			$columnTemplate->setMinWidth($column['minWidth']);
-			$columnTemplate->setMaxWidth($column['maxWidth']);
-			$columnManager->update($columnTemplate);
-			// $columns[]
-
-
+			$columnTemplate->setPageTemplate($this->pageTemplate);
+			if(is_string($column['parentColumnId']) || $column['parentColumnId'] != 0){
+				$parentColumn = $this->saveColumn($this->columns[$column['parentColumnId']]);
+				$column['parentColumnId'] = $parentColumn->getId();
+				$columnTemplate->setParentColumn($parentColumn);
+			}
+		}else{
+			$columnTemplate = $this->container->get('chenxi_column_template_manager')->find($column['id']);
 		}
+		$columnTemplate->setPagePartId($column['pagePartId']);
+		$columnTemplate->setColumnPartId($column['columnPartId']);
+		$columnTemplate->setMinWidth($column['minWidth']);
+		$columnTemplate->setMaxWidth($column['maxWidth']);
+		$this->container->get('chenxi_column_template_manager')->update($columnTemplate);
+
+		// 更新数组
+		$id = isset($column['id']) ? $column['id'] : $column['cid'];
+		$this->columns[$id] = $columnTemplate;
+		$column['id'] = $columnTemplate->getId();
+		$this->data[] = $column;
+
+		return $columnTemplate;
 	}
 
 }
