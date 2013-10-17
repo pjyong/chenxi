@@ -12,7 +12,7 @@ define([
 
         // tagName: 'li',
         
-        
+        id: 'custom_template_page',
 
         template: function(data){
             return _.template(PageTemplateAddColumns, data, {variable: 'args'});

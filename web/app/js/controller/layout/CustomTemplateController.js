@@ -14,6 +14,7 @@ define([
     'view/layout/PageTemplateColumnView',
     'model/layout/TemplateColumnCollectionWrapper',
     'view/layout/TemplateColumnItemEditModalView',
+    'view/layout/template/TemplateBoxView'
 ], function(
     Marionette,
     app,
@@ -29,7 +30,8 @@ define([
     PageTemplatePartView,
     PageTemplateColumnView,
     TemplateColumnCollectionWrapper,
-    TemplateColumnItemEditModalView
+    TemplateColumnItemEditModalView,
+    TemplateBoxView
 ){
     function getColumnPartId(parentColumnId, pagePartId, columnCollection){
         // 获取新行索引
@@ -194,26 +196,39 @@ define([
                 pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, 2, columns));
                 pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, 3, columns));
 
-        $(window).scroll(function () { 
-        var vScrollPosition = $(document).scrollTop(); //retrieve the document scroll ToP position
-        var bottomPart = pageTemplateAddColumns.$("#wn").height();
-        
-            
-        pageTemplateAddColumns.$("#wn").stop().animate({"top": (($(window).height()-bottomPart+vScrollPosition- 50) + "px")}, "slow" );
-        
-        //$scrollingChildDiv.stop().animate({"marginTop": ($(window).scrollTop()) + "px"}, "slow");
-    });
+                that.fixPositionBoxesBar();
+                $(window).scroll(function(){that.fixPositionBoxesBar();});
 
+                that.pageTemplateAddColumns.$('.draggable-box').draggable({revert: true, helper: "clone"});
 
+                that.pageTemplateAddColumns.$('.droppable-boxes').droppable({
+                    greedy: true,
+                    activeClass: "template-box-hover",
+                    hoverClass: "template-box-active",
+                    drop: function( event, ui ) {
+                        var templateBoxView = new TemplateBoxView();
+                        templateBoxView.render();
+                        $(this).append(templateBoxView.$el);
+                    }
+                });
 
-
-
-
+                that.pageTemplateAddColumns.$('.template_column_body').sortable({revert: true});
+                that.pageTemplateAddColumns.$('.template_column_body').disableSelection();
                 that.endLoading();
             };
             that.startLoading();
             $.when(pageTemplateRepository.getPageTemplate(id), customTemplateRepository.getTemplateColumns(id)).then(callback);
             // alert(123);
+        },
+
+        fixPositionBoxesBar: function(){
+            var vScrollPosition = $(document).scrollTop(); //retrieve the document scroll ToP position
+            var bottomPart = this.pageTemplateAddColumns.$("#wn").height();
+            this.pageTemplateAddColumns.$("#wn").stop().animate({"top": (($(window).height()-bottomPart+vScrollPosition- 90) + "px")}, "slow" );
+        },
+
+        // 添加一个区块视图
+        addTemplateBox: function(){
 
         },
 
@@ -251,6 +266,7 @@ define([
             this.closeModal();
         },
 
+        // 保存页面模板
         saveTemplate: function(){
             var templateColumnCollectionWrapper = new TemplateColumnCollectionWrapper({columns: this.columnCollection});
             // 
@@ -288,13 +304,14 @@ define([
 
         },
 
-        // 添加行
+        // 顶级添加行
         editRow: function(options){
             //
             var templateColumnEditView = new TemplateColumnEditView(options);
             this.loadModal(templateColumnEditView);
             
         },
+
 
         saveColumn: function(options){
             // 添加到本地的
