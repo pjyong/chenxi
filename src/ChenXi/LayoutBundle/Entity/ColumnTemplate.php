@@ -22,10 +22,10 @@ class ColumnTemplate{
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PageTemplate", inversedBy="column_templates")
+     * @ORM\ManyToOne(targetEntity="PageTemplate", inversedBy="columnTemplates")
      * @ORM\JoinColumn(name="page_template_id", referencedColumnName="id")
      */
-    private $page_template;
+    private $pageTemplate;
 
     /**
      * @ORM\Column(name="page_part_id", type="integer")
@@ -50,7 +50,7 @@ class ColumnTemplate{
 
     /**
      * @ORM\OneToOne(targetEntity="ChenXi\ContentBundle\Entity\Text")
-     * @ORM\JoinColumn(name="styleId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="style_id", referencedColumnName="id")
      */
     private $style;
 
@@ -159,7 +159,7 @@ class ColumnTemplate{
      */
     public function getPageTemplate()
     {
-        return $this->page_template;
+        return $this->pageTemplate;
     }
 
     /**

@@ -30,9 +30,9 @@ class PageTemplate{
     private $contentType;
 
     /**
-     * @ORM\OneToMany(targetEntity="ColumnTemplate", mappedBy="page_template")
+     * @ORM\OneToMany(targetEntity="ColumnTemplate", mappedBy="pageTemplate")
      */
-    private $column_templates;
+    private $columnTemplates;
 
     /**
      * @ORM\ManyToOne(targetEntity="ChenXi\MainBundle\Entity\Website")
@@ -163,7 +163,7 @@ class PageTemplate{
      */
     public function getColumnTemplates()
     {
-        return $this->column_templates;
+        return $this->columnTemplates;
     }
 
     /**
