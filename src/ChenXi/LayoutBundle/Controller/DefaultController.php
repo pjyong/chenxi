@@ -3,11 +3,22 @@
 namespace ChenXi\LayoutBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+
+    public function newBoxTypeAction($label)
     {
-        return $this->render('LayoutBundle:Default:index.html.twig', array('name' => $name));
+
+    	$fullClass = 'ChenXi\LayoutBundle\BoxType\\' . $label;
+        if(!class_exists($fullClass))
+        {
+            return new Response('请将创建指定的区块类型');
+        }
+
+        $boxType = new $fullClass();
+        $boxType->persistToDB();
+
     }
 }

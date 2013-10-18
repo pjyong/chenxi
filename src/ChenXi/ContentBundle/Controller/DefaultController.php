@@ -16,12 +16,12 @@ class DefaultController extends Controller
     public function testAction()
     {
     	// get some article
-    	$articleManager = $this->container->get('chenxi_article_manager');
-		$article = $articleManager->find(2);
+  //   	$articleManager = $this->container->get('chenxi_article_manager');
+		// $article = $articleManager->find(2);
 
-		// print_r();
-
-		return new Response(var_export($article->getWebsite(), false));
+		// // print_r();
+        print '123';
+		return new Response(123);
 
     }
 }

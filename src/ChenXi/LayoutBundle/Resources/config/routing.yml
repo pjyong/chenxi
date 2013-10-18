@@ -3,15 +3,17 @@ layout_page_templates:
     resource: ChenXi\LayoutBundle\Controller\TemplatesController
     prefix: /api/layout
 
-
 layout_column_templates:
     type:     rest
     parent:   layout_page_templates
     resource: ChenXi\LayoutBundle\Controller\ColumnsController
 
-
-
 layout_columnswrapper:
     type:     rest
     resource: ChenXi\LayoutBundle\Controller\ColumnswrapperController
     prefix: /api/layout
+
+#此路由用来生成新的boxtype, label是boxType的标签
+layout_new_box_type:
+   path: /bin/boxtype/{label}
+   defaults: { _controller: ChenXiLayoutBundle:Default:newBoxType }

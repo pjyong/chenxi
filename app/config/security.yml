@@ -54,7 +54,7 @@ security:
     firewalls:
         # 所有的页面都必须要经过验证 
         main:
-            pattern: ^/login$|^/register|^/resetting
+            pattern: ^/login$|^/register|^/resetting|^/bin|^/test
             anonymous:    ~   
         secured_area:
             pattern: ^/
@@ -67,4 +67,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/test, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/bin, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }

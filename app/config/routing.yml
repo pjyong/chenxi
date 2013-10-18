@@ -1,7 +1,9 @@
-layout:
+chen_xi_layout:
     type: rest
-    resource: "@LayoutBundle/Resources/config/routing.yml"
+    resource: "@ChenXiLayoutBundle/Resources/config/routing.yml"
     prefix:   /
+
+
 
 chen_xi_tag:
     resource: "@ChenXiTagBundle/Resources/config/routing.yml"
