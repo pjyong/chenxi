@@ -7,11 +7,13 @@ define([
     'model/layout/TemplateColumnModel',
     'repository/layout/PageTemplateRepository',
     'repository/layout/TemplateColumnRepository',
+    'repository/layout/BoxTypeRepository',
     'view/layout/PageTemplateAddColumnsView',
     'collection/layout/TemplateColumnCollection',
     'view/layout/PageTemplateRowView',
     'view/layout/PageTemplatePartView',
     'view/layout/PageTemplateColumnView',
+    'view/layout/box/BoxTypeListView',
     'model/layout/TemplateColumnCollectionWrapper',
     'view/layout/TemplateColumnItemEditModalView',
     'view/layout/template/TemplateBoxView'
@@ -24,11 +26,13 @@ define([
     TemplateColumnModel,
     PageTemplateRepository,
     TemplateColumnRepository,
+    BoxTypeRepository,
     PageTemplateAddColumnsView,
     TemplateColumnCollection,
     PageTemplateRowView,
     PageTemplatePartView,
     PageTemplateColumnView,
+    BoxTypeListView,
     TemplateColumnCollectionWrapper,
     TemplateColumnItemEditModalView,
     TemplateBoxView
@@ -186,7 +190,8 @@ define([
             this.pageTemplateId = id;
             var pageTemplateRepository = new PageTemplateRepository();
             var customTemplateRepository = new TemplateColumnRepository();
-            var callback = function(pageTemplate, columns){
+            var boxTypeRepository = new BoxTypeRepository();
+            var callback = function(pageTemplate, columns, boxTypes){
                 var pageTemplateAddColumns = new PageTemplateAddColumnsView({model: pageTemplate});
                 that.contentRegion.show(pageTemplateAddColumns);
                 that.columnCollection = columns;
@@ -196,11 +201,13 @@ define([
                 pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, 2, columns));
                 pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, 3, columns));
 
+                // 插入工具栏
+                var boxTypeListView = new BoxTypeListView({boxTypes: boxTypes});
+                boxTypeListView.render();
+                that.pageTemplateAddColumns.$el.append(boxTypeListView);
                 that.fixPositionBoxesBar();
                 $(window).scroll(function(){that.fixPositionBoxesBar();});
-
                 that.pageTemplateAddColumns.$('.draggable-box').draggable({revert: true, helper: "clone"});
-
                 that.pageTemplateAddColumns.$('.droppable-boxes').droppable({
                     greedy: true,
                     activeClass: "template-box-hover",
@@ -217,7 +224,7 @@ define([
                 that.endLoading();
             };
             that.startLoading();
-            $.when(pageTemplateRepository.getPageTemplate(id), customTemplateRepository.getTemplateColumns(id)).then(callback);
+            $.when(pageTemplateRepository.getPageTemplate(id), customTemplateRepository.getTemplateColumns(id), boxTypeRepository.getBoxTypes()).then(callback);
             // alert(123);
         },
 

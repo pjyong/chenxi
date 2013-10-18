@@ -3,7 +3,7 @@
 namespace ChenXi\LayoutBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
-use ChenXi\LayoutBundle\Entity\ColumnTemplate;
+use ChenXi\LayoutBundle\Entity\BoxType;
 
 class BoxTypeManager
 {
@@ -20,15 +20,15 @@ class BoxTypeManager
 	}
 
 
-	public function delete(ColumnTemplate $columnTemplate)
+	public function delete(BoxType $boxType)
 	{
-		$this->em->remove($columnTemplate);
+		$this->em->remove($boxType);
 		$this->em->flush();
 	}
 
-	public function update(ColumnTemplate $columnTemplate, $andFlush = true)
+	public function update(BoxType $boxType, $andFlush = true)
 	{
-		$this->em->persist($columnTemplate);
+		$this->em->persist($boxType);
 		if($andFlush)
 		{
 			$this->em->flush();
@@ -52,7 +52,7 @@ class BoxTypeManager
 
     public function findBy(array $criteria)
     {
-    	$query = $this->em->createQuery('SELECT a FROM ChenXi\LayoutBundle\Entity\PageTemplate a JOIN a.website w WHERE w.id = :wid');
+    	$query = $this->em->createQuery('SELECT a FROM ChenXi\LayoutBundle\Entity\BoxType a WHERE w.id = :wid');
     	$query->setParameter(':wid', $criteria['websiteId']);
     	return $query->getResult();
     }

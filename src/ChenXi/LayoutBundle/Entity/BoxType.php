@@ -28,6 +28,11 @@ class BoxType{
     private $chineseLabel;
 
     /**
+     * @ORM\Column(name="category_label", type="string", length=50)
+     */
+    private $categoryLabel;
+
+    /**
      * @ORM\Column(name="is_cached", type="boolean", options={"default" = false})
      */
     private $isCached = false;
@@ -155,5 +160,28 @@ class BoxType{
     public function getBoxTypeProperties()
     {
         return $this->boxTypeProperties;
+    }
+
+    /**
+     * Set categoryLabel
+     *
+     * @param string $categoryLabel
+     * @return BoxType
+     */
+    public function setCategoryLabel($categoryLabel)
+    {
+        $this->categoryLabel = $categoryLabel;
+    
+        return $this;
+    }
+
+    /**
+     * Get categoryLabel
+     *
+     * @return string 
+     */
+    public function getCategoryLabel()
+    {
+        return $this->categoryLabel;
     }
 }

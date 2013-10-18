@@ -8,6 +8,11 @@ layout_column_templates:
     parent:   layout_page_templates
     resource: ChenXi\LayoutBundle\Controller\ColumnsController
 
+layout_box_types:
+    type:     rest
+    resource: ChenXi\LayoutBundle\Controller\BoxtypesController
+    prefix: /api/layout
+
 layout_columnswrapper:
     type:     rest
     resource: ChenXi\LayoutBundle\Controller\ColumnswrapperController

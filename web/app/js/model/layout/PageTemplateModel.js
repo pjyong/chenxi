@@ -1,9 +1,7 @@
 define([
     'marionette',
-    'collection/layout/TemplateColumnCollection',
 ], function(
-    Marionette,
-    TemplateColumnCollection
+    Marionette
 ){
     var pageTemplateModel = Backbone.Model.extend({
         defaults: {

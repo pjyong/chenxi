@@ -17,8 +17,10 @@ class DefaultController extends Controller
             return new Response('请将创建指定的区块类型');
         }
 
-        $boxType = new $fullClass();
-        $boxType->persistToDB();
+        $boxType = new $fullClass($this->container->get('chenxi_box_type_manager'), $this->container->get('chenxi_box_type_property_manager'));
+        $boxTypeLabel = $boxType->persistToDB()->getChineseLabel();
+
+        return new Response("***$boxTypeLabel区块***已经创建成功");
 
     }
 }
