@@ -1,7 +1,9 @@
 define([
     'marionette',
+    'collection/layout/BoxTypePropertyCollection'
 ], function(
-    Marionette
+    Marionette,
+    BoxTypePropertyCollection
 ){
     return Backbone.Model.extend({
 
@@ -10,8 +12,17 @@ define([
             chineseLabel: '',
             categoryLabel: '',
             isCached: false,
+            formStr: '',
         },
 
+        parse: function(response, options){
+            //
+            if(!_.isEmpty(response.boxTypeProperties)){
+                this.set('boxTypeProperties', new BoxTypePropertyCollection(response.boxTypeProperties));
+            }
+            delete response.boxTypeProperties;
+            return response;
+        },
 
         initialize: function(){
         },

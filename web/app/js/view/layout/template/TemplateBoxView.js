@@ -16,19 +16,24 @@ define([
         },
 
         events: {
+            'click .template_box_setting': 'editBoxSetting'
         },
 
         initialize: function(){
-            // _.bindAll(this, 'deleteArticle');
+            _.bindAll(this, 'editBoxSetting');
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
             this.model = this.options.model;
+            console.log(this.model);
         },
 
         render: function(){
             console.log(this.model.toJSON());
             this.$el.html(this.template(this.model.toJSON()));
         },
-
+        
+        editBoxSetting: function(){
+            vent.trigger('CustomTemplateController:editBoxSetting', {});
+        }
     
 
         // onClose: function(){

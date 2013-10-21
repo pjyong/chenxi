@@ -38,7 +38,7 @@ class BoxType{
     private $isCached = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="BoxTypeProperty", mappedBy="boxType")
+     * @ORM\OneToMany(targetEntity="BoxTypeProperty", mappedBy="boxType", cascade={"persist", "remove"})
      */
     private $boxTypeProperties;
 

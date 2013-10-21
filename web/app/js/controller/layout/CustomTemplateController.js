@@ -171,12 +171,13 @@ define([
     return AppController.extend({
 
         initialize: function(){
-            _.bindAll(this, 'editRow', 'submitRow', 'saveTemplate', 'addColumnToRow', 'saveColumn');
+            _.bindAll(this, 'editRow', 'submitRow', 'saveTemplate', 'addColumnToRow', 'saveColumn', 'editBoxSetting');
             vent.on('CustomTemplateController:editRow', this.editRow);
             vent.on('CustomTemplateController:submitRow', this.submitRow);
             vent.on('CustomTemplateController:saveTemplate', this.saveTemplate);
             vent.on('CustomTemplateController:addColumnToRow', this.addColumnToRow);
             vent.on('CustomTemplateController:saveColumn', this.saveColumn);
+            vent.on('CustomTemplateController:editBoxSetting', this.editBoxSetting);
 
             // vent.on('pageTemplateController:saveColumn', this.saveColumn);
         },
@@ -351,11 +352,21 @@ define([
             }
         },
 
+        // 编辑模板区块设置
+        editBoxSetting: function(options){
+            //
+            // var templateColumnEditView = new TemplateColumnEditView(options);
+            // this.loadModal(templateColumnEditView);
+            alert(123);
+            
+        },
+
         onClose: function(){
             vent.off('CustomTemplateController:editRow');
             vent.off('CustomTemplateController:submitRow');
             vent.off('CustomTemplateController:saveTemplate');
             vent.off('CustomTemplateController:saveColumn');
+            vent.off('CustomTemplateController:editBoxSetting');
         }
 
 

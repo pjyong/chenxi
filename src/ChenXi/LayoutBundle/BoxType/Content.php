@@ -18,7 +18,10 @@ class Content implements BoxTypeInterface
 		$this->boxTypeManager = $boxTypeManager;
 		$this->boxTypePropertyManager = $boxTypePropertyManager;
 	}
-	
+	public function displayForm(BoxType $boxType)
+	{
+		return '';
+	}
 
 	public function persistToDB()
 	{

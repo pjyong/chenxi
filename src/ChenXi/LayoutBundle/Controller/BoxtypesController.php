@@ -7,7 +7,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 
 use ChenXi\LayoutBundle\Entity\PageTemplate;
 use ChenXi\LayoutBundle\Form\Type\PageTemplateType;
-
+use Symfony\Component\HttpFoundation\Response;
 // PageTemplate 资源
 
 
@@ -84,15 +84,21 @@ class BoxtypesController extends FOSRestController
 			$boxType = array('error' => 1);
 		}
 		$temp = array();
-			$temp['label'] = $boxType->getLabel();
-			$temp['categoryLabel'] = $boxType->getCategoryLabel();
-			$temp['chineseLabel'] = $boxType->getChineseLabel();
-			$temp['id'] = $boxType->getId();
-			$temp['isCached'] = $boxType->getIsCached();
+		$temp['label'] = $boxType->getLabel();
+		$temp['categoryLabel'] = $boxType->getCategoryLabel();
+		$temp['chineseLabel'] = $boxType->getChineseLabel();
+		$temp['id'] = $boxType->getId();
+		$temp['isCached'] = $boxType->getIsCached();
+
+		// 得到该boxtype
+		$fullClass = 'ChenXi\LayoutBundle\BoxType\\' . $temp['label'];
+		$boxTypeTransform = new $fullClass($this->container->get('chenxi_box_type_manager'), $this->container->get('chenxi_box_type_property_manager'));
+        $temp['formStr'] = $boxTypeTransform->displayForm($boxType);
+			// print_r($temp);
 
 		// $data = $this->getData($boxType);
 		
-
+        // return new Response($temp['formStr']);
 		return $this->handleView($this->view($temp));
 	}
 
