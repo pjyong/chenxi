@@ -1,32 +1,24 @@
 <div class="tabbable tabs-below">
-
 	<div class="tab-content" style="background-color:white;">
-												<div id="content" class="tab-pane in active">
-													<span class="draggable-box">内容</span>
-												</div>
-
-												<div id="blog" class="tab-pane">
-													<span class="draggable-box">最近博文</span>
-												</div>
-
-												<div id="widget" class="tab-pane">
-													<span class="draggable-box">天气</span>
-													
-												</div>
-											</div>
-											<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
-												<li class="active">
-													<a data-toggle="tab" href="#content">内容</a>
-												</li>
-
-												<li>
-													<a data-toggle="tab" href="#blog">博客</a>
-												</li>
-
-												<li>
-													<a data-toggle="tab" href="#widget">挂件</a>
-												</li>
-											</ul>
-
-											
-										</div>
+		<% var i = 0; %>
+		<% for(var key in args.categoryArr){ %>
+			<div id="<%=key%>" class="tab-pane in <%=(i == 0 ? 'active' : '')%>">
+				<% for(var key2 in args.categoryArr[key].boxTypes){ %>
+				<span class="draggable-box" boxtypeid='<%=args.categoryArr[key].boxTypes[key2].id%>'><%=args.categoryArr[key].boxTypes[key2].chineseLabel%></span>
+				<% } %>
+			</div>
+		<% i++ %>
+		<% } %>
+		
+	</div>
+		<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+		<% var i = 0; %>
+		<% for(var key in args.categoryArr){ %>
+		<%console.log(key);%>
+			<li class="<%=(i == 0 ? 'active' : '')%>">
+				<a data-toggle="tab" href="#<%=key%>"><%=args.categoryArr[key].label%></a>
+			</li>
+		<% i++ %>
+		<% } %>
+		</ul>						
+</div>

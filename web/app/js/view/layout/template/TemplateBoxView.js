@@ -21,10 +21,12 @@ define([
         initialize: function(){
             // _.bindAll(this, 'deleteArticle');
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
+            this.model = this.options.model;
         },
 
         render: function(){
-            this.$el.html(this.template({}));
+            console.log(this.model.toJSON());
+            this.$el.html(this.template(this.model.toJSON()));
         },
 
     

@@ -22,10 +22,32 @@ define([
         },
 
         initialize: function(){
+            var boxTypes = this.options.boxTypes;
+
+            this.categoryArr = {};
+
+            this.categoryArr.content = {};
+            this.categoryArr.content.label = '内容';
+            this.categoryArr.content.boxTypes = [];
+
+            this.categoryArr.blog = {};
+            this.categoryArr.blog.label = '博客';
+            this.categoryArr.blog.boxTypes = [];
+
+            this.categoryArr.widget = {};
+            this.categoryArr.widget.label = '挂件';
+            this.categoryArr.widget.boxTypes = [];
+
+            var that = this;
+            boxTypes.each(function(model){
+                console.log(model);
+                that.categoryArr[model.get('categoryLabel')].boxTypes.push(model.toJSON());
+            });
+            console.log(this.categoryArr);
         },
 
         render: function(){
-            this.$el.html(this.template({}));
+            this.$el.html(this.template({categoryArr: this.categoryArr}));
         },
     });
 });

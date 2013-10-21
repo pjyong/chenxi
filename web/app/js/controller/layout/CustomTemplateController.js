@@ -204,7 +204,7 @@ define([
                 // 插入工具栏
                 var boxTypeListView = new BoxTypeListView({boxTypes: boxTypes});
                 boxTypeListView.render();
-                that.pageTemplateAddColumns.$el.append(boxTypeListView);
+                that.pageTemplateAddColumns.$el.append(boxTypeListView.$el);
                 that.fixPositionBoxesBar();
                 $(window).scroll(function(){that.fixPositionBoxesBar();});
                 that.pageTemplateAddColumns.$('.draggable-box').draggable({revert: true, helper: "clone"});
@@ -213,9 +213,17 @@ define([
                     activeClass: "template-box-hover",
                     hoverClass: "template-box-active",
                     drop: function( event, ui ) {
-                        var templateBoxView = new TemplateBoxView();
-                        templateBoxView.render();
-                        $(this).append(templateBoxView.$el);
+                        console.log(ui);
+                        // 生成templateBox视图
+                        var boxTypeId = ui.draggable.attr('boxtypeid');
+
+                        var currentColumnUI = $(this);
+                        var callback2 = function(boxType){
+                            var templateBoxView = new TemplateBoxView({model: boxType});
+                            templateBoxView.render();
+                            currentColumnUI.append(templateBoxView.$el);
+                        };
+                        $.when(boxTypeRepository.getBoxType(boxTypeId)).then(callback2);
                     }
                 });
 

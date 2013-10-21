@@ -17,9 +17,23 @@ class BoxtypesController extends FOSRestController
 	public function getBoxtypesAction()
 	{
 
-		$pageBoxtypes = $this->container->get('chenxi_box_type_manager')->findAll();
+		$boxTypes = $this->container->get('chenxi_box_type_manager')->findAll();
 
-		return $this->handleView($this->view($pageBoxtypes));
+		$data = array();
+
+		foreach($boxTypes as $boxType){
+			$temp = array();
+			$temp['label'] = $boxType->getLabel();
+			$temp['categoryLabel'] = $boxType->getCategoryLabel();
+			$temp['chineseLabel'] = $boxType->getChineseLabel();
+			$temp['id'] = $boxType->getId();
+			$temp['isCached'] = $boxType->getIsCached();
+
+			$data[] = $temp;
+		}
+
+
+		return $this->handleView($this->view($data));
 	}
 
 	// 创建
@@ -58,22 +72,28 @@ class BoxtypesController extends FOSRestController
 	}
 
 	// 得到
-	public function getTemplateAction($id)
+	public function getBoxtypeAction($id)
 	{
-		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
+		$boxType = $this->container->get('chenxi_box_type_manager')->find($id);
 
 
 
 		
-		if(!$pageTemplate)
+		if(!$boxType)
 		{
-			$pageTemplate = array('error' => 1);
+			$boxType = array('error' => 1);
 		}
+		$temp = array();
+			$temp['label'] = $boxType->getLabel();
+			$temp['categoryLabel'] = $boxType->getCategoryLabel();
+			$temp['chineseLabel'] = $boxType->getChineseLabel();
+			$temp['id'] = $boxType->getId();
+			$temp['isCached'] = $boxType->getIsCached();
 
-		$data = $this->getData($pageTemplate);
+		// $data = $this->getData($boxType);
 		
 
-		return $this->handleView($this->view($data));
+		return $this->handleView($this->view($temp));
 	}
 
 	public function process(PageTemplate $pageTemplate, $new = false)
