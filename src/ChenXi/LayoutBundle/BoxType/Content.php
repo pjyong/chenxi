@@ -22,7 +22,10 @@ class Content implements BoxTypeInterface
 	{
 		return '';
 	}
-
+	public function displayBox()
+	{
+		
+	}
 	public function persistToDB()
 	{
 		$boxType = $this->getBoxType();

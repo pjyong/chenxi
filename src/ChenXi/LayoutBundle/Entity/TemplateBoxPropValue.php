@@ -19,11 +19,13 @@ class TemplateBoxPropValue{
 
     /**
      * @ORM\OneToOne(targetEntity="TemplateBox")
+     * @ORM\JoinColumn(name="template_box_id", referencedColumnName="id")
      */
     private $templateBox;
 
     /**
      * @ORM\OneToOne(targetEntity="BoxTypeProperty")
+     * @ORM\JoinColumn(name="box_type_property_id", referencedColumnName="id")
      */
     private $boxTypeProperty;
 

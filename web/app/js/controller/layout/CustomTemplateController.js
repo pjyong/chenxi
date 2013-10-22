@@ -3,39 +3,53 @@ define([
     'app',
     'vent',
     'controller/AppController',
-    'view/layout/TemplateColumnEditView',
+
+    'model/layout/TemplateBoxModel',
     'model/layout/TemplateColumnModel',
+    'model/layout/TemplateColumnCollectionWrapper',
+    
+    'collection/layout/TemplateColumnCollection',
+
     'repository/layout/PageTemplateRepository',
     'repository/layout/TemplateColumnRepository',
+    'repository/layout/TemplateBoxRepository',
     'repository/layout/BoxTypeRepository',
-    'view/layout/PageTemplateAddColumnsView',
-    'collection/layout/TemplateColumnCollection',
+    
+    'view/layout/TemplateColumnEditView',
     'view/layout/PageTemplateRowView',
     'view/layout/PageTemplatePartView',
     'view/layout/PageTemplateColumnView',
     'view/layout/box/BoxTypeListView',
-    'model/layout/TemplateColumnCollectionWrapper',
+    'view/layout/template/TemplateBoxView',
+    'view/layout/PageTemplateAddColumnsView',
+    'view/layout/template/TemplateBoxSettingView',
     'view/layout/TemplateColumnItemEditModalView',
-    'view/layout/template/TemplateBoxView'
 ], function(
     Marionette,
     app,
     vent,
     AppController,
-    TemplateColumnEditView,
+
+    TemplateBoxModel,
     TemplateColumnModel,
+    TemplateColumnCollectionWrapper,
+
+    TemplateColumnCollection,
+
     PageTemplateRepository,
     TemplateColumnRepository,
+    TemplateBoxRepository,
     BoxTypeRepository,
-    PageTemplateAddColumnsView,
-    TemplateColumnCollection,
+
+    TemplateColumnEditView,
     PageTemplateRowView,
     PageTemplatePartView,
     PageTemplateColumnView,
     BoxTypeListView,
-    TemplateColumnCollectionWrapper,
-    TemplateColumnItemEditModalView,
-    TemplateBoxView
+    TemplateBoxView,
+    PageTemplateAddColumnsView,
+    TemplateBoxSettingView,
+    TemplateColumnItemEditModalView
 ){
     function getColumnPartId(parentColumnId, pagePartId, columnCollection){
         // 获取新行索引
@@ -192,6 +206,7 @@ define([
             var pageTemplateRepository = new PageTemplateRepository();
             var customTemplateRepository = new TemplateColumnRepository();
             var boxTypeRepository = new BoxTypeRepository();
+            var templateBoxRepository = new TemplateBoxRepository();
             var callback = function(pageTemplate, columns, boxTypes){
                 var pageTemplateAddColumns = new PageTemplateAddColumnsView({model: pageTemplate});
                 that.contentRegion.show(pageTemplateAddColumns);
@@ -217,10 +232,12 @@ define([
                         console.log(ui);
                         // 生成templateBox视图
                         var boxTypeId = ui.draggable.attr('boxtypeid');
-
+                        var templateBox = new TemplateBoxModel();
                         var currentColumnUI = $(this);
+
                         var callback2 = function(boxType){
-                            var templateBoxView = new TemplateBoxView({model: boxType});
+                            templateBox.set({boxType: boxType});
+                            var templateBoxView = new TemplateBoxView({model: templateBox});
                             templateBoxView.render();
                             currentColumnUI.append(templateBoxView.$el);
                         };
@@ -355,9 +372,9 @@ define([
         // 编辑模板区块设置
         editBoxSetting: function(options){
             //
-            // var templateColumnEditView = new TemplateColumnEditView(options);
-            // this.loadModal(templateColumnEditView);
-            alert(123);
+            var templateBox = options.templateBox;
+            var templateBoxSettingView = new TemplateBoxSettingView({model: templateBox});
+            this.loadModal(templateBoxSettingView);
             
         },
 

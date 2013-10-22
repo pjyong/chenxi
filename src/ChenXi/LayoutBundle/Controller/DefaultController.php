@@ -20,12 +20,12 @@ class DefaultController extends Controller
         $boxType = new $fullClass($this->container->get('chenxi_box_type_manager'), $this->container->get('chenxi_box_type_property_manager'));
         
         // 生成boxType
-        // $boxTypeLabel = $boxType->persistToDB()->getChineseLabel();
-        // return new Response("***$boxTypeLabel区块***已经创建成功");
+        $boxTypeLabel = $boxType->persistToDB()->getChineseLabel();
+        return new Response("***$boxTypeLabel区块***已经创建成功");
 
         // 测试
-        print $boxType->displayForm($boxType->getBoxType());
-        return new Response('');
+        // print $boxType->displayForm($boxType->getBoxType());
+        // return new Response('');
 
     }
 }
