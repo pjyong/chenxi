@@ -29,6 +29,11 @@ class BoxTypeProperty{
     private $boxType;
 
     /**
+     * @ORM\OneToMany(targetEntity="TemplateBoxPropValue", mappedBy="boxTypeProperty", cascade={"persist", "remove"})
+     */
+    private $templateBoxPropValues;
+
+    /**
      * @ORM\Column(name="is_required", type="boolean", options={"default" = false})
      */
     private $isRequired = false;
@@ -110,5 +115,45 @@ class BoxTypeProperty{
     public function getBoxType()
     {
         return $this->boxType;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->templateBoxPropValues = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add templateBoxPropValues
+     *
+     * @param \ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues
+     * @return BoxTypeProperty
+     */
+    public function addTemplateBoxPropValue(\ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues)
+    {
+        $this->templateBoxPropValues[] = $templateBoxPropValues;
+    
+        return $this;
+    }
+
+    /**
+     * Remove templateBoxPropValues
+     *
+     * @param \ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues
+     */
+    public function removeTemplateBoxPropValue(\ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues)
+    {
+        $this->templateBoxPropValues->removeElement($templateBoxPropValues);
+    }
+
+    /**
+     * Get templateBoxPropValues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTemplateBoxPropValues()
+    {
+        return $this->templateBoxPropValues;
     }
 }

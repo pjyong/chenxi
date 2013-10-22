@@ -18,12 +18,14 @@ class TemplateBoxPropValue{
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="TemplateBox")
+     * @ORM\ManyToOne(targetEntity="TemplateBox", inversedBy="templateBoxPropValues")
+     * @ORM\JoinColumn(name="template_box_id", referencedColumnName="id")
      */
     private $templateBox;
 
     /**
-     * @ORM\OneToOne(targetEntity="BoxTypeProperty")
+     * @ORM\ManyToOne(targetEntity="BoxTypeProperty", inversedBy="templateBoxPropValues")
+     * @ORM\JoinColumn(name="box_type_property_id", referencedColumnName="id")
      */
     private $boxTypeProperty;
 

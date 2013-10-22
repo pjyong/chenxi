@@ -34,6 +34,11 @@ class TemplateBox{
     private $style;
 
     /**
+     * @ORM\OneToMany(targetEntity="TemplateBoxPropValue", mappedBy="templateBox", cascade={"persist", "remove"})
+     */
+    private $templateBoxPropValues;
+
+    /**
      * @ORM\Column(name="can_remove", type="boolean", options={"default" = true})
      */
     private $canRemove;
@@ -42,6 +47,12 @@ class TemplateBox{
      * @ORM\Column(name="can_modify", type="boolean", options={"default" = true})
      */
     private $canModify;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ColumnTemplate", inversedBy="templateBoxes")
+     * @ORM\JoinColumn(name="column_template_id", referencedColumnName="id")
+     */
+    private $columnTemplate;
 
 
     /**
@@ -167,5 +178,68 @@ class TemplateBox{
     public function getStyle()
     {
         return $this->style;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->templateBoxPropValues = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add templateBoxPropValues
+     *
+     * @param \ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues
+     * @return TemplateBox
+     */
+    public function addTemplateBoxPropValue(\ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues)
+    {
+        $this->templateBoxPropValues[] = $templateBoxPropValues;
+    
+        return $this;
+    }
+
+    /**
+     * Remove templateBoxPropValues
+     *
+     * @param \ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues
+     */
+    public function removeTemplateBoxPropValue(\ChenXi\LayoutBundle\Entity\TemplateBoxPropValue $templateBoxPropValues)
+    {
+        $this->templateBoxPropValues->removeElement($templateBoxPropValues);
+    }
+
+    /**
+     * Get templateBoxPropValues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTemplateBoxPropValues()
+    {
+        return $this->templateBoxPropValues;
+    }
+
+    /**
+     * Set columnTemplate
+     *
+     * @param \ChenXi\LayoutBundle\Entity\ColumnTemplate $columnTemplate
+     * @return TemplateBox
+     */
+    public function setColumnTemplate(\ChenXi\LayoutBundle\Entity\ColumnTemplate $columnTemplate = null)
+    {
+        $this->columnTemplate = $columnTemplate;
+    
+        return $this;
+    }
+
+    /**
+     * Get columnTemplate
+     *
+     * @return \ChenXi\LayoutBundle\Entity\ColumnTemplate 
+     */
+    public function getColumnTemplate()
+    {
+        return $this->columnTemplate;
     }
 }

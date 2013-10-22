@@ -6,6 +6,9 @@ use ChenXi\LayoutBundle\Entity\BoxTypeManager;
 use ChenXi\LayoutBundle\Entity\BoxTypeProperty;
 use ChenXi\LayoutBundle\Entity\BoxTypePropertyManager;
 
+use ChenXi\LayoutBundle\Entity\TemplateBox;
+use Symfony\Component\HttpFoundation\Request;
+
 class BlogRecentPost implements BoxTypeInterface
 {
 
@@ -19,9 +22,10 @@ class BlogRecentPost implements BoxTypeInterface
 		$this->boxTypePropertyManager = $boxTypePropertyManager;
 	}
 
-	public function displayForm(BoxType $boxType)
+	public function displayTemplateBoxForm(TemplateBox $templateBox)
 	{
 		$html = '';
+		$boxType = $templateBox->getBoxType();
 		$allProperties = $boxType->getBoxTypeProperties();
 		foreach($allProperties as $property)
 		{
@@ -33,6 +37,11 @@ class BlogRecentPost implements BoxTypeInterface
 
 		return $html;
 	}
+
+	public function handleTemplateBoxForm(Request $request)
+	{
+
+	} 
 
 	public function displayBox()
 	{

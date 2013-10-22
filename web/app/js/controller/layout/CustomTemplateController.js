@@ -308,6 +308,7 @@ define([
             templateColumnCollectionWrapper.on('sync', function(model, response){
                 // 同步collection
                 that.columnCollection = new TemplateColumnCollection(response);
+                
                 that.endLoading();
                 $.gritter.add({
                     // (string | mandatory) the heading of the notification

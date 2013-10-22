@@ -5,6 +5,8 @@ use ChenXi\LayoutBundle\Entity\BoxType;
 use ChenXi\LayoutBundle\Entity\BoxTypeManager;
 use ChenXi\LayoutBundle\Entity\BoxTypeProperty;
 use ChenXi\LayoutBundle\Entity\BoxTypePropertyManager;
+use ChenXi\LayoutBundle\Entity\TemplateBox;
+use Symfony\Component\HttpFoundation\Request;
 
 class Content implements BoxTypeInterface
 {
@@ -18,10 +20,17 @@ class Content implements BoxTypeInterface
 		$this->boxTypeManager = $boxTypeManager;
 		$this->boxTypePropertyManager = $boxTypePropertyManager;
 	}
-	public function displayForm(BoxType $boxType)
+	
+	public function displayTemplateBoxForm(TemplateBox $templateBox)
 	{
 		return '';
 	}
+
+	public function handleTemplateBoxForm(Request $request)
+	{
+
+	}
+
 	public function displayBox()
 	{
 		

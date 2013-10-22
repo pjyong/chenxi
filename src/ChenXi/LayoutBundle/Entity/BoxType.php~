@@ -38,7 +38,7 @@ class BoxType{
     private $isCached = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="BoxTypeProperty", mappedBy="boxType")
+     * @ORM\OneToMany(targetEntity="BoxTypeProperty", mappedBy="boxType", cascade={"persist", "remove"})
      */
     private $boxTypeProperties;
 
@@ -160,5 +160,28 @@ class BoxType{
     public function getBoxTypeProperties()
     {
         return $this->boxTypeProperties;
+    }
+
+    /**
+     * Set categoryLabel
+     *
+     * @param string $categoryLabel
+     * @return BoxType
+     */
+    public function setCategoryLabel($categoryLabel)
+    {
+        $this->categoryLabel = $categoryLabel;
+    
+        return $this;
+    }
+
+    /**
+     * Get categoryLabel
+     *
+     * @return string 
+     */
+    public function getCategoryLabel()
+    {
+        return $this->categoryLabel;
     }
 }

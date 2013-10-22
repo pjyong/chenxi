@@ -34,6 +34,11 @@ class TemplateBox{
     private $style;
 
     /**
+     * @ORM\OneToMany(targetEntity="TemplateBoxPropValue", mappedBy="templateBox", cascade={"persist", "remove"})
+     */
+    private $templateBoxPropValues;
+
+    /**
      * @ORM\Column(name="can_remove", type="boolean", options={"default" = true})
      */
     private $canRemove;
@@ -42,6 +47,12 @@ class TemplateBox{
      * @ORM\Column(name="can_modify", type="boolean", options={"default" = true})
      */
     private $canModify;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ColumnTemplate", inversedBy="templateBoxes")
+     * @ORM\JoinColumn(name="column_template_id", referencedColumnName="id")
+     */
+    private $columnTemplate;
 
 
     /**

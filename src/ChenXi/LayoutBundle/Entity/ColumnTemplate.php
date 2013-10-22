@@ -43,7 +43,7 @@ class ColumnTemplate{
     private $childrenColumns;
     
     /**
-     * @ORM\ManyToOne(targetEntity="ColumnTemplate", inversedBy="")
+     * @ORM\ManyToOne(targetEntity="ColumnTemplate")
      * @ORM\JoinColumn(name="parent_column_id", referencedColumnName="id")
      */
     private $parentColumn;
@@ -74,6 +74,10 @@ class ColumnTemplate{
      */
     private $maxWidth;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TemplateBox", mappedBy="columnTemplate")
+     */
+    private $templateBoxes;
     
     /**
      * Constructor
@@ -331,5 +335,38 @@ class ColumnTemplate{
     public function getStyle()
     {
         return $this->style;
+    }
+
+    /**
+     * Add templateBoxes
+     *
+     * @param \ChenXi\LayoutBundle\Entity\TemplateBox $templateBoxes
+     * @return ColumnTemplate
+     */
+    public function addTemplateBoxe(\ChenXi\LayoutBundle\Entity\TemplateBox $templateBoxes)
+    {
+        $this->templateBoxes[] = $templateBoxes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove templateBoxes
+     *
+     * @param \ChenXi\LayoutBundle\Entity\TemplateBox $templateBoxes
+     */
+    public function removeTemplateBoxe(\ChenXi\LayoutBundle\Entity\TemplateBox $templateBoxes)
+    {
+        $this->templateBoxes->removeElement($templateBoxes);
+    }
+
+    /**
+     * Get templateBoxes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTemplateBoxes()
+    {
+        return $this->templateBoxes;
     }
 }

@@ -43,7 +43,7 @@ class ColumnTemplate{
     private $childrenColumns;
     
     /**
-     * @ORM\ManyToOne(targetEntity="ColumnTemplate", inversedBy="")
+     * @ORM\ManyToOne(targetEntity="ColumnTemplate")
      * @ORM\JoinColumn(name="parent_column_id", referencedColumnName="id")
      */
     private $parentColumn;
@@ -74,6 +74,10 @@ class ColumnTemplate{
      */
     private $maxWidth;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TemplateBox", mappedBy="columnTemplate")
+     */
+    private $templateBoxes;
     
     /**
      * Constructor
