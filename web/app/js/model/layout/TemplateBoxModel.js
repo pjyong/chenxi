@@ -9,6 +9,7 @@ define([
             positionId: '',
             cssCode: '',
             boxTypeId: '',
+            columnTemplateId: ''
         },
 
         initialize: function(){

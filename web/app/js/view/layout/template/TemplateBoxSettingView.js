@@ -15,13 +15,13 @@ define([
         },
 
         events: {
-            // 'click .template_box_setting': 'editBoxSetting'
+            'click .template_box_save': 'saveBoxSetting'
         },
 
         className: 'modal-dialog',
 
         initialize: function(){
-            // _.bindAll(this, 'editBoxSetting');
+            _.bindAll(this, 'saveBoxSetting');
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
             this.model = this.options.model;
 
@@ -35,10 +35,9 @@ define([
             this.$el.html(this.template(data));
         },
         
-        // editBoxSetting: function(e){
-        //     e.preventDefault();
-        //     vent.trigger('CustomTemplateController:editBoxSetting', {templateBox: this.model});
-        // }
+        saveBoxSetting: function(){
+
+        }
     
 
         // onClose: function(){

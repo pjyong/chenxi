@@ -199,16 +199,22 @@ define([
                             class_name: 'gritter-warning',
                         });
                     }else{
+                        // 获得列的ID
+                        var templateColumnId = ui.droppable.attr('templatecolumnid');
                         // 生成templateBox视图
                         var boxTypeId = ui.draggable.attr('boxtypeid');
                         var templateBox = new TemplateBoxModel();
+                        templateBox.set('columnTemplateId', templateColumnId);
                         var currentColumnUI = $(this);
                         var boxTypeRepository = new BoxTypeRepository();
                         var callback2 = function(boxType){
+
                             templateBox.set({boxType: boxType});
                             var templateBoxView = new TemplateBoxView({model: templateBox});
                             templateBoxView.render();
                             currentColumnUI.append(templateBoxView.$el);
+                            // 弹出区块配置
+                            that.editBoxSetting({templateBox: templateBox});
                         };
                         $.when(boxTypeRepository.getBoxType(boxTypeId)).then(callback2);
                     }

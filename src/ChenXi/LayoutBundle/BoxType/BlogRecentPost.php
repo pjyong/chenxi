@@ -38,7 +38,7 @@ class BlogRecentPost implements BoxTypeInterface
 		return $html;
 	}
 
-	public function handleTemplateBoxForm(Request $request)
+	public function handleTemplateBoxForm(TemplateBox $templateBox, Request $request)
 	{
 
 	} 

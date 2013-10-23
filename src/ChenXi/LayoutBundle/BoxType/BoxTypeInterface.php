@@ -10,7 +10,7 @@ Interface BoxTypeInterface
 	public function displayTemplateBoxForm(TemplateBox $templateBox);
 
 	// 处理模板区块表单
-	public function handleTemplateBoxForm(Request $request);
+	public function handleTemplateBoxForm(TemplateBox $templateBox, Request $request);
 
 	// // 显示新创建的网站区块配置界面
 	// public function displayWebsiteBoxForm();

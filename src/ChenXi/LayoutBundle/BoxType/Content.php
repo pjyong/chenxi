@@ -26,7 +26,7 @@ class Content implements BoxTypeInterface
 		return '';
 	}
 
-	public function handleTemplateBoxForm(Request $request)
+	public function handleTemplateBoxForm(TemplateBox $templateBox, Request $request)
 	{
 
 	}
