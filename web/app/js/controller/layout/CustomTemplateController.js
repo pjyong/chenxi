@@ -117,70 +117,8 @@ define([
                 }
             }
         }
-        // console.log('exit');
         return pageTemplateColumnView.$el;
     }
-
-    // var columns = [
-    //     {
-    //         "id": "1",
-    //         "pageTemplateId": "2",
-    //         "pagePartId": "2",
-    //         "columnPartId": "1",
-    //         "parentColumnId": 0,
-    //         "children": [
-    //             {
-    //                 "id": "3",
-    //                 "pageTemplateId": "2",
-    //                 "pagePartId": "2",
-    //                 "columnPartId": "1",
-    //                 "parentColumnId": 0,
-    //                 "children": [
-                        
-    //                 ]
-    //             },
-    //             {
-    //                 "id": "4",
-    //                 "pageTemplateId": "2",
-    //                 "pagePartId": "2",
-    //                 "columnPartId": "2",
-    //                 "parentColumnId": 0,
-    //                 "children": [
-                        
-    //                 ]
-    //             },
-    //         ]
-    //     },
-    //     {
-    //         "id": "2",
-    //         "pageTemplateId": "2",
-    //         "pagePartId": "2",
-    //         "columnPartId": "1",
-    //         "parentColumnId": "0",
-    //         "children": [
-    //             {
-    //                 "id": "5",
-    //                 "pageTemplateId": "2",
-    //                 "pagePartId": "2",
-    //                 "columnPartId": "1",
-    //                 "parentColumnId": "2",
-    //                 "children": [
-                        
-    //                 ]
-    //             },
-    //             {
-    //                 "id": "6",
-    //                 "pageTemplateId": "2",
-    //                 "pagePartId": "2",
-    //                 "columnPartId": "1",
-    //                 "parentColumnId": "2",
-    //                 "children": [
-                        
-    //                 ]
-    //             },
-    //         ]
-    //     },
-    // ];
 
     return AppController.extend({
 
@@ -197,7 +135,7 @@ define([
         },
 
         
-
+        // 编辑页面模板
         addColumnsToPageTemplate: function(id){            
             id = parseInt(id);
             var that = this;
@@ -213,28 +151,59 @@ define([
                 that.columnCollection = columns;
                 that.pageTemplateAddColumns = pageTemplateAddColumns;
 
-                pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, 1, columns));
-                pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, 2, columns));
-                pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, 3, columns));
-
                 // 插入工具栏
                 var boxTypeListView = new BoxTypeListView({boxTypes: boxTypes});
                 boxTypeListView.render();
                 that.pageTemplateAddColumns.$el.append(boxTypeListView.$el);
                 that.fixPositionBoxesBar();
                 $(window).scroll(function(){that.fixPositionBoxesBar();});
-                that.pageTemplateAddColumns.$('.draggable-box').draggable({revert: true, helper: "clone"});
-                that.pageTemplateAddColumns.$('.droppable-boxes').droppable({
-                    greedy: true,
-                    activeClass: "template-box-hover",
-                    hoverClass: "template-box-active",
-                    drop: function( event, ui ) {
-                        console.log(ui);
+
+                that.renderPagePart(1);
+                that.renderPagePart(2);
+                that.renderPagePart(3);
+                
+                // 初始化页面的drag和drop
+                that.initDrag();
+                
+                that.endLoading();
+            };
+            that.startLoading();
+            $.when(pageTemplateRepository.getPageTemplate(id), customTemplateRepository.getTemplateColumns(id), boxTypeRepository.getBoxTypes()).then(callback);
+        },
+
+        initDrag: function(){
+            this.pageTemplateAddColumns.$('.draggable-box').draggable({revert: true, helper: "clone"});
+        },
+
+        initDrop: function(jqObj){
+            var that = this;
+            jqObj.find('.droppable-boxes').droppable({
+                greedy: true,
+                activeClass: "template-box-hover",
+                hoverClass: "template-box-active",
+                drop: function( event, ui ) {
+                    // 如果该模板中有未保存的列，则提示用户先保存模板，然后再添加列
+                    var showMsg = false;
+                    that.columnCollection.each(function(model){
+                        if(model.isNew()){
+                            showMsg = true;
+                            // break;
+                        }
+                    });
+                    if(showMsg){
+                        $.gritter.add({
+                            // (string | mandatory) the heading of the notification
+                            title: '',
+                            // (string | mandatory) the text inside the notification
+                            text: '请先保存模板，再添加区块。',
+                            class_name: 'cx-warning',
+                        });
+                    }else{
                         // 生成templateBox视图
                         var boxTypeId = ui.draggable.attr('boxtypeid');
                         var templateBox = new TemplateBoxModel();
                         var currentColumnUI = $(this);
-
+                        var boxTypeRepository = new BoxTypeRepository();
                         var callback2 = function(boxType){
                             templateBox.set({boxType: boxType});
                             var templateBoxView = new TemplateBoxView({model: templateBox});
@@ -243,17 +212,14 @@ define([
                         };
                         $.when(boxTypeRepository.getBoxType(boxTypeId)).then(callback2);
                     }
-                });
+                }
+            });
 
-                that.pageTemplateAddColumns.$('.template_column_body').sortable({revert: true});
-                that.pageTemplateAddColumns.$('.template_column_body').disableSelection();
-                that.endLoading();
-            };
-            that.startLoading();
-            $.when(pageTemplateRepository.getPageTemplate(id), customTemplateRepository.getTemplateColumns(id), boxTypeRepository.getBoxTypes()).then(callback);
-            // alert(123);
+            jqObj.find('.template_column_body').sortable({revert: true});
+            jqObj.find('.template_column_body').disableSelection();
         },
 
+        // 修正区块工具栏的页面位置
         fixPositionBoxesBar: function(){
             var vScrollPosition = $(document).scrollTop(); //retrieve the document scroll ToP position
             var bottomPart = this.pageTemplateAddColumns.$("#wn").height();
@@ -265,7 +231,7 @@ define([
 
         },
 
-        // 提交添加行的表单
+        // 保存行到本地，并重新渲染该行所属的部分(页头/页体/页尾)
         submitRow: function(options){
             // 得到所有的行视图
             var rowViews = options.rowViews;
@@ -292,14 +258,12 @@ define([
                 this.columnCollection.add(childModel);
             }
 
-            console.log(this.columnCollection);
-
             // 重新渲染这部分的
             this.renderPagePart(pagePartId);
             this.closeModal();
         },
 
-        // 保存页面模板
+        // 保存模板，并同步到服务器
         saveTemplate: function(){
             var templateColumnCollectionWrapper = new TemplateColumnCollectionWrapper({columns: this.columnCollection});
             // 
@@ -307,15 +271,15 @@ define([
             this.startLoading();
             templateColumnCollectionWrapper.on('sync', function(model, response){
                 // 同步collection
-                that.columnCollection = new TemplateColumnCollection(response);
-                
-                that.endLoading();
+                // that.columnCollection = new TemplateColumnCollection(response);
+                that.addColumnsToPageTemplate(response.pageTemplateId);
+                // that.endLoading();
                 $.gritter.add({
                     // (string | mandatory) the heading of the notification
-                    title: '保存页面模板成功!',
+                    title: '',
                     // (string | mandatory) the text inside the notification
-                    text: '',
-                    class_name: 'gritter-success'
+                    text: '模板保存成功。',
+                    class_name: 'cx-success'
                 });
 
             });
@@ -324,7 +288,7 @@ define([
             // 
         },
 
-        // 添加列到行
+        // 添加列给行，加载视图
         addColumnToRow: function(options){
             console.log(options);
             var newColumn = new TemplateColumnModel();
@@ -338,15 +302,14 @@ define([
 
         },
 
-        // 顶级添加行
+        // 添加行给页头/页体/页尾，加载视图
         editRow: function(options){
-            //
             var templateColumnEditView = new TemplateColumnEditView(options);
             this.loadModal(templateColumnEditView);
             
         },
 
-
+        // 保存列到本地，并刷新该列所属的部分(页头/页体/页尾)
         saveColumn: function(options){
             // 添加到本地的
             console.log(options);
@@ -356,29 +319,28 @@ define([
 
         },
 
+        // 渲染页面
         renderPagePart: function(pagePartId){
-            console.log(this.columnCollection);
             if(pagePartId == 1){
                 this.pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
-
+                this.initDrop(this.pageTemplateAddColumns.$('#template_header .page_part_area'));
             }else if(pagePartId == 2){
                 this.pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
-
+                this.initDrop(this.pageTemplateAddColumns.$('#template_body .page_part_area'));
             }else{
                 this.pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
-                
+                this.initDrop(this.pageTemplateAddColumns.$('#template_footer .page_part_area'));
             }
         },
 
-        // 编辑模板区块设置
+        // 编辑模板区块设置，加载视图
         editBoxSetting: function(options){
-            //
             var templateBox = options.templateBox;
             var templateBoxSettingView = new TemplateBoxSettingView({model: templateBox});
             this.loadModal(templateBoxSettingView);
-            
         },
 
+        // 
         onClose: function(){
             vent.off('CustomTemplateController:editRow');
             vent.off('CustomTemplateController:submitRow');
@@ -386,8 +348,5 @@ define([
             vent.off('CustomTemplateController:saveColumn');
             vent.off('CustomTemplateController:editBoxSetting');
         }
-
-
-
     });
 });

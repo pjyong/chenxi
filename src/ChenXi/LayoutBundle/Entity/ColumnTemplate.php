@@ -151,7 +151,7 @@ class ColumnTemplate{
      */
     public function setPageTemplate(\ChenXi\LayoutBundle\Entity\PageTemplate $pageTemplate = null)
     {
-        $this->page_template = $pageTemplate;
+        $this->pageTemplate = $pageTemplate;
     
         return $this;
     }

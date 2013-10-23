@@ -42,7 +42,8 @@ class ColumnswrapperController extends FOSRestController
 				$this->saveColumn($column);
 			}			
 		}
-		return $this->handleView($this->view($this->data));
+		// return $this->handleView($this->view($this->data));
+		return $this->handleView($this->view(array('pageTemplateId' => $pageTemplateId)));
 	}
 
 	// 保存父列，返回当前列
@@ -53,6 +54,7 @@ class ColumnswrapperController extends FOSRestController
 			// 创建
 			$columnTemplate = new ColumnTemplate();
 			$columnTemplate->setPageTemplate($this->pageTemplate);
+
 			if(is_string($column['parentColumnId']) || $column['parentColumnId'] != 0){
 				$parentColumn = $this->saveColumn($this->columns[$column['parentColumnId']]);
 				$column['parentColumnId'] = $parentColumn->getId();
