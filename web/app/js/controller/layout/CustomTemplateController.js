@@ -196,7 +196,7 @@ define([
                             title: '',
                             // (string | mandatory) the text inside the notification
                             text: '请先保存模板，再添加区块。',
-                            class_name: 'cx-warning',
+                            class_name: 'gritter-warning',
                         });
                     }else{
                         // 生成templateBox视图
@@ -279,7 +279,7 @@ define([
                     title: '',
                     // (string | mandatory) the text inside the notification
                     text: '模板保存成功。',
-                    class_name: 'cx-success'
+                    class_name: 'gritter-success'
                 });
 
             });

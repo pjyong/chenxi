@@ -1,19 +1,5 @@
 /*图标大小*/
 
-#gritter-notice-wrapper .cx-warning{
-	background-color: #fcf8e3;
-	border: 1px solid #fbeed5;
-	font-size: 14px;
-}
-#gritter-notice-wrapper .cx-warning .gritter-item{color: #c09853;}
-#gritter-notice-wrapper .cx-success{
-	background-color: #dff0d8;
-	border: 1px solid #d6e9c6;
-	font-size: 14px;
-}
-#gritter-notice-wrapper .cx-success .gritter-item{color: #468847;}
-
-
 .icon-14{
 	font-size:14px;
 }
