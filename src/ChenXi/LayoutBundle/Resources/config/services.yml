@@ -8,6 +8,8 @@ parameters:
     chenxi_box_type.class: ChenXi\LayoutBundle\Entity\BoxType
     chenxi_box_type_property_manager.class: ChenXi\LayoutBundle\Entity\BoxTypePropertyManager
     chenxi_box_type_property.class: ChenXi\LayoutBundle\Entity\BoxTypeProperty
+    chenxi_template_box_manager.class: ChenXi\LayoutBundle\Entity\TemplateBoxManager
+    chenxi_template_box.class: ChenXi\LayoutBundle\Entity\TemplateBox
 
 services:
     chenxi_page_template_manager:
@@ -22,3 +24,6 @@ services:
     chenxi_box_type_property_manager:
         class: %chenxi_box_type_property_manager.class%
         arguments: [@doctrine.orm.default_entity_manager, %chenxi_box_type_property.class%]
+    chenxi_template_box_manager:
+        class: %chenxi_template_box_manager.class%
+        arguments: [@doctrine.orm.default_entity_manager, %chenxi_template_box.class%]

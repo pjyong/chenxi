@@ -7,6 +7,6 @@ define([
 ){
     return Backbone.Collection.extend({
         model: TemplateBoxModel,
-        // url: 'api/layout/boxtypes'
+        // url: 'api/layout/boxeswrapper'
     });
 });

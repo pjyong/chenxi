@@ -64,13 +64,25 @@ define([
     }
 
 
-    function renderTemplateColumn(parentColumnId, currentColumn, pagePartId, columnCollection){
+    function renderTemplateColumn(parentColumnId, currentColumn, pagePartId, columnCollection, boxCollection, boxTypeCollection){
         if(parentColumnId == 0){
             var pageTemplateColumnView = new PageTemplatePartView();
+            pageTemplateColumnView.render();
         }else{
             var pageTemplateColumnView = new PageTemplateColumnView({model: currentColumn});
+            pageTemplateColumnView.render();
+            // 如果该列有区块
+            var boxes = boxCollection.where({columnTemplateId: currentColumn.get('id')});
+            for(var key in boxes){
+                // 
+                var templateBox = boxes[key];
+                templateBox.set('boxType', boxTypeCollection.findWhere({id: templateBox.get('boxTypeId')}));
+                var templateBoxView = new TemplateBoxView({model: boxes[key]});
+
+                templateBoxView.render();
+                pageTemplateColumnView.$('.droppable-boxes').append(templateBoxView.$el);
+            }
         }
-        pageTemplateColumnView.render();
         // 得到所有的子列
         var columns = columnCollection.where({parentColumnId:parentColumnId, pagePartId: pagePartId});
         if(columns.length > 0){
@@ -110,7 +122,7 @@ define([
                     }
                     // 
                     // if(parentColumnId == 0){
-                        templateRow.$el.children('.template_row_body').append(renderTemplateColumn(pid, column, pagePartId, columnCollection));  
+                        templateRow.$el.children('.template_row_body').append(renderTemplateColumn(pid, column, pagePartId, columnCollection, boxCollection, boxTypeCollection));  
                     // }else{
                         // pageTemplateColumnView.$('.template_column_body').append(renderTemplateColumn(pid, column, pagePartId, columnCollection));
                     // }
@@ -123,13 +135,14 @@ define([
     return AppController.extend({
 
         initialize: function(){
-            _.bindAll(this, 'editRow', 'submitRow', 'saveTemplate', 'addColumnToRow', 'saveColumn', 'editBoxSetting');
+            _.bindAll(this, 'editRow', 'submitRow', 'saveTemplate', 'addColumnToRow', 'saveColumn', 'editBoxSetting', 'saveBoxSetting');
             vent.on('CustomTemplateController:editRow', this.editRow);
             vent.on('CustomTemplateController:submitRow', this.submitRow);
             vent.on('CustomTemplateController:saveTemplate', this.saveTemplate);
             vent.on('CustomTemplateController:addColumnToRow', this.addColumnToRow);
             vent.on('CustomTemplateController:saveColumn', this.saveColumn);
             vent.on('CustomTemplateController:editBoxSetting', this.editBoxSetting);
+            vent.on('CustomTemplateController:saveBoxSetting', this.saveBoxSetting);
 
             // vent.on('pageTemplateController:saveColumn', this.saveColumn);
         },
@@ -148,7 +161,16 @@ define([
             var callback = function(pageTemplate, columns, boxTypes){
                 var pageTemplateAddColumns = new PageTemplateAddColumnsView({model: pageTemplate});
                 that.contentRegion.show(pageTemplateAddColumns);
+
+                // 存储所有的区块
+                that.boxCollection = columns.templateBoxCollection;
+                delete columns.templateBoxCollection;
+                // 存储所有的模板列
                 that.columnCollection = columns;
+                // 存储所有的区块类型
+                that.boxTypeCollection = boxTypes;
+                
+
                 that.pageTemplateAddColumns = pageTemplateAddColumns;
 
                 // 插入工具栏
@@ -200,23 +222,24 @@ define([
                         });
                     }else{
                         // 获得列的ID
-                        var templateColumnId = ui.droppable.attr('templatecolumnid');
+                        var currentColumnUI = $(this);
+                        var templateColumnId = currentColumnUI.attr('templatecolumnid');
                         // 生成templateBox视图
                         var boxTypeId = ui.draggable.attr('boxtypeid');
                         var templateBox = new TemplateBoxModel();
                         templateBox.set('columnTemplateId', templateColumnId);
-                        var currentColumnUI = $(this);
-                        var boxTypeRepository = new BoxTypeRepository();
-                        var callback2 = function(boxType){
-
+                        templateBox.set('boxTypeId', boxTypeId);
+                        // var boxTypeRepository = new BoxTypeRepository();
+                        // var callback2 = function(boxType){
+                            var boxType = that.boxTypeCollection.findWhere({id: boxTypeId});
                             templateBox.set({boxType: boxType});
                             var templateBoxView = new TemplateBoxView({model: templateBox});
                             templateBoxView.render();
                             currentColumnUI.append(templateBoxView.$el);
                             // 弹出区块配置
-                            that.editBoxSetting({templateBox: templateBox});
-                        };
-                        $.when(boxTypeRepository.getBoxType(boxTypeId)).then(callback2);
+                            // that.editBoxSetting({templateBox: templateBox});
+                        // };
+                        // $.when(boxTypeRepository.getBoxType(boxTypeId)).then(callback2);
                     }
                 }
             });
@@ -271,7 +294,7 @@ define([
 
         // 保存模板，并同步到服务器
         saveTemplate: function(){
-            var templateColumnCollectionWrapper = new TemplateColumnCollectionWrapper({columns: this.columnCollection});
+            var templateColumnCollectionWrapper = new TemplateColumnCollectionWrapper({columns: this.columnCollection, boxes: this.boxCollection});
             // 
             var that = this;
             this.startLoading();
@@ -291,7 +314,7 @@ define([
             });
             // 保存所有的列
             templateColumnCollectionWrapper.save();
-            // 
+
         },
 
         // 添加列给行，加载视图
@@ -328,15 +351,14 @@ define([
         // 渲染页面
         renderPagePart: function(pagePartId){
             if(pagePartId == 1){
-                this.pageTemplateAddColumns.$('#template_header .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
-                this.initDrop(this.pageTemplateAddColumns.$('#template_header .page_part_area'));
+                var page_part_area = this.pageTemplateAddColumns.$('#template_header .page_part_area');
             }else if(pagePartId == 2){
-                this.pageTemplateAddColumns.$('#template_body .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
-                this.initDrop(this.pageTemplateAddColumns.$('#template_body .page_part_area'));
+                var page_part_area = this.pageTemplateAddColumns.$('#template_body .page_part_area');
             }else{
-                this.pageTemplateAddColumns.$('#template_footer .page_part_area').html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection));
-                this.initDrop(this.pageTemplateAddColumns.$('#template_footer .page_part_area'));
+                var page_part_area = this.pageTemplateAddColumns.$('#template_footer .page_part_area');
             }
+            page_part_area.html(renderTemplateColumn(0, {}, pagePartId, this.columnCollection, this.boxCollection, this.boxTypeCollection));
+            this.initDrop(page_part_area);
         },
 
         // 编辑模板区块设置，加载视图
@@ -344,6 +366,15 @@ define([
             var templateBox = options.templateBox;
             var templateBoxSettingView = new TemplateBoxSettingView({model: templateBox});
             this.loadModal(templateBoxSettingView);
+        },
+
+        // 保存区块设置到本地
+        saveBoxSetting: function(options){
+            var templateBox = options.templateBox;
+            this.boxCollection.add(templateBox);
+            // console.log(this.boxCollection);
+            this.closeModal();
+            // var templateBoxRepository = new TemplateBoxRepository();
         },
 
         // 

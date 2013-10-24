@@ -6,6 +6,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 
 use ChenXi\LayoutBundle\Entity\ColumnTemplate;
+use ChenXi\LayoutBundle\Entity\TemplateBox;
 
 // PageTemplate 资源
 
@@ -21,8 +22,12 @@ class ColumnswrapperController extends FOSRestController
 	// 创建
 	public function postColumnswrapperAction()
 	{
-		// print '123';
-		$columns = $this->getRequest()->request->all();
+		// print_r(stripslashes($this->getRequest()->getContent()));
+		$requestData = json_decode(json_decode($this->getRequest()->getContent(), true), true);
+
+
+		$columns = $requestData['columns'];
+		$boxes = $requestData['boxes'];
 		$columnManager = $this->container->get('chenxi_column_template_manager');
 		// $pageTemplate = $this->container->
 		if(count($columns) > 0){
@@ -41,6 +46,26 @@ class ColumnswrapperController extends FOSRestController
 				if(is_object($column)){continue;}
 				$this->saveColumn($column);
 			}			
+		}
+
+		// 保存所有的区块
+		$templateBoxManager = $this->container->get('chenxi_template_box_manager');
+		$boxTypeManager = $this->container->get('chenxi_box_type_manager');
+		if(count($boxes) > 0){
+			foreach($boxes as $box){
+				if(isset($box['id'])){
+					// 修改
+					$templateBox = $templateBoxManager->find($box['id']);
+
+				}else{
+					// 添加
+					$templateBox = new TemplateBox();
+					$templateBox->setBoxType($boxTypeManager->find($box['boxTypeId']));
+					$templateBox->setPositionId(1);
+					$templateBox->setColumnTemplate($columnManager->find($box['columnTemplateId']));
+				}
+				$templateBoxManager->update($templateBox);
+			}
 		}
 		// return $this->handleView($this->view($this->data));
 		return $this->handleView($this->view(array('pageTemplateId' => $pageTemplateId)));

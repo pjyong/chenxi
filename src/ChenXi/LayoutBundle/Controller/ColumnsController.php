@@ -23,6 +23,9 @@ class ColumnsController extends FOSRestController
 		$columns = $pageTemplate->getColumnTemplates();
 
 		$data = array();
+		$columnsArr = array();
+		$boxesArr = array();
+
 		foreach($columns as $column){
 			$temp = array();
 			$temp['id'] = $column->getId();
@@ -33,8 +36,23 @@ class ColumnsController extends FOSRestController
 			$temp['parentColumnId'] = ($parentColumn == null) ? 0 : $parentColumn->getId();
 			$temp['minWidth'] = $column->getMinWidth();
 			$temp['maxWidth'] = $column->getMaxWidth();
-			$data[] = $temp;
+			// 获得该列所有的区块
+			$templateBoxes = $column->getTemplateBoxes();
+			foreach($templateBoxes as $box){
+				$temp2 = array();
+				$temp2['id'] = $box->getId();
+				$temp2['columnTemplateId'] = $column->getId();
+				$temp2['cssCode'] = '';
+				$temp2['boxTypeId'] = $box->getBoxType()->getId();
+				$temp2['positionId'] = 1;
+				$boxesArr[] = $temp2;
+
+			}
+			$columnsArr[] = $temp;
 		}
+
+		$data = array('columns' => $columnsArr, 'boxes' => $boxesArr);
+		
 		return $this->handleView($this->view($data));
 	}
 

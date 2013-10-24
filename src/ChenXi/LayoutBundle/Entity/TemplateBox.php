@@ -41,12 +41,12 @@ class TemplateBox{
     /**
      * @ORM\Column(name="can_remove", type="boolean", options={"default" = true})
      */
-    private $canRemove;
+    private $canRemove = true;
 
     /**
      * @ORM\Column(name="can_modify", type="boolean", options={"default" = true})
      */
-    private $canModify;
+    private $canModify = true;
 
     /**
      * @ORM\ManyToOne(targetEntity="ColumnTemplate", inversedBy="templateBoxes")

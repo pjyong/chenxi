@@ -8,6 +8,8 @@ layout_column_templates:
     parent:   layout_page_templates
     resource: ChenXi\LayoutBundle\Controller\ColumnsController
 
+
+
 layout_box_types:
     type:     rest
     resource: ChenXi\LayoutBundle\Controller\BoxtypesController
@@ -16,6 +18,11 @@ layout_box_types:
 layout_columnswrapper:
     type:     rest
     resource: ChenXi\LayoutBundle\Controller\ColumnswrapperController
+    prefix: /api/layout
+
+layout_boxeswrapper:
+    type:     rest
+    resource: ChenXi\LayoutBundle\Controller\BoxeswrapperController
     prefix: /api/layout
 
 #此路由用来生成新的boxtype, label是boxType的标签

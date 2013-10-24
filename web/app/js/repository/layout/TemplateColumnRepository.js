@@ -9,6 +9,7 @@ define([
 ){
     return Marionette.Controller.extend({
 
+        // 获得该模板的所有列和所有区块
         getTemplateColumns: function(pageTemplateId){
             var deferred = $.Deferred();
             var templateColumns = new TemplateColumnCollection({pageTemplateId: pageTemplateId});

@@ -31,7 +31,7 @@ class BlogRecentPost implements BoxTypeInterface
 		{
 			$label = $property->getLabel();
 			if($label == 'showNum'){
-				$html .= '<div class="form-group"><label class="col-sm-3 control-label no-padding-right">显示数目：</label><div class="col-sm-9"><select class="showNum"><option value="10">10</option><option value="10">20</option></select></div></div>';
+				$html .= '<div class="form-group"><label class="col-sm-3 control-label no-padding-right">显示数目：</label><div class="col-sm-9"><select name="showNum"><option value="10">10</option><option value="10">20</option></select></div></div>';
 			}
 		}
 

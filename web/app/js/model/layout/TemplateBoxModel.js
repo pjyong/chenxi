@@ -9,7 +9,9 @@ define([
             positionId: '',
             cssCode: '',
             boxTypeId: '',
-            columnTemplateId: ''
+            columnTemplateId: '',
+            // 区块设置所得的表单
+            responseStr: ''
         },
 
         initialize: function(){

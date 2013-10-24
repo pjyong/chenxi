@@ -40,10 +40,8 @@ define([
 
             var that = this;
             boxTypes.each(function(model){
-                console.log(model);
                 that.categoryArr[model.get('categoryLabel')].boxTypes.push(model.toJSON());
             });
-            console.log(this.categoryArr);
         },
 
         render: function(){

@@ -8,7 +8,8 @@ define([
     return Backbone.Model.extend({
         
         defaults: {
-            columns: []
+            columns: [],
+            boxes: []
         },
 
         url: 'api/layout/columnswrapper',
@@ -18,7 +19,11 @@ define([
             this.get('columns').each(function(column, key, list){
                 column.set('cid', column.cid);
             });
-            return this.get('columns').toJSON();
+            var data = {};
+            data.columns = this.get('columns').toJSON();
+            data.boxes = this.get('boxes').toJSON();
+            return JSON.stringify(data);
+            
         }
     });
 
