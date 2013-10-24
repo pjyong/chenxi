@@ -38,6 +38,7 @@ define([
         saveBoxSetting: function(){
             var responseStr = JSON.stringify(this.$('form').serializeArray());
             this.model.set('responseStr', responseStr);
+            console.log(responseStr);
             vent.trigger('CustomTemplateController:saveBoxSetting', {templateBox: this.model});
         }
     

@@ -24,11 +24,9 @@ define([
             // this.listenTo(this.options.model, 'destroy', this.destroyView);
             this.model = this.options.model;
 
-            console.log(this.model);
         },
 
         render: function(){
-            console.log(this.model.toJSON());
             var data = this.model.toJSON();
             data.boxType = this.model.get('boxType').toJSON();
             this.$el.html(this.template(data));

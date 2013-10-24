@@ -77,6 +77,7 @@ define([
                 // 
                 var templateBox = boxes[key];
                 templateBox.set('boxType', boxTypeCollection.findWhere({id: templateBox.get('boxTypeId')}));
+                templateBox.get('boxType').set('formStr', templateBox.get('formStr'));
                 var templateBoxView = new TemplateBoxView({model: boxes[key]});
 
                 templateBoxView.render();
@@ -225,13 +226,17 @@ define([
                         var currentColumnUI = $(this);
                         var templateColumnId = currentColumnUI.attr('templatecolumnid');
                         // 生成templateBox视图
-                        var boxTypeId = ui.draggable.attr('boxtypeid');
+                        var boxTypeId = parseInt(ui.draggable.attr('boxtypeid'));
                         var templateBox = new TemplateBoxModel();
                         templateBox.set('columnTemplateId', templateColumnId);
                         templateBox.set('boxTypeId', boxTypeId);
                         // var boxTypeRepository = new BoxTypeRepository();
                         // var callback2 = function(boxType){
+
                             var boxType = that.boxTypeCollection.findWhere({id: boxTypeId});
+                            // console.log(that.boxTypeCollection);
+                            // console.log(boxType);
+
                             templateBox.set({boxType: boxType});
                             var templateBoxView = new TemplateBoxView({model: templateBox});
                             templateBoxView.render();
@@ -341,7 +346,6 @@ define([
         // 保存列到本地，并刷新该列所属的部分(页头/页体/页尾)
         saveColumn: function(options){
             // 添加到本地的
-            console.log(options);
             this.columnCollection.add(options.model);
             this.renderPagePart(options.model.get('pagePartId'));
             this.closeModal();
@@ -368,12 +372,31 @@ define([
             this.loadModal(templateBoxSettingView);
         },
 
-        // 保存区块设置到本地
+        // 保存区块到服务器
         saveBoxSetting: function(options){
+            var that = this;
             var templateBox = options.templateBox;
-            this.boxCollection.add(templateBox);
+            var templateBoxRepository = new TemplateBoxRepository();
+            // console.log('start');
+            var callback = function(article){
+                that.endLoading();
+                this.closeModal();
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: '保存区块成功。',
+                    // (string | mandatory) the text inside the notification
+                    text: '',
+                    class_name: 'gritter-success'
+                });
+            };
+            that.startLoading();
+
+            $.when(templateBoxRepository.createTemplateBox(templateBox)).then(callback);
+
+            
+            // this.boxCollection.add(templateBox);
             // console.log(this.boxCollection);
-            this.closeModal();
+            
             // var templateBoxRepository = new TemplateBoxRepository();
         },
 

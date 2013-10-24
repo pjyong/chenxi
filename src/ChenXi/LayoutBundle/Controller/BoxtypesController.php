@@ -29,7 +29,12 @@ class BoxtypesController extends FOSRestController
 			$temp['chineseLabel'] = $boxType->getChineseLabel();
 			$temp['id'] = $boxType->getId();
 			$temp['isCached'] = $boxType->getIsCached();
-
+			// 得到
+			$templateBox = new TemplateBox();
+			$templateBox->setBoxType($boxType);
+			$fullClass = 'ChenXi\LayoutBundle\BoxType\\' . $temp['label'];
+			$boxTypeTransform = new $fullClass($this->container->get('chenxi_box_type_manager'), $this->container->get('chenxi_box_type_property_manager'), $this->container->get('chenxi_template_box_prop_value_manager'));
+	        $temp['formStr'] = $boxTypeTransform->displayTemplateBoxForm($templateBox);
 			$data[] = $temp;
 		}
 

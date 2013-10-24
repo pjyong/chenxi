@@ -11,6 +11,8 @@ parameters:
     chenxi_template_box_manager.class: ChenXi\LayoutBundle\Entity\TemplateBoxManager
     chenxi_template_box.class: ChenXi\LayoutBundle\Entity\TemplateBox
 
+    chenxi_template_box_prop_value_manager.class: ChenXi\LayoutBundle\Entity\TemplateBoxPropValueManager
+    chenxi_template_box_prop_value.class: ChenXi\LayoutBundle\Entity\TemplateBoxPropValue
 services:
     chenxi_page_template_manager:
         class: %chenxi_page_template_manager.class%
@@ -27,3 +29,6 @@ services:
     chenxi_template_box_manager:
         class: %chenxi_template_box_manager.class%
         arguments: [@doctrine.orm.default_entity_manager, %chenxi_template_box.class%]
+    chenxi_template_box_prop_value_manager:
+        class: %chenxi_template_box_prop_value_manager.class%
+        arguments: [@doctrine.orm.default_entity_manager, %chenxi_template_box_prop_value.class%]

@@ -7,6 +7,8 @@ use ChenXi\LayoutBundle\Entity\BoxTypeProperty;
 use ChenXi\LayoutBundle\Entity\BoxTypePropertyManager;
 use ChenXi\LayoutBundle\Entity\TemplateBox;
 use Symfony\Component\HttpFoundation\Request;
+use ChenXi\LayoutBundle\Entity\TemplateBoxPropValue;
+use ChenXi\LayoutBundle\Entity\TemplateBoxPropValueManager;
 
 class Content implements BoxTypeInterface
 {
@@ -15,10 +17,13 @@ class Content implements BoxTypeInterface
 
 	private $boxTypePropertyManager;
 
-	public function __construct(BoxTypeManager $boxTypeManager, BoxTypePropertyManager $boxTypePropertyManager)
+	private $templateBoxPropValueManager;
+
+	public function __construct(BoxTypeManager $boxTypeManager, BoxTypePropertyManager $boxTypePropertyManager, TemplateBoxPropValueManager $templateBoxPropValueManager)
 	{
 		$this->boxTypeManager = $boxTypeManager;
 		$this->boxTypePropertyManager = $boxTypePropertyManager;
+		$this->templateBoxPropValueManager = $templateBoxPropValueManager;
 	}
 	
 	public function displayTemplateBoxForm(TemplateBox $templateBox)
@@ -26,7 +31,7 @@ class Content implements BoxTypeInterface
 		return '';
 	}
 
-	public function handleTemplateBoxForm(TemplateBox $templateBox, Request $request)
+	public function handleTemplateBoxForm(TemplateBox $templateBox, $responseStr)
 	{
 
 	}

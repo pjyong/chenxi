@@ -11,10 +11,41 @@ use ChenXi\LayoutBundle\Entity\ColumnTemplate;
 // PageTemplate 资源
 
 
-class ColumnsController extends FOSRestController
+class TemplateboxesController extends FOSRestController
 {
-	// 获得
-	public function getColumnsAction($pageTemplateId)
+	// 得到
+	public function getTemplateboxAction($id)
+	{
+		$box = $this->container->get('chenxi_template_box_manager')->find($id);
+
+		
+		$temp2 = array();
+		$temp2['id'] = $box->getId();
+		$temp2['columnTemplateId'] = $column->getId();
+		$temp2['cssCode'] = '';
+		$temp2['boxTypeId'] = $box->getBoxType()->getId();
+		$temp2['positionId'] = 1;
+		// 得到
+		$fullClass = 'ChenXi\LayoutBundle\BoxType\\' . $box->getBoxType()->getLabel();
+		$boxTypeTransform = new $fullClass($this->container->get('chenxi_box_type_manager'), $this->container->get('chenxi_box_type_property_manager'), $this->container->get('chenxi_template_box_prop_value_manager'));
+        $temp2['formStr'] = $boxTypeTransform->displayTemplateBoxForm($box);
+
+		return $this->handleView($this->view($temp2));
+	}
+
+	// 修改相册
+	public function putTemplateboxAction($id)
+	{
+		$box = $this->container->get('chenxi_template_box_manager')->find($id);
+		
+
+	}
+
+
+
+
+	// 获得该template box
+	public function getTemplateboxesAction($templateBoxId)
 	{
 		// $criteria = array('websiteId' => $this->getWebsiteId());
 
@@ -62,7 +93,7 @@ class ColumnsController extends FOSRestController
 	}
 
 	// 创建
-	public function postColumnsAction()
+	public function postTemplateboxesAction()
 	{
 		$pageTemplate = new PageTemplate();
 		// 指定website
@@ -96,21 +127,7 @@ class ColumnsController extends FOSRestController
 		return $this->process($pageTemplate);
 	}
 
-	// 得到
-	public function getTemplateAction($id)
-	{
-		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
-
-		
-		if(!$pageTemplate)
-		{
-			$pageTemplate = array('error' => 1);
-		}
-
-		$data = $this->getData($pageTemplate);
-
-		return $this->handleView($this->view($data));
-	}
+	
 
 	public function process(PageTemplate $pageTemplate, $new = false)
 	{

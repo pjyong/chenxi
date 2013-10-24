@@ -65,6 +65,15 @@ class ColumnswrapperController extends FOSRestController
 					$templateBox->setColumnTemplate($columnManager->find($box['columnTemplateId']));
 				}
 				$templateBoxManager->update($templateBox);
+				// print 
+				// 保存该区块的值
+				$responseStr = $box['responseStr'];
+				$boxType = $templateBox->getBoxType();
+				$fullClass = 'ChenXi\LayoutBundle\BoxType\\' . $boxType->getLabel();
+				$boxTypeTransform = new $fullClass($this->container->get('chenxi_box_type_manager'), $this->container->get('chenxi_box_type_property_manager'), $this->container->get('chenxi_template_box_prop_value_manager'));
+				$boxTypeTransform->handleTemplateBoxForm($templateBox, $responseStr);
+
+
 			}
 		}
 		// return $this->handleView($this->view($this->data));

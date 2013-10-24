@@ -11,7 +11,8 @@ define([
             boxTypeId: '',
             columnTemplateId: '',
             // 区块设置所得的表单
-            responseStr: ''
+            responseStr: '',
+            formStr: ''
         },
 
         initialize: function(){

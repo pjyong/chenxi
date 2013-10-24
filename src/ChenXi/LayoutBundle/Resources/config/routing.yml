@@ -20,9 +20,9 @@ layout_columnswrapper:
     resource: ChenXi\LayoutBundle\Controller\ColumnswrapperController
     prefix: /api/layout
 
-layout_boxeswrapper:
+layout_template_box:
     type:     rest
-    resource: ChenXi\LayoutBundle\Controller\BoxeswrapperController
+    resource: ChenXi\LayoutBundle\Controller\TemplateboxesController
     prefix: /api/layout
 
 #此路由用来生成新的boxtype, label是boxType的标签
