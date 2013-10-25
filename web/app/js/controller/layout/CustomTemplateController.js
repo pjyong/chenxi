@@ -77,7 +77,6 @@ define([
                 // 
                 var templateBox = boxes[key];
                 templateBox.set('boxType', boxTypeCollection.findWhere({id: templateBox.get('boxTypeId')}));
-                templateBox.get('boxType').set('formStr', templateBox.get('formStr'));
                 var templateBoxView = new TemplateBoxView({model: boxes[key]});
 
                 templateBoxView.render();
@@ -202,17 +201,17 @@ define([
             var that = this;
             jqObj.find('.droppable-boxes').droppable({
                 greedy: true,
+                accept: '.draggable-box',
                 activeClass: "template-box-hover",
                 hoverClass: "template-box-active",
                 drop: function( event, ui ) {
                     // 如果该模板中有未保存的列，则提示用户先保存模板，然后再添加列
                     var showMsg = false;
-                    that.columnCollection.each(function(model){
-                        if(model.isNew()){
-                            showMsg = true;
-                            // break;
-                        }
-                    });
+                    var currentColumnUI = $(this);
+                    var templateColumnId = currentColumnUI.attr('templatecolumnid');
+                    if(templateColumnId == ''){
+                        showMsg = true;
+                    }
                     if(showMsg){
                         $.gritter.add({
                             // (string | mandatory) the heading of the notification
@@ -223,34 +222,37 @@ define([
                         });
                     }else{
                         // 获得列的ID
-                        var currentColumnUI = $(this);
-                        var templateColumnId = currentColumnUI.attr('templatecolumnid');
-                        // 生成templateBox视图
-                        var boxTypeId = parseInt(ui.draggable.attr('boxtypeid'));
-                        var templateBox = new TemplateBoxModel();
-                        templateBox.set('columnTemplateId', templateColumnId);
-                        templateBox.set('boxTypeId', boxTypeId);
-                        // var boxTypeRepository = new BoxTypeRepository();
-                        // var callback2 = function(boxType){
+                        // 如果拖动的是列里的区块，那么不要再创建区块
+                        // if(_.isUndefined(ui.draggable.parent().attr('templatecolumnid'))){
+                            // 生成templateBox视图
+                            var boxTypeId = parseInt(ui.draggable.attr('boxtypeid'));
+                            var templateBox = new TemplateBoxModel();
+                            // 添加到本地变量
+                            that.boxCollection.add(templateBox);
+                            templateBox.set('columnTemplateId', templateColumnId);
+                            templateBox.set('boxTypeId', boxTypeId);
+                            // var boxTypeRepository = new BoxTypeRepository();
+                            // var callback2 = function(boxType){
 
                             var boxType = that.boxTypeCollection.findWhere({id: boxTypeId});
                             // console.log(that.boxTypeCollection);
                             // console.log(boxType);
 
                             templateBox.set({boxType: boxType});
+                            templateBox.set('formStr', boxType.get('formStr'));
                             var templateBoxView = new TemplateBoxView({model: templateBox});
                             templateBoxView.render();
                             currentColumnUI.append(templateBoxView.$el);
                             // 弹出区块配置
-                            // that.editBoxSetting({templateBox: templateBox});
+                            that.editBoxSetting({templateBox: templateBox});
+                        // }
                         // };
                         // $.when(boxTypeRepository.getBoxType(boxTypeId)).then(callback2);
                     }
                 }
             });
 
-            jqObj.find('.template_column_body').sortable({revert: true});
-            jqObj.find('.template_column_body').disableSelection();
+            jqObj.find('.template_column_body').sortable().disableSelection();
         },
 
         // 修正区块工具栏的页面位置
@@ -287,7 +289,6 @@ define([
                 childModel.set('cssCode', child.$('.css_code_option').val());
                 childModel.set('columnPartId', columnPartId);
 
-                console.log(childModel);
                 // 添加进collection
                 this.columnCollection.add(childModel);
             }
@@ -299,7 +300,7 @@ define([
 
         // 保存模板，并同步到服务器
         saveTemplate: function(){
-            var templateColumnCollectionWrapper = new TemplateColumnCollectionWrapper({columns: this.columnCollection, boxes: this.boxCollection});
+            var templateColumnCollectionWrapper = new TemplateColumnCollectionWrapper({columns: this.columnCollection, /*boxes: this.boxCollection*/});
             // 
             var that = this;
             this.startLoading();
@@ -377,27 +378,19 @@ define([
             var that = this;
             var templateBox = options.templateBox;
             var templateBoxRepository = new TemplateBoxRepository();
-            // console.log('start');
-            var callback = function(article){
+            var callback = function(model){
                 that.endLoading();
-                this.closeModal();
+                that.closeModal();
+                templateBox.set('id', model.get('id'));
+                templateBox.set('formStr', model.get('formStr'));
                 $.gritter.add({
-                    // (string | mandatory) the heading of the notification
-                    title: '保存区块成功。',
-                    // (string | mandatory) the text inside the notification
-                    text: '',
+                    title: '',
+                    text: '保存区块成功。',
                     class_name: 'gritter-success'
                 });
             };
             that.startLoading();
-
             $.when(templateBoxRepository.createTemplateBox(templateBox)).then(callback);
-
-            
-            // this.boxCollection.add(templateBox);
-            // console.log(this.boxCollection);
-            
-            // var templateBoxRepository = new TemplateBoxRepository();
         },
 
         // 

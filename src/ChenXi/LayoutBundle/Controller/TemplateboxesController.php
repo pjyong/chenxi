@@ -5,7 +5,7 @@ namespace ChenXi\LayoutBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 
-use ChenXi\LayoutBundle\Entity\PageTemplate;
+use ChenXi\LayoutBundle\Entity\TemplateBox;
 use ChenXi\LayoutBundle\Entity\ColumnTemplate;
 
 // PageTemplate 资源
@@ -39,7 +39,45 @@ class TemplateboxesController extends FOSRestController
 		$box = $this->container->get('chenxi_template_box_manager')->find($id);
 		
 
+
 	}
+
+	// 创建
+	public function postTemplateboxesAction()
+	{
+		$templateBox = new TemplateBox();
+		$columnManager = $this->container->get('chenxi_column_template_manager');
+		$boxTypeManager = $this->container->get('chenxi_box_type_manager');
+		$templateBoxManager = $this->container->get('chenxi_template_box_manager');
+
+		$boxTypeId = (int)$this->getRequest()->request->get('boxTypeId');
+		$columnTemplateId = (int)$this->getRequest()->request->get('columnTemplateId');
+
+		$templateBox->setBoxType($boxTypeManager->find($boxTypeId));
+		$templateBox->setPositionId(1);
+		$templateBox->setColumnTemplate($columnManager->find($columnTemplateId));
+
+		$templateBoxManager->update($templateBox);
+		
+		$responseStr = $this->getRequest()->request->get('responseStr');
+		$boxType = $templateBox->getBoxType();
+		$fullClass = 'ChenXi\LayoutBundle\BoxType\\' . $boxType->getLabel();
+		$boxTypeTransform = new $fullClass($this->container->get('chenxi_box_type_manager'), $this->container->get('chenxi_box_type_property_manager'), $this->container->get('chenxi_template_box_prop_value_manager'));
+		$boxTypeTransform->handleTemplateBoxForm($templateBox, $responseStr);
+
+
+		$data = array();
+		$data['id'] = $templateBox->getId();
+		$data['columnTemplateId'] = $columnTemplateId;
+		$data['boxTypeId'] = $boxTypeId;
+		$data['cssCode'] = '';
+		$data['positionId'] = 0;
+		$data['formStr'] = $boxTypeTransform->displayTemplateBoxForm($templateBox);
+
+		return $this->handleView($this->view($data));
+	}
+
+	
 
 
 
@@ -92,79 +130,23 @@ class TemplateboxesController extends FOSRestController
 		return $this->handleView($this->view($data));
 	}
 
-	// 创建
-	public function postTemplateboxesAction()
-	{
-		$pageTemplate = new PageTemplate();
-		// 指定website
-		$website = $this->container->get('chenxi_website_manager')->find($this->getWebsiteId());
-		$pageTemplate->setWebsite($website);
-
-		return $this->process($pageTemplate, true);
-	}
+	
 
 	// 删除相册
 	public function deleteColumnAction($id)
 	{
-		$pageTemplateManager = $this->container->get('chenxi_page_template_manager');
-		$pageTemplate = $pageTemplateManager->find($id);
+		
 
-		// remove tags relate pageTemplate
-		$tagManager = $this->container->get('fpn_tag.tag_manager');
-		$tagManager->deleteTagging($pageTemplate);
-
-		// remove pageTemplate
-		$pageTemplateManager->delete($pageTemplate);
-
-		return $this->handleView($this->view(null, 204));
+		return $this->handleView($this->view(array()));
 	}
 
-	// 修改相册
-	public function putTemplateAction($id)
-	{
-		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
 
-		return $this->process($pageTemplate);
-	}
 
 	
 
-	public function process(PageTemplate $pageTemplate, $new = false)
-	{
-		$statusCode = $new ? 201 : 204;
-		$form = $this->createForm(new PageTemplateType(), $pageTemplate);
-		$data = $this->getRequest()->request->all();
-		$children = $form->all();
-		$toBind = array_intersect_key($data, $children);
+	
 
-		// print_r($toBind);
-		// $toBind['start_date'] = new \DateTime($toBind['start_date']);
-		// $toBind['end_date'] = new \DateTime($toBind['end_date']);
-
-		$form->bind($toBind);
-
-		if($form->isValid()){
-			// print_r($pageTemplate);
-			// return;
-			$this->container->get('chenxi_page_template_manager')->update($pageTemplate);
-
-			$data = $this->getData($pageTemplate);
-
-			return $this->handleView($this->view($new ? $data : null, $statusCode));
-		}
-		
-		return $this->handleView($this->view($form, 400));
-	}
-
-	function getData(PageTemplate $pageTemplate){
-		$data = array();
-		$data['id'] = $pageTemplate->getId();
-		$data['name'] = $pageTemplate->getName();
-		$data['isPrimary'] = $pageTemplate->getIsPrimary();
-		$data['contentType'] = $pageTemplate->getContentType();
-
-		return $data;
-	}
+	
 
 	function getWebsiteId()
 	{
