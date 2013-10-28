@@ -20,7 +20,19 @@ class TemplatesController extends FOSRestController
 
 		$pageTemplates = $this->container->get('chenxi_page_template_manager')->findBy($criteria);
 
-		return $this->handleView($this->view($pageTemplates));
+		$data = array();
+
+		foreach($pageTemplates as $pageTemplate)
+		{
+			$temp = array();
+			$temp['id'] = $pageTemplate->getId();
+			$temp['contentType'] = $pageTemplate->getContentType();
+			$temp['name'] = $pageTemplate->getName();
+
+			$data[] = $temp;
+		}
+
+		return $this->handleView($this->view($data));
 	}
 
 	// 创建

@@ -34,6 +34,13 @@ define([
                 that.contentRegion.show(pageTemplateIndexView);
                 that.endLoading();
                 // $('[data-toggle="tooltip"]').tooltip();
+
+                pageTemplateIndexView.$( "#page_template_list" ).accordion({
+                    collapsible: true ,
+                    heightStyle: "content",
+                    animate: 250,
+                    header: ".accordion-header"
+                });
             };
             that.startLoading();
             $.when(pageTemplateRepository.getPageTemplates()).then(callback);

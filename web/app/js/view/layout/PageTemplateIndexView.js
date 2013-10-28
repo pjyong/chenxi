@@ -30,7 +30,8 @@ define([
         itemView: PageTemplateItemView,
 
         appendHtml: function(collectionView, itemView, index){
-            collectionView.$(".template_list").append(itemView.el);
+            var model = itemView.model;
+            collectionView.$el.find('#' + model.get('contentType') + '_template_list' + ' .accordion-body').append(itemView.el);
         },
 
         initialize: function(){
