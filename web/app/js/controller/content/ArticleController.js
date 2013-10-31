@@ -10,7 +10,8 @@ define([
     'ckeditor',
     'bootstrap.daterangepicker',
     'jquery.tagsinput',
-    'jquery.chosen'
+    'jquery.chosen',
+    'jquery.isotope'
 ], function(
     Marionette,
     vent,
@@ -49,6 +50,23 @@ define([
                 var articleIndexView = new ArticleIndexView({collection: articles});
                 that.contentRegion.show(articleIndexView);
                 that.endLoading();
+                // 
+                var container = articleIndexView.$('#article_list_div');
+                container.isotope({
+                    itemSelector: '.article_item',
+                    masonry : {
+                        columnWidth : 210
+                    },
+                    containerStyle: {
+                        overflow: 'visible',
+                        position: 'relative'
+                    },
+                    
+                });
+                container.delegate( '.article_item', 'click', function(){
+                    $(this).toggleClass('large_item');
+                    container.isotope('reLayout');
+                });
                 $('[data-toggle="tooltip"]').tooltip();
             };
             that.startLoading();

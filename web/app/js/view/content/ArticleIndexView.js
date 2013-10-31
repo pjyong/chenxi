@@ -24,14 +24,16 @@ define([
         },
 
         events: {
-            'click #creat_content': 'createContent'
+            'click #creat_content': 'createContent',
+            
         },        
 
         itemView: ArticleItemView,
 
         appendHtml: function(collectionView, itemView, index){
-            collectionView.$("tbody").append(itemView.el);
+            collectionView.$("#article_list_div").append(itemView.el);
         },
+
 
         initialize: function(){
 
@@ -43,13 +45,15 @@ define([
             // }else if(this.contentType === 'page'){
             //     this.contentTypeName = '页面';
             // }
-            // _.bindAll(this, 'createContent');
+            
             // alert(options.type);
 
             // save article collection
             // this.collection = this.options.collection;
             
         },
+
+     
 
         createContent: function(){
             // vent.trigger('contentModule:createContent', {type: this.contentType});

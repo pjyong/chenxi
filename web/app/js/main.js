@@ -9,6 +9,7 @@ require.config({
         ckeditor: 'lib/ckeditor/ckeditor',
         'jquery.tagsinput': 'lib/jquery.tagsinput.min',
         'jquery.gritter': 'lib/jquery.gritter.min',
+        'jquery.isotope': 'lib/jquery.isotope.min',
         'jquery.chosen': 'lib/chosen.jquery.min',
         'backbone.routerilter': 'lib/backbone.routefilter',
         'backbone.wreqr': 'lib/backbone.wreqr',
@@ -42,6 +43,9 @@ require.config({
             deps: ['jquery']
         },
         'jquery.gritter': {
+            deps: ['jquery']
+        },
+        'jquery.isotope': {
             deps: ['jquery']
         },
         backbone : {

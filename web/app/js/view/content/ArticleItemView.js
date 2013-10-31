@@ -10,18 +10,21 @@ define([
 
     return Marionette.ItemView.extend({
 
-        tagName: 'tr',
+        className: 'article_item',
 
         template: function(data){
             return _.template(ArticleItem, data, {variable: 'args'});
         },
 
         events: {
-            'click .delete': 'deleteArticle'
+            'click .delete': 'deleteArticle',
+            'mouseover .cx-contents': 'showTools',
+            'mouseover .cx-tools': 'showTools',
+            'mouseout .cx-contents': 'hideTools'
         },
 
         initialize: function(){
-            _.bindAll(this, 'deleteArticle');
+            _.bindAll(this, 'deleteArticle', 'showTools', 'hideTools');
             this.listenTo(this.options.model, 'destroy', this.destroyView);
         },
 
@@ -32,6 +35,14 @@ define([
         deleteArticle: function(){
             // trigger
             vent.trigger('articleController:deleteArticle', {model: this.model});
+        },
+
+        showTools: function(){
+            this.$('.cx-tools').show();
+        },
+        hideTools: function(){
+
+            this.$('.cx-tools').hide();
         },
 
         destroyView: function(){
