@@ -1,4 +1,13 @@
 /*图标大小*/
+.icon-red{
+	color: rgb(209, 91, 71);
+}
+
+/*内容页面*/
+#template_options_view{
+	text-align: right;
+}
+
 
 .icon-14{
 	font-size:14px;
@@ -273,8 +282,8 @@ div#wn .draggable-box:hover{background-color:rgb(48, 48, 48);cursor:move;}
 /**/
 .cx-item-content{
 	margin-bottom: 8px;
-	position:relative;
 }
+.cx-item-content .cx-contents{position:relative;cursor:pointer;}
 .cx-item-content .cx-photo {
 	display: block;
 	width: 199px;

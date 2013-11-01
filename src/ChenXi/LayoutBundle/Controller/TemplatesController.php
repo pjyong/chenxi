@@ -35,6 +35,8 @@ class TemplatesController extends FOSRestController
 		return $this->handleView($this->view($data));
 	}
 
+
+
 	// 创建
 	public function postTemplatesAction()
 	{
@@ -73,20 +75,35 @@ class TemplatesController extends FOSRestController
 	// 得到
 	public function getTemplateAction($id)
 	{
-		$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
+		// 如果id是字符串，那么是article, blog, page...
+		if(is_numeric($id)){
+			$pageTemplate = $this->container->get('chenxi_page_template_manager')->find($id);
+			if(!$pageTemplate)
+			{
+				$pageTemplate = array('error' => 1);
+			}
+
+			$data = $this->getData($pageTemplate);
+			
+
+		}else{
+			$data = array();
+			$pageTemplates = $this->container->get('chenxi_page_template_manager')->findBy(
+				array('contentType' => $id, 'websiteId' => $this->getWebsiteId())
+			);
+
+			foreach($pageTemplates as $pageTemplate){
+				$temp = $this->getData($pageTemplate);
+				$data[] = $temp;
+			}
 
 
-
-		
-		if(!$pageTemplate)
-		{
-			$pageTemplate = array('error' => 1);
 		}
-
-		$data = $this->getData($pageTemplate);
-		
-
 		return $this->handleView($this->view($data));
+
+
+		
+		
 	}
 
 	public function process(PageTemplate $pageTemplate, $new = false)

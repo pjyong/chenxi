@@ -18,8 +18,8 @@ define([
 
         events: {
             'click .delete': 'deleteArticle',
+            'click .cx-tools': 'preventClick',
             'mouseover .cx-contents': 'showTools',
-            'mouseover .cx-tools': 'showTools',
             'mouseout .cx-contents': 'hideTools'
         },
 
@@ -38,11 +38,14 @@ define([
         },
 
         showTools: function(){
-            this.$('.cx-tools').show();
+            this.$('.cx-tools').css('visibility', 'visible');
         },
         hideTools: function(){
 
-            this.$('.cx-tools').hide();
+            this.$('.cx-tools').css('visibility', 'hidden');
+        },
+        preventClick: function(e){
+            e.stopPropagation();
         },
 
         destroyView: function(){

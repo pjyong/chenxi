@@ -6,8 +6,19 @@ define([
     PageTemplateModel
 ){
     var pageTemplateCollection = Backbone.Collection.extend({
+    	initialize: function(options){
+    		// this.options.pageTemplateId;
+    		if(!_.isUndefined(options) && !_.isUndefined(options.contentType)){
+    			this.contentType =  options.contentType;
+    		}
+    	},
         model: PageTemplateModel,
-        url: 'api/layout/templates'
+        url: function(){
+        	if(!_.isUndefined(this.contentType)){
+        		return 'api/layout/templates/' + this.contentType;
+        	}
+        	return 'api/layout/templates';
+        }
     });
 
     return pageTemplateCollection;

@@ -2,11 +2,17 @@ define([
     'marionette',
     'vent',
     'controller/AppController',
+
+    'collection/layout/PageTemplateCollection',
+
+    'repository/layout/PageTemplateRepository',
+
     'view/content/ArticleEditView',
     'view/content/ArticleIndexView',
     'repository/content/ArticleRepository',
     'view/modal/MediaLibraryView',
     'view/common/TemplateOptionsView',
+
     'ckeditor',
     'bootstrap.daterangepicker',
     'jquery.tagsinput',
@@ -16,6 +22,11 @@ define([
     Marionette,
     vent,
     AppController,
+
+    PageTemplateCollection,
+
+    PageTemplateRepository,
+
     ArticleCreateView,
     ArticleIndexView,
     ArticleRepository,
@@ -99,7 +110,8 @@ define([
             var that = this;
             // create repository
             var articleRepository = new ArticleRepository();
-            var callback = function(article){
+            var pageTemplateRepository = new PageTemplateRepository();
+            var callback = function(article, pageTemplates){
                 var editArticleView = new ArticleCreateView({model: article});
                 that.contentRegion.show(editArticleView);
                 var ckeditor = CKEDITOR.replace('content_body');
@@ -113,12 +125,12 @@ define([
                 editArticleView.$('.tags').tagsInput({defaultText: '添加标签'});
                 that.endLoading();
 
-                // load template options view
-                var templateOptions = new TemplateOptionsView();
+                // 载入模板列表
+                var templateOptions = new TemplateOptionsView({pageTemplates: pageTemplates});
                 templateOptions.$el.find('.templates-select').chosen();
             };
             that.startLoading();
-            $.when(articleRepository.getArticle(id)).then(callback);
+            $.when(articleRepository.getArticle(id), pageTemplateRepository.getPageTemplates({contentType: 'article'})).then(callback);
         },
 
         submitArticle: function(options){

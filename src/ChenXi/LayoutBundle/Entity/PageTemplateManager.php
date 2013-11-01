@@ -52,8 +52,13 @@ class PageTemplateManager
 
     public function findBy(array $criteria)
     {
-    	$query = $this->em->createQuery('SELECT a FROM ChenXi\LayoutBundle\Entity\PageTemplate a JOIN a.website w WHERE w.id = :wid');
+    	$sql = 'SELECT a FROM ChenXi\LayoutBundle\Entity\PageTemplate a JOIN a.website w WHERE w.id = :wid';
+    	$sql .= isset($criteria['contentType']) ? ' AND a.contentType = :contenttype' : '';
+    	$query = $this->em->createQuery($sql);
     	$query->setParameter(':wid', $criteria['websiteId']);
+    	if(isset($criteria['contentType'])){
+    		$query->setParameter(':contenttype', $criteria['contentType']);
+    	}
     	return $query->getResult();
     }
 }

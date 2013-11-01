@@ -1,17 +1,10 @@
-<div class="row-fluid">
-	<label class="span7">模板</label>
-	<span class="span5">
-		<select class="templates-select" style="width:200px;" data-placeholder="选择一个模板...">
-			<option value=""></option>
-	        <option>American Black Bear</option>
-	        <option>Asiatic Black Bear</option>
-	        <option>Brown Bear</option>
-	        <option>Giant Panda</option>
-	        <option>Sloth Bear</option>
-	        <option>Sun Bear</option>
-	        <option>Polar Bear</option>
-	        <option>Spectacled Bear</option>							
-		</select>
-	</span>
-	
+<div style="display:inline-block;text-align:left;">
+模板&nbsp;<i class="icon-asterisk icon-red"></i>
+
+<select class="templates-select" style="width:150px;" data-placeholder="选择一个模板...">
+	<option value=""></option>
+	<% for(var k in args){ %>
+    <option value="<%=args[k].id%>"><%=args[k].name%></option>
+    <% } %>						
+</select>
 </div>

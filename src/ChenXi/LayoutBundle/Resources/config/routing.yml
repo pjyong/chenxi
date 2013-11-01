@@ -3,6 +3,9 @@ layout_page_templates:
     resource: ChenXi\LayoutBundle\Controller\TemplatesController
     prefix: /api/layout
 
+
+
+
 layout_column_templates:
     type:     rest
     parent:   layout_page_templates

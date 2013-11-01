@@ -9,9 +9,9 @@ define([
 ){
     var pageTemplateRepository = Marionette.Controller.extend({
 
-        getPageTemplates: function(){
+        getPageTemplates: function(options){
             var deferred = $.Deferred();
-            var pageTemplates = new PageTemplateCollection();
+            var pageTemplates = new PageTemplateCollection(options);
             pageTemplates.on('sync', function(){
                 deferred.resolve(pageTemplates);
             });

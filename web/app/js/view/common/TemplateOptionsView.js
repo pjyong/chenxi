@@ -13,15 +13,17 @@ define([
 
 
         initialize: function(){
+
+            this.pageTemplates = this.options.pageTemplates;
             this.render();
         },
 
-        template: function(){
-            return _.template(TemplateOptions);
+        template: function(data){
+            return _.template(TemplateOptions, data, {variable: 'args'});
         },
 
         render: function(){
-            this.$el.html(this.template());
+            this.$el.html(this.template(this.pageTemplates.toJSON()));
         },
 
     });
