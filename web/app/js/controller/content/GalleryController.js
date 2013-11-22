@@ -61,6 +61,21 @@ define([
                 var galleryIndexView = new GalleryIndexView({collection: gallerys});
                 that.contentRegion.show(galleryIndexView);
                 that.endLoading();
+
+
+                var container = galleryIndexView.$('#gallery_list');
+                container.isotope({
+                    itemSelector: '.gallery_item',
+                    masonry : {
+                        columnWidth : 210
+                    },
+                    containerStyle: {
+                        overflow: 'visible',
+                        position: 'relative'
+                    },
+                    
+                });
+                
                 $('[data-toggle="tooltip"]').tooltip();
             };
             that.startLoading();

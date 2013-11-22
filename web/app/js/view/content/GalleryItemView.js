@@ -10,7 +10,7 @@ define([
 
     return Marionette.ItemView.extend({
 
-        tagName: 'li',
+        className: 'gallery_item',
         
 
         template: function(data){
@@ -18,7 +18,9 @@ define([
         },
 
         events: {
-            'click .delete': 'deleteGallery'
+            'click .delete': 'deleteGallery',
+            'mouseover .cx-contents': 'showTools',
+            'mouseout .cx-contents': 'hideTools'
         },
 
         initialize: function(){
@@ -33,6 +35,13 @@ define([
         deleteGallery: function(){
             // trigger
             vent.trigger('galleryController:deleteGallery', {model: this.model});
+        },
+        showTools: function(){
+            this.$('.cx-tools').css('visibility', 'visible');
+        },
+        hideTools: function(){
+
+            this.$('.cx-tools').css('visibility', 'hidden');
         },
 
         destroyView: function(){

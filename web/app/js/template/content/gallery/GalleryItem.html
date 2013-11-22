@@ -1,24 +1,34 @@
-<div class="gallery_bg"></div>
-<div class="gallery_wrap">
-    <div class="gallery_inner">
-        <p class="gallery_image">
-            <a href="#content/gallery/<%=args.id%>/image" class="gallery_image_a">
-                <img src="/app/img/no_image.gif">
-            </a>
-        </p>
-    </div>
-    <div class="gallery_foot">
-        <div><a href=""><%=args.title%></a></div>
-        <div>133张</div>
-        <div>
-            <a href="#content/gallery/edit/<%=args.id%>" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="编辑">
-                <i class="icon-edit bigger-120"></i>
-            </a>
+<div class="cx-item-content ace-thumbnails">                   
+    <div class="cx-contents">
+        <div class="cx-tools" style="visibility:hidden;">
+            <div class="btn-group">
+                <button class="btn btn-xs btn-success">
+                    <i class="icon-ok bigger-120"></i>
+                </button>
 
-            <button class="btn btn-xs btn-danger delete" data-toggle="tooltip" data-placement="top" title="删除">
-                <i class="icon-trash bigger-120"></i>
-            </button>
+                <a href="#content/gallery/edit/<%=args.id%>" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="编辑">
+                    <i class="icon-edit bigger-120"></i>
+                </a>
 
+                <button class="btn btn-xs btn-danger delete" data-toggle="tooltip" data-placement="top" title="删除">
+                    <i class="icon-trash bigger-120"></i>
+                </button>
+
+                <button class="btn btn-xs btn-warning">
+                    <i class="icon-flag bigger-120"></i>
+                </button>
+            </div>
+        </div>  
+
+        <div class="cx-photo" style="background-image: url(http://cms.com/uploads/images/test.jpg)"></div>
+        
+        <div class="cx-key">
+            <div>133张</div>                                   
         </div>
-    </div>
+    </div>  
+                
+    <div class="cx-titles">
+        <a href="#content/gallery/<%=args.id%>/image"><%=args.title%></a>
+    </div>                                       
 </div>
+
