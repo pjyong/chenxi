@@ -10,7 +10,7 @@ define([
 
     return Marionette.Layout.extend({
 
-        className: 'row-fluid',
+        className: 'row',
         template: function(data){
             return _.template(GalleryImageAdd, data, {variable: 'args'});
         },

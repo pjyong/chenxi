@@ -234,6 +234,8 @@ class GalleriesController extends FOSRestController
 		return $this->handleView($this->view($data));
 	}
 
+	
+
 	function getWebsiteId()
 	{
 		return $this->getRequest()->getSession()->get('websiteId');

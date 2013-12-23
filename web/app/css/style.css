@@ -22,6 +22,12 @@
 .input_w_90{
     width: 90%;
 }
+.input_w_70{
+    width: 70%;
+}
+.input_w_60{
+    width: 60%;
+}
 
 div.tagsinput span.tag{
     font-size:11px;
@@ -333,4 +339,20 @@ div#wn .draggable-box:hover{background-color:rgb(48, 48, 48);cursor:move;}
 	height: 50px;
 	line-height:50px;
 	font-size: 16px;
+}
+
+
+.article_image_dropzone{
+	width:80px;
+}
+.article_image_dropzone .dropzone{
+	min-height:60px;
+}
+
+.article_image_dropzone .dropzone .dz-default.dz-message{
+	font-size:12px;
+	top:0px;
+	margin-top:0px;
+	height:100%;
+	line-height: 60px;
 }

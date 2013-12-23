@@ -6,6 +6,8 @@ use DoctrineExtensions\Taggable\Taggable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use ChenXi\ContentBundle\Base\Imaging;
+
 
 // use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -16,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Article implements Taggable
+class Article implements Taggable, Imaging
 {
     /**
      * @ORM\Column(name="id", type="integer")
@@ -56,6 +58,8 @@ class Article implements Taggable
     private $status = 1;
 
     private $tags;
+
+    private $images;
 
     /**
      * @ORM\ManyToOne(targetEntity="ChenXi\MainBundle\Entity\Website")
@@ -243,5 +247,27 @@ class Article implements Taggable
     public function getUpdatedDate()
     {
         return $this->updated_date;
+    }
+
+    public function getContentType()
+    {
+        return 'article';
+    }
+
+    public function getContentId()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * Get images
+     *
+     * @return \ChenXi\ContentBundle\Entity\Image 
+     */
+    public function getImages()
+    {
+        $this->images = $this->images ?: new ArrayCollection();
+
+        return $this->images;
     }
 }

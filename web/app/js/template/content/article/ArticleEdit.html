@@ -18,6 +18,34 @@
 
     <div class="row">
         <div class="col-xs-6">
+        <div class="form-group">
+        <div id="dropzone" class="article_image_dropzone" style="float:left;">
+            <div class="dropzone dz-clickable">
+               <div class="fallback">
+                  <input id="gallery_images" type="file" multiple=""/>
+               </div>
+    
+            </div>
+        </div>
+        <div style="float:left;" id="article_image_path">
+            <%
+                if(args.path){
+            %>
+            <img src="http://cms.com/<%=args.path%>" style="height:60px;width:80px;" />
+            <%
+                }
+            %>
+
+
+        </div>
+        <div style="clear:both;"></div>
+        </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
             <div class="form-group">
             标题&nbsp;<i class="icon-asterisk icon-red"></i>
             <input type="text" id="content_title" class="input_w_90" value="<%=args.title%>" placeholder="请在此输入标题">
@@ -26,17 +54,16 @@
 
         <div class="col-xs-6">
             <div class="form-group">
-            
-            <div class="control-group">
-                <div class="input-prepend">
-                    <span class="add-on">
-                        日期&nbsp;<i class="icon-calendar"></i>
-                    </span>
+            <div class="input-group">
+  <span class="input-group-addon"><i class="icon-calendar"></i></span>
+  <input class="input_w_70" type="text" name="date-range-picker" value="<%=args.start_date%> - <%=args.end_date%>" id="content_date">
+  <!-- <span class="input-group-addon"></span> -->
+</div>
 
-                    <input class="span11" type="text" name="date-range-picker" id="content_date">
-                    <span class="help-button ace-popover" data-trigger="hover" data-placement="top" data-content="这篇文章会自动在开始日期发布，并在结束日期" title="" data-original-title="小贴士">?</span>
-                </div>
-            </div>
+
+<!-- <span class="help-button ace-popover" data-trigger="hover" data-placement="top" data-content="这篇文章会自动在开始日期发布，并在结束日期" title="" data-original-title="小贴士">?</span> -->
+
+            
             </div>
         </div>
     </div>

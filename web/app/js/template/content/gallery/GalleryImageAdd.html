@@ -1,27 +1,21 @@
-
-
-<div class="span9">
-    <h3 class="header smaller lighter blue">
-        上传图片
-        到相册<a href="#content/gallery/<%=args.id%>/image"><%=args.title%></a>
-    </h3>
-
-    <div class="row-fluid">
-        <div id="dropzone">
-<div class="dropzone dz-clickable">
-	<div class="fallback">
-		<input id="gallery_images" type="file" multiple=""/>
-	</div>
-	
-</div>
-</div>
+<div class="col-xs-12">
+    <div class="page-header">
+        <h1>
+            上传图片
+            到相册<a href="#content/gallery/<%=args.id%>/image"><%=args.title%></a>
+        </h1>
     </div>
-</div>   
 
-<div class="span3">
-    <h3 class="header smaller lighter blue">
-        选项
-        
-    </h3>
-
-</div>              
+    <div class="row">
+        <div class="col-xs-12">
+        <div id="dropzone">
+            <div class="dropzone dz-clickable">
+	           <div class="fallback">
+		          <input id="gallery_images" type="file" multiple=""/>
+	           </div>
+	
+            </div>
+        </div>
+        </div>
+    </div>
+</div>           

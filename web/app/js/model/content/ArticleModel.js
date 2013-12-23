@@ -11,6 +11,7 @@ define([
             body: '',
             start_date: '',
             end_date: '',
+            path: '',
         },
 
         parse: function(response, options){
